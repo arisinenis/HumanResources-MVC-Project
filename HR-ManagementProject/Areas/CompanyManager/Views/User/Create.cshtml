@@ -1,0 +1,127 @@
+﻿@using HumanResources.Core.Enums
+@model HumanResources.Core.Entities.User
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<div class="container">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <h1>Ekle</h1>
+
+                <h4>Person</h4>
+                <hr />
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                    <form asp-area="Admin" asp-controller="User" asp-action="Create" class="row g-3" enctype="multipart/form-data" method="post">
+                        <div class="col-12">
+                            @{
+
+                                if (Model.PhotoPath != null)
+                                {
+                                    <img src="@Url.Content(@Model.PhotoPath)" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+                                    <br />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/images/default.png")" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+
+                                    <br />
+                                }
+                            }
+                            <label asp-for="Photo" class="form-label">Fotoğraf</label>
+                            <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+                                   onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="FirstName" class="form-label">@Html.DisplayNameFor(model => model.FirstName)</label>
+                            <input asp-for="FirstName" type="text" class="form-control" id="FirstName">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="SecondName" class="form-label">@Html.DisplayNameFor(model => model.SecondName)</label>
+                            <input asp-for="SecondName" type="text" class="form-control" id="SecondName">
+                            <span asp-validation-for="SecondName" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="LastName" class="form-label">@Html.DisplayNameFor(model => model.LastName)</label>
+                            <input asp-for="LastName" type="text" class="form-control" id="LastName">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label">@Html.DisplayNameFor(model => model.Email)</label>
+                            <input asp-for="Email" type="text" class="form-control" id="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Address" class="form-label">@Html.DisplayNameFor(model => model.Address)</label>
+                            <input asp-for="Address" type="text" class="form-control" id="Address">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+                            <input asp-for="PhoneNumber" type="text" class="form-control" id="PhoneNumber">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Password" class="form-label">@Html.DisplayNameFor(model => model.Password)</label>
+                            <input asp-for="Password" type="text" class="form-control" id="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="CitizenNo" class="form-label">@Html.DisplayNameFor(model => model.CitizenNo)</label>
+                            <input asp-for="CitizenNo" type="text" class="form-control" id="CitizenNo">
+                            <span asp-validation-for="CitizenNo" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="BirthDate" class="form-label">@Html.DisplayNameFor(model => model.BirthDate)</label>
+                            <input asp-for="BirthDate" type="date" class="form-control" id="BirthDate">
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="BloodType" class="form-label">@Html.DisplayNameFor(model => model.BloodType)</label>
+                            <select asp-for="BloodType" asp-items="@Html.GetEnumSelectList<BloodType>()" class="form-control" id="BloodType"></select>
+                            <span asp-validation-for="BloodType" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="JobTitle" class="form-label">@Html.DisplayNameFor(model => model.JobTitle)</label>
+                            <input asp-for="JobTitle" type="text" class="form-control" id="JobTitle">
+                            <span asp-validation-for="JobTitle" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Profession " class="form-label">@Html.DisplayNameFor(model => model.Profession )</label>
+                            <input asp-for="Profession " type="text" class="form-control" id="Profession ">
+                            <span asp-validation-for="Profession " class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="CompanyId " class="form-label">@*@Html.DisplayNameFor(model => model.CompanyId )*@Şirket</label>
+                            @*<input asp-for="CompanyId " type="text" class="form-control" id="CompanyId ">*@
+                            @Html.DropDownListFor(m => m.CompanyId, (IEnumerable<SelectListItem>)ViewData["UserData"])
+                            <span asp-validation-for="CompanyId" class="text-danger"></span>
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" value="Ekle" class="btn btn-primary" />
+                            <a asp-controller="Login" asp-action="Index"><input value="Geri Dön" class="btn btn-primary" /></a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

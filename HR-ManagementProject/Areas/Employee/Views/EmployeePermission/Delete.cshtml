@@ -1,0 +1,65 @@
+﻿@model HumanResources.Core.Entities.Permission
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1>İzin Sil</h1>
+
+<h3>Silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>İzin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PermissionType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PermissionType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalDayOfPermissionType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalDayOfPermissionType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RequestDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PermissionStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PermissionStatus)
+        </dd>
+    </dl>
+    
+    <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="EmployeePermission" asp-action="Index">İzin Listesine geri dön</a>
+    </form>
+</div>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}

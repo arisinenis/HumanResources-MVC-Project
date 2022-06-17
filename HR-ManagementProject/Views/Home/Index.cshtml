@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.Package>
+
+@{
+    if (Context.Session.GetString("email") != "admin@admin.com")
+    {
+        Layout = "_CompanyManagerLayout";
+    }
+    else
+    {
+        Layout = "_AdminLayout ";
+    }
+    
+
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+<div class="container">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                    <h1>@TempData["welcome"]</h1>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

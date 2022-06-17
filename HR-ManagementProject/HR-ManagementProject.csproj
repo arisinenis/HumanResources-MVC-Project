@@ -1,0 +1,95 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>HR_ManagementProject</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Compile Remove="Areas\CompanyManager\Data\**" />
+    <Compile Remove="Areas\CompanyManager\Models\**" />
+    <Compile Remove="Areas\Personel\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\CompanyManager\Data\**" />
+    <Content Remove="Areas\CompanyManager\Models\**" />
+    <Content Remove="Areas\Personel\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\CompanyManager\Data\**" />
+    <EmbeddedResource Remove="Areas\CompanyManager\Models\**" />
+    <EmbeddedResource Remove="Areas\Personel\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\CompanyManager\Data\**" />
+    <None Remove="Areas\CompanyManager\Models\**" />
+    <None Remove="Areas\Personel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\CompanyManager\Views\User\Create.cshtml" />
+    <Content Remove="Areas\CompanyManager\Views\User\Delete.cshtml" />
+    <Content Remove="Areas\CompanyManager\Views\User\Details.cshtml" />
+    <Content Remove="Areas\CompanyManager\Views\User\Edit.cshtml" />
+    <Content Remove="Areas\CompanyManager\Views\User\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResources.BLL\HumanResources.BLL.csproj" />
+    <ProjectReference Include="..\HumanResources.DAL\HumanResources.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\CompanyManager\Views\Shared\" />
+    <Folder Include="Areas\Employee\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="Areas\Admin\Views\Admins\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Admins\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Admins\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Admins\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Admins\Index.cshtml" />
+    <None Include="Areas\Admin\Views\User\Create.cshtml" />
+    <None Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\User\Details.cshtml" />
+    <None Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\User\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Company\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Company\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Company\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Company\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Company\Index.cshtml" />
+    <None Include="Areas\CompanyManager\Views\Company\Details.cshtml" />
+    <None Include="Areas\CompanyManager\Views\Company\Edit.cshtml" />
+    <None Include="Areas\CompanyManager\Views\Company\Index.cshtml" />
+    <None Include="Areas\CompanyManager\Views\User\Create.cshtml" />
+    <None Include="Areas\CompanyManager\Views\User\Delete.cshtml" />
+    <None Include="Areas\CompanyManager\Views\User\Details.cshtml" />
+    <None Include="Areas\CompanyManager\Views\User\Edit.cshtml" />
+    <None Include="Areas\CompanyManager\Views\User\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Login\Index.cshtml" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>
