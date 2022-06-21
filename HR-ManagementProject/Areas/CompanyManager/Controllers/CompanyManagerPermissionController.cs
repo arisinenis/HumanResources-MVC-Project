@@ -51,7 +51,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PermissionType,TotalDayOfPermissionType,RequestDate,StartDate,EndDate,PermissionStatus,Id")] Permission permission)
+        public async Task<IActionResult> Create( Permission permission)
         {
             if (ModelState.IsValid)
             {
@@ -126,9 +126,68 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //private bool PermissionExists(int id)
-        //{
-        //    return _context.Permissions.Any(e => e.Id == id);
-        //}
+
+        public async Task<IActionResult> WaitingPermission()
+        {
+            var permission = permissionManager.GetAllWaitingPermission();
+            
+
+            if (permission == null)
+            {
+                return NotFound();
+            }
+
+            return View(permission);
+        }
+       
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApprovePermission(int id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var permission = permissionManager.GetById(id);
+            if (ModelState.IsValid)
+            {
+                
+                permissionManager.ApprovePermission(permission);
+                
+                ViewBag.Message = "İzin Onaylandı !";
+
+                return RedirectToAction(nameof(WaitingPermission));
+            }
+            return View(permission);
+            
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectPermission(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var permission = permissionManager.GetById(id);
+            if (ModelState.IsValid)
+            {
+
+                permissionManager.RejectPermission(permission);
+
+                ViewBag.Message = "İzin Onaylandı !";
+
+                return RedirectToAction(nameof(WaitingPermission));
+            }
+            return View(permission);
+
+        }
+
+
+       
     }
 }

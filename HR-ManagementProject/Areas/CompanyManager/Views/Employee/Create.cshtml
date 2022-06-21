@@ -2,102 +2,101 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    Layout = "_CompanyManagerLayout";
 }
 
-<h1>Create</h1>
+<h3>Yeni Personel Oluştur</h3>
 
-<h4>Employee</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SecondName" class="control-label"></label>
-                <input asp-for="SecondName" class="form-control" />
-                <span asp-validation-for="SecondName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CitizenNo" class="control-label"></label>
-                <input asp-for="CitizenNo" class="form-control" />
-                <span asp-validation-for="CitizenNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="JobTitle" class="control-label"></label>
-                <input asp-for="JobTitle" class="form-control" />
-                <span asp-validation-for="JobTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Job" class="control-label"></label>
-                <input asp-for="Job" class="form-control" />
-                <span asp-validation-for="Job" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhotoPath" class="control-label"></label>
-                <input asp-for="PhotoPath" class="form-control" />
-                <span asp-validation-for="PhotoPath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanyId" class="control-label"></label>
-                <select asp-for="CompanyId" class ="form-control" asp-items="ViewBag.CompanyId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-area="CompanyManager" asp-controller="Employee" asp-action="Create" class="row g-3" enctype="multipart/form-data" method="post">
+    <div class="col-12">     
+        <label asp-for="PhotoPath" class="form-label">Fotoğraf</label>
+        <input asp-for="PhotoPath" type="file" accept="image/*" class="form-control" id="PhotoPath"
+               onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+        <span asp-validation-for="PhotoPath" class="text-danger"></span>
     </div>
-</div>
+    <div class="col-12">
+        <label asp-for="FirstName" class="form-label">@Html.DisplayNameFor(model => model.FirstName)</label>
+        <input asp-for="FirstName" type="text" class="form-control" id="FirstName">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="SecondName" class="form-label">@Html.DisplayNameFor(model => model.SecondName)</label>
+        <input asp-for="SecondName" type="text" class="form-control" id="SecondName">
+        <span asp-validation-for="SecondName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="LastName" class="form-label">@Html.DisplayNameFor(model => model.LastName)</label>
+        <input asp-for="LastName" type="text" class="form-control" id="LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="CitizenNo" class="form-label">@Html.DisplayNameFor(model => model.CitizenNo)</label>
+        <input asp-for="CitizenNo" type="text" pattern="\d{11}" class="form-control" id="CitizenNo">
+        <span asp-validation-for="CitizenNo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+        <input asp-for="PhoneNumber" type="tel" name="phone" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    @*<div class="col-12">
+        <label asp-for="Email" class="form-label">@Html.DisplayNameFor(model => model.Email)</label>
+        <input asp-for="Email" type="text" class="form-control" id="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>*@
+     <div class="col-12">
+        <label asp-for="Password" class="form-label">@Html.DisplayNameFor(model => model.Password)</label>
+        <input asp-for="Password" type="text" class="form-control" id="Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Address" class="form-label">@Html.DisplayNameFor(model => model.Address)</label>
+        <input asp-for="Address" type="text" class="form-control" id="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="BirthDate" class="form-label">@Html.DisplayNameFor(model => model.BirthDate)</label>
+        <input asp-for="BirthDate" type="date" class="form-control" id="BirthDate">
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="StartDate" class="form-label">@Html.DisplayNameFor(model => model.StartDate)</label>
+        <input asp-for="StartDate" type="date" class="form-control" id="StartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="EndDate" class="form-label">@Html.DisplayNameFor(model => model.EndDate)</label>
+        <input asp-for="EndDate" type="date" class="form-control" id="EndDate">
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Status" />Aktif Durumu
+        </label>
+    </div>
+     <div class="col-12">
+        <label asp-for="JobTitle" class="form-label">@Html.DisplayNameFor(model => model.JobTitle)</label>
+        <input asp-for="JobTitle" type="text" class="form-control" id="JobTitle">
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+     <div class="col-12">
+        <label asp-for="Job" class="form-label">@Html.DisplayNameFor(model => model.Job)</label>
+        <input asp-for="Job" type="text" class="form-control" id="Job">
+        <span asp-validation-for="Job" class="text-danger"></span>
+    </div>
+       <div class="text-center">
+           <input type="submit" value="Ekle" class="btn btn-primary" />
+           <button asp-area="CompanyManager" asp-controller="Employee" asp-action="Create" class="btn btn-secondary">Oluştur</button>
+
+       </div>
+</form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a  asp-area="CompanyManager" asp-controller="Employee"  asp-action="Index">Listeye Dön</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

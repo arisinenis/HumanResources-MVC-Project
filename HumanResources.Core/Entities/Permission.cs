@@ -12,10 +12,10 @@ namespace HumanResources.Core.Entities
     {
         public Permission()
         {
-            Employees = new HashSet<Employee>();
+            //Employees = new HashSet<Employee>();
         }
         [Display(Name = "İzin Türü")]
-        public PermissionType PermissionType { get; set; }
+        public string PermissionType { get; set; }
         [Display(Name = "Toplam İzin Süresi")]
         public string TotalDayOfPermissionType { get; set; }
         [Display(Name = "İzin Talep Tarihi")]
@@ -28,7 +28,11 @@ namespace HumanResources.Core.Entities
         public PermissionStatus PermissionStatus { get; set; } = PermissionStatus.Bekliyor;
 
         // Nav. Property
+
+        //public IEnumerable<Employee> Employees { get; set; }
+
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
         
-        public IEnumerable<Employee> Employees { get; set; }
     }
 }

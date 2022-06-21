@@ -54,7 +54,7 @@
     </div>
     <div class="col-12">
         <label asp-for="Cost" class="form-label">@Html.DisplayNameFor(model => model.Cost)</label>
-        <input asp-for="Cost" type="text" class="form-control" id="Cost">
+        <input asp-for="Cost" type="text" pattern="\d*" class="form-control" id="Cost">
         <span asp-validation-for="Cost" class="text-danger"></span>
     </div>
     <div class="col-12">
@@ -64,13 +64,13 @@
     </div>
     <div class="col-12">
         <label asp-for="UsageAmount" class="form-label">@Html.DisplayNameFor(model => model.UsageAmount)</label>
-        <input asp-for="UsageAmount" type="text" class="form-control" id="UsageAmount">
+        <input asp-for="UsageAmount" type="text" pattern="\d*" class="form-control" id="UsageAmount">
         <span asp-validation-for="UsageAmount" class="text-danger"></span>
     </div>
     <div class="text-center">
         <input type="hidden" asp-for="Id" />
-        <button type="submit" value="Save" class="btn btn-primary">Submit</button>
-        <button asp-action="Index" class="btn btn-secondary">Back to List</button>
+        <button type="submit" value="Save" class="btn btn-primary">Düzenle</button>
+        <button asp-action="Index" class="btn btn-secondary">Paket Listesine Dön</button>
     </div>
 </form>
 @section Scripts {

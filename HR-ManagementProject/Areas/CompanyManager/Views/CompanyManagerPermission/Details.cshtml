@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>İzin Talebi Detayı</h1>
 
 <div>
     <h4>Permission</h4>
     <hr />
+    
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PermissionType)
@@ -50,6 +51,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a asp-action="Index">Talep Listesine Dön</a>
 </div>

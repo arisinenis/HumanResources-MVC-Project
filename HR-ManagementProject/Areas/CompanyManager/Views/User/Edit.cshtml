@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2>Şirket Yöneticisi Düzenle</h2>
 
-<h4>Person</h4>
+
 <hr />
 <form asp-area="Admin" asp-controller="Package" asp-action="Edit" class="row g-3">
     <div class="col-12">
@@ -92,8 +92,8 @@
     </div>
     <div class="text-center">
         <input type="hidden" asp-for="Id" />
-        <button type="submit" value="Save" class="btn btn-primary">Submit</button>
-        <button asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary">Back to List</button>
+        <button type="submit" value="Save" class="btn btn-primary">Düzenle</button>
+        <button asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary">Yönetici Listesine Dön</button>
     </div>
 </form>
 @section Scripts {

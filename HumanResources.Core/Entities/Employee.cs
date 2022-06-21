@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HumanResources.Core.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,8 @@ namespace HumanResources.Core.Entities
         //public string Email { get { return FirstName + "." + LastName + "@" + Company.Name + "." + "com"; } }
 
         public string Password { get; set; }
+
+        public Gender Gender { get; set; }
 
         [Display(Name = "Adres")]
         public string Address { get; set; }

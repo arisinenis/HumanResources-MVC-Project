@@ -10,6 +10,9 @@ using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using Microsoft.AspNetCore.Hosting;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using System.Net.Mail;
+using System.Net;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
@@ -55,7 +58,33 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(employee.Email);
+                mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
+                mail.Subject = "Yakuptan mesaj";
+                mail.Body = "Hoşgeldin " + employee.FirstName + "," + "</br>" + "Şifreniz: " + employee.Password;
+                mail.IsBodyHtml = true;
+
+                SmtpClient client = new SmtpClient();
+                client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+
+                try
+                {
+                    client.Send(mail);
+                    TempData["Message"] = "Gönderildi.";
+                }
+                catch (Exception ex)
+                {
+
+                    TempData["Message"] = "Hata Var; " + ex.Message;
+                }
+
+                employee.CompanyId = Convert.ToInt32(HttpContext.Session.GetString("CompanyId"));
                 _employeeManager.CreateCMAreaEmployee(employee);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(employee);

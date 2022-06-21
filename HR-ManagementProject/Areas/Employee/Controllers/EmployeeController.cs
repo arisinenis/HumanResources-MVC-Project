@@ -105,9 +105,6 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
             }
             return View(employeeEditVM);
         }
-
-        
-
         private bool EmployeeExists(int id)
         {
             return employeeManager.Exists(id);

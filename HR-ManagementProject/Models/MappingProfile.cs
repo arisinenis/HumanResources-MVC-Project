@@ -10,6 +10,12 @@ namespace HR_ManagementProject.Models
         {
             CreateMap<EmployeeEditVM, Employee>();
             CreateMap<Employee, EmployeeEditVM>();
+
+            CreateMap<PermissionEmployeeVM, Employee>();
+            CreateMap<Employee, PermissionEmployeeVM>();
+
+            CreateMap<PermissionEmployeeVM, Permission>();
+            CreateMap<Permission, PermissionEmployeeVM>();
         }
     }
 }

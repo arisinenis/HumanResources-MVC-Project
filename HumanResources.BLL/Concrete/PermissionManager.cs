@@ -22,6 +22,18 @@ namespace HumanResources.BLL.Concrete
             return permissionRepository.Add(entity);
         }
 
+        public bool ApprovePermission(Permission permission)
+        {
+            if (permission != null)
+            {
+                return permissionRepository.ApprovePermission(permission);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Delete(Permission entity)
         {
             return permissionRepository.Delete(entity);
@@ -42,9 +54,26 @@ namespace HumanResources.BLL.Concrete
             return permissionRepository.GetAllPermissionById(id);
         }
 
+        public IEnumerable<Permission> GetAllWaitingPermission()
+        {
+            return permissionRepository.GetAllWaitingPermission();
+        }
+
         public Permission GetById(int id)
         {
             return permissionRepository.GetById(id);
+        }
+
+        public bool RejectPermission(Permission permission)
+        {
+            if (permission != null)
+            {
+                return permissionRepository.RejectPermission(permission);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool Update(Permission entity)

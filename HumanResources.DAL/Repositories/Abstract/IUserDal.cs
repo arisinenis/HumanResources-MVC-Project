@@ -10,5 +10,6 @@ namespace HumanResources.DAL.Repositories.Abstract
     public interface IUserDal : IRepository<User>
     {
        User GetByEmailAndPassword(string email, string password);
+        List<Permission> GetManagerWaitingPermissions(int CompanyID);
     }
 }

@@ -19,8 +19,7 @@
 
 
         <div class="card-body pb-0">
-            <h4 class="card-title">Paketler</h4>
-            <a asp-area="Admin" asp-controller="Package" asp-action="Create" class="btn btn-primary">Yeni Paket Ekle</a>
+            
 
             <table class="table table-borderless">
 
@@ -73,9 +72,10 @@
             </table>
 
         </div>
-   <div class="text-center">
-        <input type="submit" value="Ekle" class="btn btn-primary" />
-    </div>
+        <div class="text-center">
+            <a asp-area="Admin" asp-controller="Package" asp-action="Create" class="btn btn-primary">Yeni Paket Ekle</a>
+            @*<input type="submit" value="Ekle" class="btn btn-primary" />*@
+        </div>
     </div>
 </div>
 @section Scripts {

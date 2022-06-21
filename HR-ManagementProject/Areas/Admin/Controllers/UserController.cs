@@ -3,7 +3,10 @@ using HumanResources.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace HR_ManagementProject.Areas.Admin.Controllers
@@ -52,10 +55,35 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,SecondName,LastName,Email,Address,PhoneNumber,Password,CitizenNo,BirthDate,BloodType,JobTitle,Profession,Photo,CompanyId,AdminId,Id")] User person)
+        public async Task<IActionResult> Create( User person)
         {
             if (ModelState.IsValid)
             {
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add(person.Email);
+                mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
+                mail.Subject = "Yakuptan mesaj";
+                mail.Body = "Hoşgeldin " + person.FirstName + "," + "</br>" + "Şifreniz: " + person.Password;
+                mail.IsBodyHtml = true;
+
+                SmtpClient client = new SmtpClient();
+                client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+
+                try
+                {
+                    client.Send(mail);
+                    TempData["Message"] = "Gönderildi.";
+                }
+                catch (Exception ex)
+                {
+
+                    TempData["Message"] = "Hata Var; " + ex.Message;
+                }
+
                 userManager.Add(person);
                 return RedirectToAction(nameof(Index));
             }
@@ -79,7 +107,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FirstName,SecondName,LastName,Email,Address,PhoneNumber,Password,CitizenNo,BirthDate,BloodType,JobTitle,Profession,Photo,CompanyId,AdminId,Id")] User person)
+        public async Task<IActionResult> Edit(int id, User person /*[Bind("FirstName,SecondName,LastName,Email,Address,PhoneNumber,Password,CitizenNo,BirthDate,BloodType,JobTitle,Profession,Photo,CompanyId,AdminId,Id")]*/)
         {
             if (id != person.Id)
             {

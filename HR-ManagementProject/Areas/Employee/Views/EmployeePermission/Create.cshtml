@@ -1,0 +1,71 @@
+﻿@model HR_ManagementProject.Areas.Employee.Models.PermissionEmployeeVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1>İzin Oluştur</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="Create" method="post">
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+            <div class="col-12">
+                @if (Model.Employee.Gender == HumanResources.Core.Enums.Gender.Male)
+                {
+                    <label asp-for="Permission.PermissionType" class="control-label"></label>
+                    <select asp-for="Permission.PermissionType" class="form-control" asp-items="@Html.GetEnumSelectList<HumanResources.Core.Enums.PermissionTypeMale>();"></select>
+                    <span asp-validation-for="Permission.PermissionType" class="text-danger"></span>
+                }
+                else
+                {
+                    <label asp-for="Permission.PermissionType" class="control-label"></label>
+                    <select asp-for="Permission.PermissionType" class="form-control" asp-items="@Html.GetEnumSelectList<HumanResources.Core.Enums.PermissionTypeFemale>();"></select>
+                    <span asp-validation-for="Permission.PermissionType" class="text-danger"></span>
+                }
+            </div>
+           
+            <div class="col-12">
+                <label asp-for="Permission.TotalDayOfPermissionType" class="control-label"></label>
+                <input asp-for="Permission.TotalDayOfPermissionType" class="form-control" />
+                <span asp-validation-for="Permission.TotalDayOfPermissionType" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Permission.RequestDate" class="control-label"></label>
+                <input asp-for="Permission.RequestDate" class="form-control" />
+                <span asp-validation-for="Permission.RequestDate" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Permission.StartDate" class="control-label"></label>
+                <input asp-for="Permission.StartDate" class="form-control" />
+                <span asp-validation-for="Permission.StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Permission.EndDate" class="control-label"></label>
+                <input asp-for="Permission.EndDate" class="form-control" />
+                <span asp-validation-for="Permission.EndDate" class="text-danger"></span>
+            </div>
+            @*<div class="col-12">
+            <label asp-for="PermissionStatus" class="control-label"></label>
+            <select asp-for="PermissionStatus" class="form-control"></select>
+            <span asp-validation-for="PermissionStatus" class="text-danger"></span>
+            </div>*@
+            <div class="col-12">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-area="Employee" asp-controller="Employee" asp-action="Index">Anasayfaya Dön</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

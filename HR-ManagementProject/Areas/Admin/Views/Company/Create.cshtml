@@ -51,7 +51,7 @@
     </div>
     <div class="col-12">
         <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
-        <input asp-for="PhoneNumber" type="text" class="form-control" id="PhoneNumber">
+        <input asp-for="PhoneNumber" type="tel" name="phone" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="PhoneNumber">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="col-12">
@@ -66,7 +66,7 @@
     </div>
     <div class="col-12">
         <label asp-for="MersisNo" class="form-label">@Html.DisplayNameFor(model => model.MersisNo)</label>
-        <input asp-for="MersisNo" type="text" class="form-control" id="MersisNo">
+        <input asp-for="MersisNo" type="text" pattern="\d{11}" name="phone" class="form-control" id="MersisNo">
         <span asp-validation-for="MersisNo" class="text-danger"></span>
     </div>
     <div class="col-12">

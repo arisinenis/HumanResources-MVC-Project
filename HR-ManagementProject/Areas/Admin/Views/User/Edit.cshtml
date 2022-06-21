@@ -4,11 +4,10 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Person</h4>
+<h4>Şirket Yöneticisi Düzenle </h4>
 <hr />
-<form asp-area="Admin" asp-controller="Package" asp-action="Edit" class="row g-3">
+<form  asp-controller="User" asp-action="Edit" class="row g-3">
     <div class="col-12">
         @{
 
@@ -39,6 +38,12 @@
         <input asp-for="SecondName" type="text" class="form-control" id="SecondName">
         <span asp-validation-for="SecondName" class="text-danger"></span>
     </div>
+
+    <div class="col-12">
+        <label asp-for="LastName" class="form-label">@Html.DisplayNameFor(model => model.LastName)</label>
+        <input asp-for="LastName" type="text" class="form-control" id="LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
     <div class="col-12">
         <label asp-for="Email" class="form-label">@Html.DisplayNameFor(model => model.Email)</label>
         <input asp-for="Email" type="text" class="form-control" id="Email">
@@ -51,17 +56,12 @@
     </div>
     <div class="col-12">
         <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
-        <input asp-for="PhoneNumber" type="text" class="form-control" id="PhoneNumber">
+        <input asp-for="PhoneNumber" type="tel" name="phone" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="PhoneNumber">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="col-12">
-        <label asp-for="Password" class="form-label">@Html.DisplayNameFor(model => model.Password)</label>
-        <input asp-for="Password" type="text" class="form-control" id="Password">
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="col-12">
         <label asp-for="CitizenNo" class="form-label">@Html.DisplayNameFor(model => model.CitizenNo)</label>
-        <input asp-for="CitizenNo" type="text" class="form-control" id="CitizenNo">
+        <input asp-for="CitizenNo" type="text" pattern="\d{11}" class="form-control" id="CitizenNo">
         <span asp-validation-for="CitizenNo" class="text-danger"></span>
     </div>
     <div class="col-12">
@@ -92,8 +92,8 @@
     </div>
     <div class="text-center">
         <input type="hidden" asp-for="Id" />
-        <button type="submit" value="Save" class="btn btn-primary">Submit</button>
-        <button asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary">Back to List</button>
+        <button type="submit" value="Save" class="btn btn-primary">Düzenle</button>
+        <button asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-secondary">Yöneticiler Listesine Dön</button>
     </div>
 </form>
 @section Scripts {

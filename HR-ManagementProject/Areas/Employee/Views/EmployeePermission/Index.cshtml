@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HumanResources.Core.Entities.Permission>
+﻿@model (IEnumerable<HumanResources.Core.Entities.Permission> p, HumanResources.Core.Entities.Employee e)
 
 @{
     ViewData["Title"] = "PermissionIndex";
@@ -14,31 +14,51 @@
     <thead>
         <tr>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.PermissionType)
+                @*@Html.DisplayNameFor(model => model.PermissionType)*@
+                İzin Tipi
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.TotalDayOfPermissionType)
+                @*@Html.DisplayNameFor(model => model.TotalDayOfPermissionType)*@
+                Toplam İzin Süresi
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.RequestDate)
+                @*@Html.DisplayNameFor(model => model.RequestDate)*@
+                İzin Talep Tarihi
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.StartDate)
+                @*@Html.DisplayNameFor(model => model.StartDate)*@
+                Başlangıç Tarihi
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.EndDate)
+                @*@Html.DisplayNameFor(model => model.EndDate)*@
+                Bitiş Tarihi
             </th>
             <th scope="col">
-                @Html.DisplayNameFor(model => model.PermissionStatus)
+                @*@Html.DisplayNameFor(model => model.PermissionStatus)*@
+                İzin Türü
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.p)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PermissionType)
+                    @if (Model.e.Gender == HumanResources.Core.Enums.Gender.Female)
+                    {
+                        int permissionTypeValue = Convert.ToInt32(item.PermissionType);
+                        string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeFemale), permissionTypeValue);
+                        @enumName
+                    }
+                    else
+                    {
+
+                        int permissionTypeValue = Convert.ToInt32(item.PermissionType);
+                        string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeMale), permissionTypeValue);
+                        @enumName
+                    }
+
+                    @*@Html.DisplayFor(modelItem => item.PermissionType)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalDayOfPermissionType)

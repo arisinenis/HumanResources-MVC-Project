@@ -14,7 +14,7 @@ namespace HumanResources.DAL.Configurations
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasMany(e => e.Employees).WithMany(p=>p.Permissions);
+            //builder.HasMany(e => e.Employees).WithMany(p=>p.Permissions);
         }
     }
 }

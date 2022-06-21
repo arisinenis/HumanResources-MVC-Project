@@ -22,5 +22,9 @@ namespace HumanResources.DAL.Repositories.Concrete
         {
             return db.Users.Where(p => p.Email == email && p.Password == password).FirstOrDefault();
         }
+        public List<Permission> GetManagerWaitingPermissions(int CompanyID)
+        {
+            return db.Permissions.Where(x => x.Employee.CompanyId == CompanyID).Where(x => x.PermissionStatus == Core.Enums.PermissionStatus.Bekliyor).ToList();
+        }
     }
 }

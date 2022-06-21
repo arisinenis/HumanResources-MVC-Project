@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detaylar</h1>
 
 <div>
     <div>
@@ -78,8 +78,8 @@
             <form asp-area="Employee" asp-controller="Employees" asp-action="Edit">
                 &nbsp;&nbsp;
                 <input type="hidden" asp-for="Id" />
-                <input type="submit" value="Edit" class="btn btn-danger" />&nbsp;&nbsp;
-                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                <input type="submit" value="Düzenle" class="btn btn-danger" />&nbsp;&nbsp;
+                <a asp-action="Index" class="btn btn-primary">Geri Dön</a>
             </form>
             <br />
             <br />
@@ -87,6 +87,6 @@
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">DÜzenle</a> |
+    <a asp-action="Index">Geri Dön</a>
 </div>

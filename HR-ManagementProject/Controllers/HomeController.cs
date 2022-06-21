@@ -7,21 +7,35 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using HR_ManagementProject.ViewModels;
+using HumanResources.Core.Entities;
 
 namespace HR_ManagementProject.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IPackageService packageManager;
+        private readonly IEmployeeService employeeManager;
+        private readonly IUserService userManager;
 
-        public HomeController(IPackageService packageManager)
+        public HomeController(IPackageService packageManager,IEmployeeService employeeService,IUserService userService)
         {
             this.packageManager = packageManager;
+            this.employeeManager = employeeService;
+            this.userManager = userService;
         }
 
         public IActionResult Index()
         {
-            return View(packageManager.GetAll());
+            
+            PackageManagerEmployeeVM packageManagerEmployeeVM = new PackageManagerEmployeeVM();
+            packageManagerEmployeeVM.Packages = packageManager.GetAll();
+            packageManagerEmployeeVM.Employees = employeeManager.GetAll();
+            packageManagerEmployeeVM.Managers = userManager.GetAll();
+
+            
+           
+            return View(packageManagerEmployeeVM);
         }
 
         public IActionResult Privacy()

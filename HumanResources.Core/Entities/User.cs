@@ -38,13 +38,13 @@ namespace HumanResources.Core.Entities
         public string Address { get; set; }
 
         //[Required]
-        //[Display(Name = "Telefon Numarası")]
+        [Display(Name = "Telefon Numarası")]
         //[MaxLength(11, ErrorMessage = "Telefon numarası en fazla 11 karakter olmalıdır.")]
         //[DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         ////[Required]
-        //[Display(Name = "Şifre")]
+        [Display(Name = "Şifre")]
         ////[RegularExpression(@"^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$", ErrorMessage = "1 adet rakam (0-9), 1 adet büyük harf, 1 adet küçük harf, 1 adet özel karakter, 8 - 16 karakter arası, boşluk içeremez.")]
         ////[DataType(DataType.Password)]
         public string Password { get; set; }
@@ -65,7 +65,7 @@ namespace HumanResources.Core.Entities
 
         //[Required]
         //[MaxLength(100, ErrorMessage = "Unvan en fazla 11 karakter olmalıdır.")]
-        [Display(Name = "Unvan")]
+        [Display(Name = "Ünvan")]
         public string JobTitle { get; set; }
 
         //[Required]

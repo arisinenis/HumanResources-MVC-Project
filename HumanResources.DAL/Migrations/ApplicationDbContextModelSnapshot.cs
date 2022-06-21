@@ -19,21 +19,6 @@ namespace HumanResources.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EmployeePermission", b =>
-                {
-                    b.Property<int>("EmployeesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeesId", "PermissionsId");
-
-                    b.HasIndex("PermissionsId");
-
-                    b.ToTable("EmployeePermission");
-                });
-
             modelBuilder.Entity("HumanResources.Core.Entities.Admin", b =>
                 {
                     b.Property<int>("Id")
@@ -144,6 +129,9 @@ namespace HumanResources.DAL.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
                     b.Property<string>("Job")
                         .HasColumnType("nvarchar(max)");
 
@@ -233,14 +221,17 @@ namespace HumanResources.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PermissionStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("PermissionType")
-                        .HasColumnType("int");
+                    b.Property<string>("PermissionType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2");
@@ -252,6 +243,8 @@ namespace HumanResources.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Permissions");
                 });
@@ -316,21 +309,6 @@ namespace HumanResources.DAL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EmployeePermission", b =>
-                {
-                    b.HasOne("HumanResources.Core.Entities.Employee", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HumanResources.Core.Entities.Permission", null)
-                        .WithMany()
-                        .HasForeignKey("PermissionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HumanResources.Core.Entities.Company", b =>
                 {
                     b.HasOne("HumanResources.Core.Entities.Package", "Package")
@@ -351,6 +329,17 @@ namespace HumanResources.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("HumanResources.Core.Entities.Permission", b =>
+                {
+                    b.HasOne("HumanResources.Core.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HumanResources.Core.Entities.User", b =>

@@ -27,7 +27,7 @@ namespace HumanResources.Core.Entities
         public string LastName { get; set; }
 
         //[Required]
-        //[Display(Name = "Email")]
+        [Display(Name = "Email")]
         //[DataType(DataType.EmailAddress)]
         public string Email { get { return FirstName + "." + LastName + "@" + Company.Name + "." + "com"; } }
 
@@ -38,7 +38,7 @@ namespace HumanResources.Core.Entities
         public string Address { get; set; }
 
         //[Required]
-        //[Display(Name = "Telefon Numarası")]
+        [Display(Name = "Telefon Numarası")]
         //[MaxLength(11, ErrorMessage = "Telefon numarası en fazla 11 karakter olmalıdır.")]
         //[DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }

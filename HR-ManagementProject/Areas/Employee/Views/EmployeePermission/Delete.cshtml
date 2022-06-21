@@ -8,8 +8,14 @@
 <h1>İzin Sil</h1>
 
 <h3>Silmek istediğinize emin misiniz?</h3>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
 <div>
-    <h4>İzin</h4>
+    @*<h4>İzin</h4>*@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -50,16 +56,10 @@
         </dd>
     </dl>
     
-    <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="Delete">
+    <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="DeletePermission">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
         <a asp-controller="EmployeePermission" asp-action="Index">İzin Listesine geri dön</a>
     </form>
 </div>
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.ErrorMessage
-    </div>
-}

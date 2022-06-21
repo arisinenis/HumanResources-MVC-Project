@@ -46,6 +46,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: Package/Create
         public IActionResult Create()
         {
+            
             return View();
         }
 

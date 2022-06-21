@@ -7,6 +7,7 @@ using System;
 using System.Net;
 using System.Net.Mail;
 using HR_ManagementProject.Exceptions;
+using System.Linq;
 
 namespace HR_ManagementProject.Controllers
 {
@@ -15,12 +16,14 @@ namespace HR_ManagementProject.Controllers
         private readonly IAdminService adminManager;
         private readonly IUserService userManager;
         private readonly IEmployeeService employeeManager;
+        private readonly IPermissionService permissionManager;
 
-        public LoginController(IAdminService adminManager, IUserService userService,IEmployeeService employeeService)
+        public LoginController(IAdminService adminManager, IUserService userService,IEmployeeService employeeService,IPermissionService permissionService)
         {
             this.adminManager = adminManager;
             this.userManager = userService;
             this.employeeManager = employeeService;
+            this.permissionManager = permissionService;
         }
 
         public IActionResult Index()
@@ -39,7 +42,12 @@ namespace HR_ManagementProject.Controllers
             var userAdmin = adminManager.GetByEmailAndPassword(email, password);
             var user = userManager.GetByEmailAndPassword(email, password);
             var employee=employeeManager.GetByEmailAndPassword(email, password);
-           
+
+            
+            //var permissions = permissionManager.GetAllWaitingPermission().Where(x => x.Employee.CompanyId == user.CompanyId);
+
+
+
 
             if (userAdmin != null)
             {
@@ -57,13 +65,17 @@ namespace HR_ManagementProject.Controllers
             }
             else if (user != null && user.Role == "Manager")
             {
-                
+                var permissionCount = userManager.GetManagerWaitingPermissions(user.CompanyId).Count();
 
                 HttpContext.Session.SetString("email", user.Email);
                 HttpContext.Session.SetString("id", user.Id.ToString());
                 HttpContext.Session.SetString("name", user.FirstName.ToString());
                 HttpContext.Session.SetString("surname", user.LastName.ToString());
                 HttpContext.Session.SetString("title", user.JobTitle.ToString());
+                HttpContext.Session.SetString("CompanyId", user.CompanyId.ToString());
+                //HttpContext.Session.SetString("Company", user.Company.Name.ToString());
+                HttpContext.Session.SetString("role", user.Role.ToString());
+                HttpContext.Session.SetString("MessageCount", permissionCount.ToString());
                 if (user.PhotoPath != null)
                 {
                     HttpContext.Session.SetString("photoPath", user.PhotoPath.ToString());
@@ -77,6 +89,8 @@ namespace HR_ManagementProject.Controllers
                 HttpContext.Session.SetString("id", employee.Id.ToString());
                 HttpContext.Session.SetString("name", employee.FirstName.ToString());
                 HttpContext.Session.SetString("surname", employee.LastName.ToString());
+                HttpContext.Session.SetString("CompanyId", employee.CompanyId.ToString());
+                HttpContext.Session.SetString("role", employee.Role.ToString());
                 if (employee.PhotoPath != null)
                 {
                     HttpContext.Session.SetString("photoPath", employee.PhotoPath.ToString());

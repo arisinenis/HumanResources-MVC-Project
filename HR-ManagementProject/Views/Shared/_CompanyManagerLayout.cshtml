@@ -63,7 +63,40 @@
                     </a>
                 </li><!-- End Search Icon-->
 
-                
+                 <li class="nav-item dropdown">
+
+          
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            @if(Convert.ToInt32(Context.Session.GetString("MessageCount"))==0)
+            {
+
+                            }
+                            else
+                            {
+                              <span class="badge bg-success badge-number">@Context.Session.GetString("MessageCount")</span>  
+                            }
+                            
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              @Context.Session.GetString("MessageCount") yeni mesajınız var!
+              <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+           
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
+
 
               
 
@@ -79,13 +112,14 @@
                         {
                             <img src="@Url.Content((string)TempData["photoPath"])" alt="Profile" class="rounded-circle">
                         }
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Merhaba @TempData["name"]!</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">Merhaba @TempData["title"] @TempData["name"] !</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>@TempData["name"]  @TempData["surname"]</h6>
                             <span>@TempData["title"]</span>
+                            <span>@TempData["Company"]</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -94,7 +128,7 @@
                         <li>
                             <a class="dropdown-item d-flex align-items-center" asp-controller="CompanyAdmin" asp-action="Details">
                                 <i class="bi bi-person"></i>
-                                <span>My Profile</span>
+                                <span>Profilim</span>
                             </a>
                         </li>
                         <li>

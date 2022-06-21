@@ -5,9 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Şirket Yöneticisini Silmek istediğinden EMin misin?</h3>
 <div>
 
     <hr />
@@ -78,7 +77,7 @@
         <form asp-area="Admin" asp-controller="User" asp-action="Delete">&nbsp;&nbsp;
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Delete" class="btn btn-danger" /> &nbsp;&nbsp;
-            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-primary">Back to List</a>
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-primary">Şirket Yönetici Listesine Dön</a>
         </form>
         <br /><br />
     </div>

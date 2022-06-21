@@ -58,12 +58,12 @@
     </div>
     <div class="col-12">
         <label asp-for="CitizenNo" class="form-label">@Html.DisplayNameFor(model => model.CitizenNo)</label>
-        <input asp-for="CitizenNo" type="text" class="form-control" id="Cost">
+        <input asp-for="CitizenNo" type="text"  pattern="\d{11}" class="form-control" id="Cost">
         <span asp-validation-for="CitizenNo" class="text-danger"></span>
     </div>
     <div class="col-12">
         <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
-        <input asp-for="PhoneNumber" type="date" class="form-control" id="Occupancy">
+        <input asp-for="PhoneNumber" type="tel" name="phone" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="tel">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="col-12">

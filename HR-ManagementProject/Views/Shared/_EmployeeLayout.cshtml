@@ -84,7 +84,6 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>@TempData["name"]  @TempData["surname"]</h6>
-                            @*<span>Şirket Yöneticisi</span>*@
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -92,8 +91,14 @@
 
                         <li>
                             <a class="dropdown-item d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="Details">
+
                                 <i class="bi bi-person"></i>
                                 <span>Profil</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="Edit">Şifreni Değiştir
+                                <i class="bi bi-person"></i>
                             </a>
                         </li>
                         <li>
@@ -106,7 +111,7 @@
                                 <span>Çıkış Yap</span>
                             </a>
                         </li>
-                        
+
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->

@@ -9,11 +9,9 @@
     }
 }
 
-<h1>Index</h1>
+<h2>Adminler</h2>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
+
 <div class="col-12">
     <div class="card top-selling overflow-auto">
 
@@ -43,30 +41,32 @@
                         <tr>
                             @if (item.ProfilePictureName != null)
                             {
-                                <th scope="row"><a ><img src="@Url.Content(@item.ProfilePictureName)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                <th scope="row"><a><img src="@Url.Content(@item.ProfilePictureName)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
                             }
                             else
                             {
-                                <th scope="row"><a ><img src="@Url.Content("~/images/default.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                <th scope="row"><a><img src="@Url.Content("~/images/default.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
                             }
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.FirstName)</a></td>
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.LastName)</a></td>
-                            <td class="fw-bold"><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Email)</a></td>
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Password)</a></td>
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BirthDate)</a></td>
-                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Country)</a></td>
-                           <td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.FirstName)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.LastName)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Email)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Password)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BirthDate)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Country)</a></td>
+                            <td>
                                 <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
-                                        <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
                             </td>
                         </tr>
 
                     }
                 </tbody>
             </table>
-
+            <p>
+                <a class="btn btn-primary" asp-action="Create">Yeni Admin Oluştur</a>
+            </p>
         </div>
 
     </div>
