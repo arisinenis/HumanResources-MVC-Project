@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @{
+    string id = Context.Session.GetString("id");
     TempData["name"] = Context.Session.GetString("name");
     TempData["surname"] = Context.Session.GetString("surname");
     TempData["photoPath"] = Context.Session.GetString("photoPath");
@@ -46,12 +47,12 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
+      @*  <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div><!-- End Search Bar -->
+        </div>*@<!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -77,7 +78,7 @@
                         }
                         else
                         {
-                            <img src="@Url.Content((string)TempData["photo"])" class="rounded-circle" style="width:20px;height:20px">
+                            <img src="@Url.Content((string)TempData["photoPath"])" class="rounded-circle" style="width:20px;height:20px">
                         }
 
                         <span class="d-none d-md-block dropdown-toggle ps-2"><span>@TempData["name"] @TempData["surname"]</span>!</span>
@@ -93,7 +94,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" asp-area="Admin" asp-controller="Admins" asp-action="Details">
+                            <a class="dropdown-item d-flex align-items-center"  asp-route-id="@id" asp-area="Admin"  asp-controller="Admins"  asp-action="Details">
                                 <i class="bi bi-person"></i>
                                 <span>Profilim</span>
                             </a>

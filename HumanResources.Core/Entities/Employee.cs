@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace HumanResources.Core.Entities
         public Employee()
         {
             Permissions = new HashSet<Permission>();
+            Expenses = new HashSet<Expense>();
+            advancePayments= new HashSet<AdvancePayment>();
         }
         [Display(Name = "İsim")]
         public string FirstName { get; set; }
@@ -30,16 +33,24 @@ namespace HumanResources.Core.Entities
         //public string Email { get { return FirstName + "." + LastName + "@" + Company.Name + "." + "com"; } }
 
         public string Password { get; set; }
-
+        [NotMapped] 
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
         public Gender Gender { get; set; }
 
         [Display(Name = "Adres")]
         public string Address { get; set; }
+        
         [Display(Name = "Doğum Tarihi")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+
+        
         [Display(Name = "İşe Giriş Tarihi")]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [Display(Name = "İşten Çıkış Tarihi")]
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         [Display(Name = "Durumu")]
         public bool Status { get; set; }
@@ -55,6 +66,9 @@ namespace HumanResources.Core.Entities
         // Nav. property
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+        [Display(Name = "Maaş")]
+        [DataType(DataType.Currency)]
+        public decimal Salary { get; set; }
 
         //public int PermissionId { get; set; }
         //public Permission Permission { get; set; }
@@ -63,6 +77,12 @@ namespace HumanResources.Core.Entities
         //public Permission Permission { get; set; }
         [NotMapped]
         public IEnumerable<Permission> Permissions { get; set; }
+        [DefaultValue(true)]
+        public bool IsFirstTime { get; set; } = true;
+
+        public IEnumerable<Expense> Expenses { get; set; }
+
+        public IEnumerable<AdvancePayment>advancePayments { get; set; }
 
     }
 }

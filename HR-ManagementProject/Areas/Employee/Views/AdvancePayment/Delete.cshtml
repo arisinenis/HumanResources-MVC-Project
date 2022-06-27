@@ -1,0 +1,48 @@
+﻿@model HumanResources.Core.Entities.AdvancePayment
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>İzin talebini silmek istediğinizden emin misiniz?</h3>
+
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TotalPaymentRequest)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TotalPaymentRequest)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Description)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Status)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Status)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.CreateTime)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.CreateTime)</div>
+        </div>
+        <br />
+         <form asp-action="Delete">&nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-action="Index" class="btn btn-primary">Paket Listesine DÖn</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+
+

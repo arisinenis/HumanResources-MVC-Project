@@ -5,10 +5,8 @@
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
 }
 
-@foreach (var item in Model)
-{
-<h1>Merhaba @item.FirstName</h1>
-}
+
+<h3>Profilim</h3>
 
 <table class="table">
     <thead>
@@ -17,35 +15,35 @@
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.SecondName)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.SecondName)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.CitizenNo)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.CitizenNo)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>*@
             @*<th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>*@
             @*<th>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.JobTitle)
             </th>
@@ -69,35 +67,35 @@
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.SecondName)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.SecondName)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.CitizenNo)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.CitizenNo)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.JobTitle)
                 </td>

@@ -31,7 +31,7 @@ namespace HumanResources.Core.Entities
         //[DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Adres")]
         //[MaxLength(200, ErrorMessage = "Adres en fazla 200 karakter olmalıdır.")]
         [DataType(DataType.MultilineText)]

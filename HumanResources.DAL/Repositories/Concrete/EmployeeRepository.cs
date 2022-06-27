@@ -24,7 +24,6 @@ namespace HumanResources.DAL.Repositories.Concrete
         public bool CreateCMAreaEmployee(Employee _employee)
         {
             var newCompanyName = (Company)db.Companies.Where(c => c.Id == _employee.CompanyId).FirstOrDefault();
-
             try
             {
                 //var newEmployee = new Employee();
@@ -44,7 +43,7 @@ namespace HumanResources.DAL.Repositories.Concrete
                 //newEmployee.JobTitle = _employee.JobTitle;
                 //newEmployee.Job = _employee.Job;
                 //newEmployee.PhotoPath = _employee.PhotoPath;
-
+                _employee.Company = newCompanyName;
                 db.Set<Employee>().Add(_employee);
                 return db.SaveChanges() > 0;
             }
@@ -53,5 +52,10 @@ namespace HumanResources.DAL.Repositories.Concrete
                 return false;
             }
         }
+
+        
+
+
+
     }
 }

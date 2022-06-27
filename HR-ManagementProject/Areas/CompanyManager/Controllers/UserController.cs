@@ -1,7 +1,9 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
@@ -24,9 +26,10 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         }
 
         // GET: CompanyAdmin/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details()
         {
-            var companyAdmin = userManager.GetById(id);
+            var id = HttpContext.Session.GetString("id");
+            var companyAdmin = userManager.GetById(Convert.ToInt32(id));
             if (id == null)
             {
                 return NotFound();
@@ -105,6 +108,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         // GET: CompanyAdmin/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
+
             var person = userManager.GetById(id);
             if (person == null)
             {

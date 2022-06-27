@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HumanResources.Core.Entities.Employee>
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.Employee>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,116 +7,58 @@
 }
 
 <h1>Personeller</h1>
+<table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Personel Profil Fotoğrafı</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CitizenNo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Salary)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.BirthDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Job)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.JobTitle)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @if (item.Status == true)
+                        {
+                            <tr>
+                                @if (item.PhotoPath != null)
+                                {
+                                    <th scope="row"><a><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                else
+                                {
+                                    <th scope="row"><a a><img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.FirstName)</a></td>
+                                 <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.LastName)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CitizenNo)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Salary)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BirthDate)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Job)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.JobTitle)</a></td>
+                                <td>
+                                    @if (Context.Session.GetString("role") == "Manager")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                    }
+
+                                </td>
+                            </tr>
+
+                        }}
+                </tbody>
+            </table>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecondName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CitizenNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.JobTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Job)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecondName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CitizenNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Job)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhotoPath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Address)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
-            </td>
-            <p>
-                <a asp-action="Create">Yeni Personel Oluştur</a>
-            </p>
-        </tr>
-}
-    </tbody>
-</table>

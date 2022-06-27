@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Http
+@model Expense
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "İzin Detayları";
+    if (Context.Session.GetString("email") != "admin@admin.com")
+    {
+        Layout = "_CompanyManagerLayout";
+    }
+}
+
+<h2>Harcama Detayı</h2>
+@if (TempData["FileError"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["FileError"]
+        </div>
+    }
+<div>
+    
+    <div>
+
+        <hr />
+        <div class="card">
+
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Employee.FirstName)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Employee.FirstName)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Employee.LastName)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Employee.LastName)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ExpenseType)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ExpenseType)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Total)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Total) TL</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.RequestDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.RequestDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ResponseDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ResponseDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.File)</div>
+                <div class="col-lg-9 col-md-8"><a asp-controller="CompanyManagerExpense" asp-action="Download" asp-route-id="@Model.Id">Dosyayı indirmek için tıklayınız.</a> </div>
+            </div>
+            <br />
+            <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="Index" class="btn btn-primary">Harcama Listesine Dön</a>
+            <br /><br />
+        </div>
+    </div>
+
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

@@ -10,6 +10,8 @@ using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using AutoMapper;
 using HR_ManagementProject.Areas.Employee.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.Employee.Controllers
 {
@@ -40,10 +42,10 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
 
 
         // GET: Employee/Employee/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details()
         {
-
-            var employee = employeeManager.GetById(id);
+            var id = HttpContext.Session.GetString("id");
+            var employee = employeeManager.GetById(Convert.ToInt32(id));
             if (employee == null)
             {
                 return NotFound();
@@ -52,9 +54,6 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
             return View(employee);
         }
 
-       
-
-        
 
         // GET: Employee/Employee/Edit/5
         public async Task<IActionResult> Edit(int id)
@@ -72,7 +71,7 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, /*[Bind("FirstName,SecondName,LastName,CitizenNo,PhoneNumber,Password,Address,BirthDate,StartDate,EndDate,Status,JobTitle,Job,PhotoPath,CompanyId,Id")]*/ EmployeeEditVM employeeEditVM)
+        public async Task<IActionResult> Edit(int id, EmployeeEditVM employeeEditVM)
         {
 
             var employeeDb = employeeManager.GetById(id);
@@ -101,9 +100,60 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction("Index","Home");
+                return RedirectToAction(nameof(Details));
             }
             return View(employeeEditVM);
+        }
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordVM changePasswordVM)
+        {
+            var id = HttpContext.Session.GetString("id");
+            var employeeDb = employeeManager.GetById(Convert.ToInt32(id));
+            if (employeeDb.Password == changePasswordVM.OldPassword)
+            {
+                employeeDb.Password = changePasswordVM.NewPassword;
+                employeeManager.Update(employeeDb);
+                ViewBag.Message = "Şifreniz başarıyla değiştirildi.";
+            }else
+            {
+                ViewBag.Message = "Şifre değişikliği başarısız oldu.";
+
+            }
+            return View();
+
+            
+
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    employeeManager.Update(employeeDb);
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeExists(employeeDb.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ChangePassword));
+            }
+            return View(employeeDb);
         }
         private bool EmployeeExists(int id)
         {

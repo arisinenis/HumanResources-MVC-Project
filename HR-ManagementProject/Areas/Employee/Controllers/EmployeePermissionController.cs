@@ -85,6 +85,8 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
             return View(permission);
         }
 
+      
+        
         public async Task<IActionResult> Delete(int id)
         {
             var permission = permissionManager.GetById(id);

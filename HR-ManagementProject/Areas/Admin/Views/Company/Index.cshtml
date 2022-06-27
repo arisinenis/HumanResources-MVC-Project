@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Şirketler</h1>
+@*<h1>Şirketler</h1>*@
 
 
 <div class="col-12">
@@ -15,7 +15,9 @@
 
         <div class="card-body pb-0">
             <h5 class="card-title">Şirketler</h5>
-
+            <p>
+                <a asp-area="Admin" asp-controller="Company" asp-action="Create"><input value="Yeni şirket oluştur" class="btn btn-primary" /></a>
+            </p>
             <table class="table table-borderless">
 
                 <thead>
@@ -60,9 +62,7 @@
                     }
                 </tbody>
             </table>
-            <p>
-                <a asp-area="Admin" asp-controller="Company" asp-action="Create"><input value="Yeni şirket oluştur" class="btn btn-primary" /></a>
-            </p>
+            
         </div>
 
     </div>

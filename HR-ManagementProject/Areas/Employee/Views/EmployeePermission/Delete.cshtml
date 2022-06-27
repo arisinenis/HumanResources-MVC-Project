@@ -8,58 +8,57 @@
 <h1>İzin Sil</h1>
 
 <h3>Silmek istediğinize emin misiniz?</h3>
-@if (ViewBag.ErrorMessage != null)
+@*@if (ViewBag.ErrorMessage != null)
 {
     <div class="alert alert-danger" role="alert">
         @ViewBag.ErrorMessage
     </div>
-}
+}*@
 <div>
-    @*<h4>İzin</h4>*@
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PermissionType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PermissionType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalDayOfPermissionType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalDayOfPermissionType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RequestDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RequestDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PermissionStatus)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PermissionStatus)
-        </dd>
-    </dl>
-    
-    <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="DeletePermission">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Sil" class="btn btn-danger" /> |
-        <a asp-controller="EmployeePermission" asp-action="Index">İzin Listesine geri dön</a>
-    </form>
+    <div class="card">
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PermissionType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PermissionType)</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TotalDayOfPermissionType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TotalDayOfPermissionType)</div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.RequestDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.RequestDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.StartDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EndDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PermissionStatus)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PermissionStatus)</div>
+        </div>
+        <br />
+
+        <form asp-area="Employee" asp-controller="EmployeePermission" asp-action="Delete">
+            &nbsp;&nbsp;
+            <input  type="hidden" asp-for="Id" />
+            <input  asp-area="Employee" asp-controller="EmployeePermission" asp-action="DeletePermission" type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-area="Employee" asp-controller="EmployeePermission"  asp-action="Index" class="btn btn-primary">Listeye Dön</a>
+        </form>
+        <br /><br />
+    </div>
 </div>
 

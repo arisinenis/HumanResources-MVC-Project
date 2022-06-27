@@ -21,6 +21,8 @@ namespace HumanResources.DAL.Context
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<AdvancePayment> AdvancePayments { get; set; }
         //public DbSet<Person> Persons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

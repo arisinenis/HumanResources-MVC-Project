@@ -14,6 +14,8 @@ namespace HumanResources.DAL.Configurations
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasMany(x=>x.advancePayments).WithOne(x => x.Employee).HasForeignKey(x => x.EmployeeId);
+            builder.Property(x=>x.Salary).IsRequired(true);
             
         }
     }

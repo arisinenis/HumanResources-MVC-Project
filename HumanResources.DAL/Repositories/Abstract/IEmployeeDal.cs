@@ -11,5 +11,6 @@ namespace HumanResources.DAL.Repositories.Abstract
     {
         Employee GetByEmailAndPassword(string email, string password);
         bool CreateCMAreaEmployee(Employee _employee);
+        
     }
 }

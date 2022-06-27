@@ -1,0 +1,68 @@
+﻿@model HumanResources.Core.Entities.Expense
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1>Harcama talebini silmek istediğinizden emin misiniz?</h1>
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Total)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Total)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Description)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ExpenseType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ExpenseType)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Status)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Status)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.RequestDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.RequestDate)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ResponseDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ResponseDate)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.FileName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.FileName)</div>
+        </div>
+
+        <br />
+        <form asp-action="Delete">
+            &nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-controller="EmployeeExpense" asp-action="Index" class="btn btn-primary">Harcama Listesine DÖn</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+
+
+
+

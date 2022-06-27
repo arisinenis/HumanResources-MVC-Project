@@ -54,7 +54,7 @@ namespace HumanResources.DAL.Repositories.Concrete
 
         public IEnumerable<T> GetAll()
         {
-            return _applicationDbContext.Set<T>();
+            return _applicationDbContext.Set<T>().ToList();
         }
 
         public T GetById(int id)

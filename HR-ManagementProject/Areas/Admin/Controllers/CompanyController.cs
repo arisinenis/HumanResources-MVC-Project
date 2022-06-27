@@ -1,5 +1,6 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
+using HumanResources.DAL.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,11 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
     {
         private readonly ICompanyService companyManager;
         private readonly IPackageService packageService;
+        private readonly ApplicationDbContext _context;
 
-        public CompanyController(ICompanyService companyManager, IPackageService packageService)
+        public CompanyController(ICompanyService companyManager, IPackageService packageService, ApplicationDbContext context)
         {
-
+            this._context = context;
             this.companyManager = companyManager;
             this.packageService = packageService;
         }
@@ -27,15 +29,13 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: Company
         public async Task<IActionResult> Index()
         {
-
-            return View(companyManager.GetAll());
+            var list = _context.Companies.Include(p => p.Package);
+            return View(await list.ToListAsync());
         }
 
         // GET: Company/Details/5
         public async Task<IActionResult> Details(int id)
         {
-
-
             var company = companyManager.GetById(id);
             if (company == null)
             {
@@ -48,8 +48,9 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: Company/Create
         public IActionResult Create()
         {
-            var packageData = new SelectList(packageService.GetAll().ToList(), "Id", "Name");
+            var packageData = new SelectList(_context.Packages, "Id", "Name");
             ViewData["PackagesData"] = packageData;
+
             return View(new Company());
         }
 

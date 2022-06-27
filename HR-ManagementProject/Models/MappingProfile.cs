@@ -16,6 +16,8 @@ namespace HR_ManagementProject.Models
 
             CreateMap<PermissionEmployeeVM, Permission>();
             CreateMap<Permission, PermissionEmployeeVM>();
+
+            
         }
     }
 }

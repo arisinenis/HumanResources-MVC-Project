@@ -1,0 +1,46 @@
+﻿@model HumanResources.Core.Entities.AdvancePayment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_EmployeeLayout";
+}
+
+<h1>Create</h1>
+
+<h4>AdvancePayment</h4>
+<hr />
+@if(TempData["hata"]!=null)
+{
+  <div class="alert alert-info">@TempData["hata"]</div>  
+}
+
+<form asp-area="Employee" asp-controller="AdvancePayment" asp-action="Create" class="row g-3" enctype="multipart/form-data" method="post">
+    
+    <div class="col-12">
+        <label asp-for="TotalPaymentRequest" class="form-label">@Html.DisplayNameFor(model => model.TotalPaymentRequest)</label>
+        <input asp-for="TotalPaymentRequest" type="text" class="form-control" id="TotalPaymentRequest">
+        <span asp-validation-for="TotalPaymentRequest" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">@Html.DisplayNameFor(model => model.Description)</label>
+        <textarea asp-for="Description" rows="10" cols="40" class="form-control" id="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="CreateTime" class="form-label">@Html.DisplayNameFor(model => model.CreateTime)</label>
+        <input asp-for="CreateTime" type="date" class="form-control" id="CreateTime">
+        <span asp-validation-for="CreateTime" class="text-danger"></span>
+    </div>
+    
+       <div class="text-center">
+           <input type="submit" value="Ekle" class="btn btn-primary" />
+           <button asp-area="Employee" asp-controller="AdvancePayment" asp-action="Index" class="btn btn-secondary">Paketler Listesine Dön</button>
+
+       </div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

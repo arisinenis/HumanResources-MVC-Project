@@ -17,25 +17,25 @@ namespace HumanResources.Core.Entities
             Users = new HashSet<User>();
         }
 
-        [Required]
+        //[Required]
         [Display(Name = "Şirket Adı")]
         public string Name { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Şirket Tipi")]
         [EnumDataType(typeof(CompanyType))]
         public CompanyType CompanyType { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Adres")]
-        [MaxLength(200, ErrorMessage = "Adres en fazla 200 karakter olmalıdır.")]
-        [DataType(DataType.MultilineText)]
+        //[MaxLength(200, ErrorMessage = "Adres en fazla 200 karakter olmalıdır.")]
+        //[DataType(DataType.MultilineText)]
         public string Address { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Telefon Numarası")]
-        [MaxLength(11, ErrorMessage = "Adres en fazla 11 karakter olmalıdır.")]
-        [DataType(DataType.PhoneNumber)]
+        //[MaxLength(11, ErrorMessage = "Adres en fazla 11 karakter olmalıdır.")]
+        //[DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         

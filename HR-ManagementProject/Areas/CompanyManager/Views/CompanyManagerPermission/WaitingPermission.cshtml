@@ -50,7 +50,7 @@
                                     </div>
                                 </form>
 
-                                <form asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="RejectPermission">
+                                <form asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="RejectPermission" asp-route-id="@item.Id">
                                     <div class="form-group">
                                         <input type="hidden" asp-for="@item.Id" />
                                         <input type="submit" value="Reddet" class="btn btn-danger" @*onclick="permissionAlert()"*@ />

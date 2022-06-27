@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<Expense>
+
+@{
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+        <div class="card-body">
+            <h5 class="card-title">Bekleyen Harcama Talepleri</h5>
+
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">İsim</th>
+                        <th scope="col">Soyisim</th>
+                        <th scope="col">Harcama Tipi</th>
+                        <th scope="col">Toplam Harcama Miktarı</th>
+                        <th scope="col">Harcama Talep Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <th scope="row">@item.Employee.FirstName</th>
+                            <th scope="row">@item.Employee.LastName</th>
+                            <th scope="row">@item.ExpenseType</th>
+                            <th scope="row">@item.Total</th>
+                            <th scope="row">@item.RequestDate</th>
+                            <td>
+
+                                <form asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="ApproveExpense" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.Status" />
+                                        <input type="submit" value="Onayla" class="btn btn-success" />
+                                    </div>
+                                </form>
+
+                                <form asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="RejectExpense" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.Status" />
+                                        <input type="submit" value="Reddet" class="btn btn-danger" />
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,11 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
-    @{
+@{
     TempData["name"] = Context.Session.GetString("name");
     TempData["surname"] = Context.Session.GetString("surname");
     TempData["photoPath"] = Context.Session.GetString("photoPath");
     TempData["title"] = Context.Session.GetString("title");
+    TempData["id"] = Context.Session.GetString("id");
+    TempData["MessageCount"] = Context.Session.GetString("MessageCount");
+    TempData["AdvancePaymentCount"] = Context.Session.GetString("AdvancePaymentCount");
+    TempData["ExpensesCount"] = Context.Session.GetString("ExpensesCount");
+    TempData["totalMessage"] = Convert.ToInt32(Context.Session.GetString("MessageCount"))+Convert.ToInt32(Context.Session.GetString("AdvancePaymentCount"))+Convert.ToInt32(Context.Session.GetString("ExpensesCount"));
+    
 }
 <head>
     <meta charset="utf-8" />
@@ -47,12 +53,12 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
+        @*<div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div><!-- End Search Bar -->
+        </div>*@<!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -69,23 +75,31 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a id="CMZero" class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
-            @if(Convert.ToInt32(Context.Session.GetString("MessageCount"))==0)
+            @if(Convert.ToInt32(TempData["totalMessage"])==0)
             {
 
                             }
                             else
                             {
-                              <span class="badge bg-success badge-number">@Context.Session.GetString("MessageCount")</span>  
+                              <span class="badge bg-success badge-number">@TempData["totalMessage"]</span>  
                             }
                             
           </a><!-- End Messages Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
-              @Context.Session.GetString("MessageCount") yeni mesajınız var!
-              <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              @TempData["MessageCount"] yeni izin talebi mesajınız var!
+              <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+            </li>
+            <li class="dropdown-header">
+              @TempData["AdvancePaymentCount"] yeni avans talebi mesajınız var!
+              <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="WaitingAdvancePayment"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+            </li>
+            <li class="dropdown-header">
+              @TempData["ExpensesCount"] yeni harcama talebi mesajınız var!
+              <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -126,7 +140,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" asp-controller="CompanyAdmin" asp-action="Details">
+                            <a class="dropdown-item d-flex align-items-center" asp-route-id="@Convert.ToInt32(TempData["id"])" asp-area="CompanyManager" asp-controller="User" asp-action="Details">
                                 <i class="bi bi-person"></i>
                                 <span>Profilim</span>
                             </a>
@@ -162,8 +176,6 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
-
-
              <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#" >
                     <i class="bi bi-journal-text"></i><span>Paketler</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -189,6 +201,54 @@
                    <li>
                         <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Index">
                             <i class="bi bi-circle"></i><span>Çalışanları Listele</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#avans-nav" data-bs-toggle="collapse" href="#" >
+                    <i class="bi bi-journal-text"></i><span>Avans Talepleri</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="avans-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Avans teleplerini Listele</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#izinler-nav" data-bs-toggle="collapse" href="#" >
+                    <i class="bi bi-journal-text"></i><span>İzinler</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="izinler-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   @*<li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>İzinleri Listele</span>
+                        </a>
+                    </li>*@
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission">
+                            <i class="bi bi-circle"></i><span>Bekleyen İzinler</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#harcamalar-nav" data-bs-toggle="collapse" href="#" >
+                    <i class="bi bi-journal-text"></i><span>Harcamalar</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="harcamalar-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Harcamaları Listele</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses">
+                            <i class="bi bi-circle"></i><span>Bekleyen Harcamalar</span>
                         </a>
                     </li>
                 </ul>
@@ -229,6 +289,16 @@
 
     <!-- Template Main JS File -->
     <script src="/NewTemplate/assets/js/main.js"></script>
+
+    <!-- Bildirim mesajı sıfırlama -->
+    @section scripts {<script>
+    $("#CMZero").on('click',function()
+    {
+        TempData["MessageCount"]=0;
+    });
+    </script>
+    }
+    <!-- Bildirim mesajı sıfırlama -->
     @RenderSection("Scripts", required: false)
 </body>
 </html>

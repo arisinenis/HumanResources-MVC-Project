@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
     @{
@@ -44,14 +45,7 @@
                 <span class="d-none d-lg-block">HumanResources</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
+        </div> 
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -78,7 +72,7 @@
                         {
                             <img src="@Url.Content((string)TempData["photoPath"])" alt="Profile" class="rounded-circle">
                         }
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Merhaba @TempData["name"]!</span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">@TempData["name"]</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -93,12 +87,16 @@
                             <a class="dropdown-item d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="Details">
 
                                 <i class="bi bi-person"></i>
-                                <span>Profil</span>
+                                <span>Profilim</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="Edit">Şifreni Değiştir
-                                <i class="bi bi-person"></i>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="ChangePassword">
+                                <i class="bi bi-person"></i>Şifreni Değiştir
+
                             </a>
                         </li>
                         <li>
@@ -135,10 +133,10 @@
 
 
              <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" asp-area="Employee" asp-controller="Employee" asp-action="Index">
+                <a class="nav-link collapsed" data-bs-target="#izin-nav" data-bs-toggle="collapse" asp-area="Employee" asp-controller="Employee" asp-action="Index">
                     <i class="bi bi-journal-text"></i><span>İzin</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="izin-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                    <li>
                         <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Index">
                             <i class="bi bi-circle"></i><span>İzinleri Listele</span>
@@ -147,6 +145,42 @@
                     <li>
                         <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Create">
                             <i class="bi bi-circle"></i><span>İzin Talep Et</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#avans-nav" data-bs-toggle="collapse" asp-area="Employee" asp-controller="AdvancePayment" asp-action="Index">
+                    <i class="bi bi-journal-text"></i><span>Avans</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="avans-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   <li>
+                        <a asp-area="Employee" asp-controller="AdvancePayment" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Avans Taleplerim</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="Employee" asp-controller="AdvancePayment" asp-action="Create">
+                            <i class="bi bi-circle"></i><span>Avans Talep Et</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#harcama-nav" data-bs-toggle="collapse" asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Index">
+                    <i class="bi bi-journal-text"></i><span>Harcamalar</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="harcama-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   <li>
+                        <a asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Harcama Taleplerim</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Create">
+                            <i class="bi bi-circle"></i><span>Harcama Talep Et</span>
                         </a>
                     </li>
                 </ul>

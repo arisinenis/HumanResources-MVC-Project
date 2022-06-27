@@ -1,0 +1,32 @@
+﻿@model HumanResources.Core.Entities.AdvancePayment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>AdvancePayment</h4>
+<hr />
+
+<form asp-controller="AdvancePayment" asp-action="Edit" enctype="multipart/form-data" class="row g-3">
+    
+    <div class="col-12">
+        <label asp-for="TotalPaymentRequest" class="form-label">@Html.DisplayNameFor(model => model.TotalPaymentRequest)</label>
+        <input asp-for="TotalPaymentRequest" type="text" class="form-control" id="TotalPaymentRequest">
+        <span asp-validation-for="TotalPaymentRequest" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">@Html.DisplayNameFor(model => model.Description)</label>
+        <textarea asp-for="Description" rows="30" cols="50" class="form-control" id="EndDate"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+   <div class="text-center">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" value="Save" class="btn btn-primary">Düzenle</button>
+        <button asp-action="Index" class="btn btn-secondary">Paket Listesine Dön</button>
+    </div>
+</form>
+
+
+

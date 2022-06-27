@@ -55,6 +55,38 @@ namespace HumanResources.DAL.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("HumanResources.Core.Entities.AdvancePayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPaymentRequest")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("AdvancePayments");
+                });
+
             modelBuilder.Entity("HumanResources.Core.Entities.Company", b =>
                 {
                     b.Property<int>("Id")
@@ -63,9 +95,7 @@ namespace HumanResources.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
@@ -74,16 +104,13 @@ namespace HumanResources.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PackageId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
@@ -132,6 +159,9 @@ namespace HumanResources.DAL.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsFirstTime")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Job")
                         .HasColumnType("nvarchar(max)");
 
@@ -153,6 +183,9 @@ namespace HumanResources.DAL.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("SecondName")
                         .HasColumnType("nvarchar(max)");
 
@@ -167,6 +200,44 @@ namespace HumanResources.DAL.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("HumanResources.Core.Entities.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpenseType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ResponseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("HumanResources.Core.Entities.Package", b =>
@@ -257,7 +328,6 @@ namespace HumanResources.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("BirthDate")
@@ -309,6 +379,17 @@ namespace HumanResources.DAL.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("HumanResources.Core.Entities.AdvancePayment", b =>
+                {
+                    b.HasOne("HumanResources.Core.Entities.Employee", "Employee")
+                        .WithMany("advancePayments")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("HumanResources.Core.Entities.Company", b =>
                 {
                     b.HasOne("HumanResources.Core.Entities.Package", "Package")
@@ -329,6 +410,17 @@ namespace HumanResources.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("HumanResources.Core.Entities.Expense", b =>
+                {
+                    b.HasOne("HumanResources.Core.Entities.Employee", "Employee")
+                        .WithMany("Expenses")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HumanResources.Core.Entities.Permission", b =>
@@ -356,6 +448,13 @@ namespace HumanResources.DAL.Migrations
             modelBuilder.Entity("HumanResources.Core.Entities.Company", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("HumanResources.Core.Entities.Employee", b =>
+                {
+                    b.Navigation("advancePayments");
+
+                    b.Navigation("Expenses");
                 });
 
             modelBuilder.Entity("HumanResources.Core.Entities.Package", b =>

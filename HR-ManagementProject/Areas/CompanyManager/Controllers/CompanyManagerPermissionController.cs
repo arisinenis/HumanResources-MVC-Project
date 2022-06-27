@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,6 +29,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         public async Task<IActionResult> Index()
         {
             return View(permissionManager.GetAll());
+            
         }
 
         // GET: CompanyManager/CompanyManagerPermission/Details/5
@@ -179,7 +183,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 
                 permissionManager.RejectPermission(permission);
 
-                ViewBag.Message = "İzin Onaylandı !";
+                ViewBag.Message = "İzin Reddedildi !";
 
                 return RedirectToAction(nameof(WaitingPermission));
             }

@@ -43,6 +43,8 @@ namespace HR_ManagementProject
             services.AddScoped<IAdminDal, AdminRepository>();
             services.AddScoped<IEmployeeDal, EmployeeRepository>();
             services.AddScoped<IPermissionDal, PermissionRepository>();
+            services.AddScoped<IExpenseDal, ExpenseRepository>();
+            services.AddScoped<IAdvancePaymentDal, AdvancePaymentRepository>();
 
             // Business Dependency Injections
             services.AddScoped<IPackageService, PackageManager>();
@@ -51,10 +53,12 @@ namespace HR_ManagementProject
             services.AddScoped<IAdminService, AdminManager>();
             services.AddScoped<IEmployeeService, EmployeeManager>();
             services.AddScoped<IPermissionService, PermissionManager>();
+            services.AddScoped<IExpenseService, ExpenseManager>();
+            services.AddScoped<IAdvancePaymentService, AdvancePaymentManager>();
             //services.AddSingleton<IEmailSender, EmailSender>();
 
             //Projeyi kapatýp açmadan anýnda yenilenmesi için
-            //services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
             services.AddRazorPages();
             
@@ -84,7 +88,12 @@ namespace HR_ManagementProject
                 endpoints.MapControllerRoute(
                     name: "login",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
-                
+
+                endpoints.MapAreaControllerRoute(
+                  name: "Employee",
+                  areaName: "Employee",
+                  pattern: "Employee/{controller}/{action}");
+
                 endpoints.MapAreaControllerRoute(
                    name: "CompanyManager",
                    areaName: "CompanyManager",

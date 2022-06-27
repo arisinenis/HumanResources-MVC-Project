@@ -1,0 +1,66 @@
+﻿@model HumanResources.Core.Entities.Expense
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h2>Harcama Detayı</h2>
+
+<div>
+
+    <div>
+
+        <hr />
+        <div class="card">
+
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Status)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Status)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ExpenseType)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ExpenseType)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Total)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Total) TL</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.RequestDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.RequestDate)</div>
+            </div>
+            <br />
+            @*<div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.ResponseDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.ResponseDate)</div>
+            </div>*@
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Description)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+            </div>
+            <br />
+            <form asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Edit">
+                &nbsp;&nbsp;
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Düzenle" class="btn btn-danger" /> &nbsp;&nbsp;
+                <a asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Index" class="btn btn-primary">Harcama Listesine Dön</a>
+            </form>
+            <br /><br />
+        </div>
+    </div>
+
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

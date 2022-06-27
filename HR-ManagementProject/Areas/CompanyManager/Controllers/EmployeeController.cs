@@ -21,11 +21,13 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeeManager;
+        private readonly ICompanyService _companyManager;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IMapper mapper;
 
-        public EmployeeController(IEmployeeService employeeManager, IWebHostEnvironment hostEnvironment)
+        public EmployeeController(IEmployeeService employeeManager, IWebHostEnvironment hostEnvironment, ICompanyService companyManager)
         {
+            _companyManager = companyManager;
             _employeeManager = employeeManager;
             this._hostEnvironment = hostEnvironment;
         }
@@ -56,35 +58,40 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HumanResources.Core.Entities.Employee employee)
         {
+            var company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //MailMessage mail = new MailMessage();
+            //mail.To.Add(employee.Email);
+            //mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
+            //mail.Subject = "Merhaba Human Resources Programıza Hoşgeldiniz" + employee.Company.Name + "Firması olarak seni aramızda görmekten çok mutluyuz. ";
+            //mail.Body = "Hoşgeldin " + employee.FirstName + "," + "</br>" + "Şifreniz: " + employee.Password;
+            //mail.IsBodyHtml = true;
+
+            //SmtpClient client = new SmtpClient();
+            //client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
+            //client.Port = 587;
+            //client.Host = "smtp.gmail.com";
+            //client.EnableSsl = true;
+
+            //try
+            //{
+            //    client.Send(mail);
+            //    TempData["Message"] = "Gönderildi.";
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    TempData["Message"] = "Hata Var; " + ex.Message;
+            //}
+
+            //employee.CompanyId = Convert.ToInt32(HttpContext.Session.GetString("CompanyId"));
+
+            employee.Email = employee.FirstName + "." + employee.LastName + "@" + company.Name + "." + "com";
+            employee.Password = company.Name + "123"; //Default bir şifre
+            employee.CompanyId =company.Id;
+
             if (ModelState.IsValid)
             {
-                MailMessage mail = new MailMessage();
-                mail.To.Add(employee.Email);
-                mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
-                mail.Subject = "Yakuptan mesaj";
-                mail.Body = "Hoşgeldin " + employee.FirstName + "," + "</br>" + "Şifreniz: " + employee.Password;
-                mail.IsBodyHtml = true;
-
-                SmtpClient client = new SmtpClient();
-                client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
-                client.Port = 587;
-                client.Host = "smtp.gmail.com";
-                client.EnableSsl = true;
-
-                try
-                {
-                    client.Send(mail);
-                    TempData["Message"] = "Gönderildi.";
-                }
-                catch (Exception ex)
-                {
-
-                    TempData["Message"] = "Hata Var; " + ex.Message;
-                }
-
-                employee.CompanyId = Convert.ToInt32(HttpContext.Session.GetString("CompanyId"));
-                _employeeManager.CreateCMAreaEmployee(employee);
-
+                _employeeManager.Add(employee);
                 return RedirectToAction(nameof(Index));
             }
             return View(employee);
@@ -108,11 +115,14 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, HumanResources.Core.Entities.Employee employee)
         {
+            var company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
             if (id != employee.Id)
             {
                 return NotFound();
             }
-
+            employee.Email = employee.FirstName + "." + employee.LastName + "@" + company.Name + "." + "com";
+            employee.Password = company.Name + "123"; //Default bir şifre
+            employee.CompanyId = company.Id;
             if (ModelState.IsValid)
             {
                 try
