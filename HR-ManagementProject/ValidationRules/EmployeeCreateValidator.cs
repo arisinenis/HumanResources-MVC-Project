@@ -11,6 +11,7 @@ namespace HR_ManagementProject.ValidationRules
     {
         public EmployeeCreateValidator()
         {
+
             RuleFor(x => x.BirthDate.Date.Year).LessThanOrEqualTo(DateTime.Now.Year+18).WithMessage("Doğum tarihi 18 yaşından küçük olanlar çalışamaz");
         }
     }

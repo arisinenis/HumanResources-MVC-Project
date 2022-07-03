@@ -60,10 +60,12 @@ namespace HR_ManagementProject.Controllers
                 HttpContext.Session.SetString("name", userAdmin.FirstName.ToString());
                 HttpContext.Session.SetString("surname", userAdmin.LastName.ToString());
                 
+                
                 if (userAdmin.ProfilePictureName != null)
                 {
                     HttpContext.Session.SetString("photoPath", userAdmin.ProfilePictureName.ToString());
                 }
+                else HttpContext.Session.SetString("photoPath", "default");
                 HttpContext.Session.SetString("ProfilePictureName", "default");
                 TempData["welcome"] = "Hoşgeldin " + userAdmin.FirstName + "!";
                 return RedirectToAction("Index", "Home");

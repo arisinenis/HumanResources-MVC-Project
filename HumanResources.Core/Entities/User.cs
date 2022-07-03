@@ -12,52 +12,59 @@ namespace HumanResources.Core.Entities
 {
     public class User : BaseEntity
     {
-        //[Required]
-        //[MaxLength(50, ErrorMessage = "İsim en fazla 3 karakter olmalıdır.")]
+        
+        [MaxLength(50, ErrorMessage = "İsim en fazla 50 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen isminizi giriniz.")]
         [Display(Name = "İsim")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string FirstName { get; set; }
 
-        //[MaxLength(50, ErrorMessage = "İkinci İsim en fazla 3 karakter olmalıdır.")]
+        [MaxLength(50, ErrorMessage = "İkinci İsim en fazla 50 karakter olmalıdır.")]
         [Display(Name = "İkinci İsim (İsteğe Bağlı)")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string? SecondName { get; set; }
 
-        //[Required]
-        //[MaxLength(50, ErrorMessage = "Soyisim en fazla 3 karakter olmalıdır.")]
+        
+        [MaxLength(50, ErrorMessage = "Soyisim en fazla 50 karakter olmalıdır.")]
+        [Required(ErrorMessage = "Lütfen isminizi giriniz.")]
         [Display(Name = "Soyisim")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string LastName { get; set; }
 
-        //[Required]
-        //[Display(Name = "Email")]
-        //[DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+        ErrorMessage = "Lütfen mail adresinizi kontrol ediniz.")]
         public string Email { get; set; }
 
-        //[Required]
+        [Required(ErrorMessage = "Lütfen adresinizi giriniz.")]
         [Display(Name = "Adres")]
-        //[MaxLength(200, ErrorMessage = "Adres en fazla 200 karakter olmalıdır.")]
+        [MaxLength(200, ErrorMessage = "Adres en fazla 200 karakter olmalıdır.")]
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
 
-        //[Required]
+        [Required(ErrorMessage = "Lütfen telefon numaranızı giriniz.")]
         [Display(Name = "Telefon Numarası")]
-        //[MaxLength(11, ErrorMessage = "Telefon numarası en fazla 11 karakter olmalıdır.")]
-        //[DataType(DataType.PhoneNumber)]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Geçerli bir telefon numarası giriniz.")]
         public string PhoneNumber { get; set; }
 
-        ////[Required]
+        [Required(ErrorMessage = "Lütfen şifrenizi giriniz.")]
         [Display(Name = "Şifre")]
         ////[RegularExpression(@"^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$", ErrorMessage = "1 adet rakam (0-9), 1 adet büyük harf, 1 adet küçük harf, 1 adet özel karakter, 8 - 16 karakter arası, boşluk içeremez.")]
-        ////[DataType(DataType.Password)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //[Required]
+        [Required(ErrorMessage = "Lütfen TC Kimlik numaranızı giriniz.")]
         [Display(Name = "Kimlik Numarası")]
-        //[MaxLength(11, ErrorMessage = " TC numarası en fazla 11 karakter olmalıdır.")]
+        [RegularExpression(@"^(\d{11})$", ErrorMessage = "TC Kimlik numarası 11 haneli olmalıdır.")]
         public string CitizenNo { get; set; }
 
-        //[Required]
+        
         [Display(Name = "Doğum Tarihi")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
         //[Required]
         [Display(Name = "Kan Grubu")]
@@ -66,11 +73,13 @@ namespace HumanResources.Core.Entities
         //[Required]
         //[MaxLength(100, ErrorMessage = "Unvan en fazla 11 karakter olmalıdır.")]
         [Display(Name = "Ünvan")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string JobTitle { get; set; }
 
         //[Required]
         //[MaxLength(100, ErrorMessage = "Meslek en fazla 11 karakter olmalıdır.")]
         [Display(Name = "Meslek")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string Profession { get; set; }
 
         //[Required]

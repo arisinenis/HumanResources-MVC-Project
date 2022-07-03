@@ -1,6 +1,7 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,20 +18,24 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
     {
         private readonly ICompanyService companyManager;
         private readonly IPackageService packageService;
+        private readonly IWalletService walletManager;
         private readonly ApplicationDbContext _context;
 
-        public CompanyController(ICompanyService companyManager, IPackageService packageService, ApplicationDbContext context)
+        public CompanyController(ICompanyService companyManager, IPackageService packageService, ApplicationDbContext context, IWalletService walletManager)
         {
             this._context = context;
             this.companyManager = companyManager;
             this.packageService = packageService;
+            this.walletManager = walletManager;
         }
 
         // GET: Company
         public async Task<IActionResult> Index()
         {
-            var list = _context.Companies.Include(p => p.Package);
-            return View(await list.ToListAsync());
+           // var list = _context.Companies.Include(p => p.Package);
+            //return View(await list.ToListAsync());
+
+            return View(companyManager.GetAll());
         }
 
         // GET: Company/Details/5
@@ -48,8 +53,8 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: Company/Create
         public IActionResult Create()
         {
-            var packageData = new SelectList(_context.Packages, "Id", "Name");
-            ViewData["PackagesData"] = packageData;
+            ViewData["PackagesData"] = new SelectList(packageService.GetAll(), "Id", "Name");
+
 
             return View(new Company());
         }
@@ -61,9 +66,13 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Company company)
         {
+            Wallet wallet = new Wallet();
+            //walletManager.Add(wallet);
+            company.Wallet = wallet;
 
             if (ModelState.IsValid)
             {
+                ViewData["PackagesData"] = new SelectList(_context.Packages, "Id", "Name");
                 companyManager.Add(company);
                 return RedirectToAction(nameof(Index));
             }
@@ -99,6 +108,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
             {
                 try
                 {
+                    //company.Packages= packageService.GetById(id);//List olmalı
                     companyManager.Update(company);
 
                 }

@@ -45,6 +45,7 @@ namespace HR_ManagementProject
             services.AddScoped<IPermissionDal, PermissionRepository>();
             services.AddScoped<IExpenseDal, ExpenseRepository>();
             services.AddScoped<IAdvancePaymentDal, AdvancePaymentRepository>();
+            services.AddScoped<IWalletDal, WalletRepository>();
 
             // Business Dependency Injections
             services.AddScoped<IPackageService, PackageManager>();
@@ -55,6 +56,7 @@ namespace HR_ManagementProject
             services.AddScoped<IPermissionService, PermissionManager>();
             services.AddScoped<IExpenseService, ExpenseManager>();
             services.AddScoped<IAdvancePaymentService, AdvancePaymentManager>();
+            services.AddScoped<IWalletService, WalletManager>();
             //services.AddSingleton<IEmailSender, EmailSender>();
 
             //Projeyi kapatýp açmadan anýnda yenilenmesi için

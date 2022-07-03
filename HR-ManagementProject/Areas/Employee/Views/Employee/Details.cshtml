@@ -73,15 +73,14 @@
                 <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Photo)</div>
                 <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Photo)</div>
             </div>
-
-            <br />
-            
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model.Id"><span class="btn btn-success" style="margin-left:30px">Düzenle</span></a>
-                <button asp-area="Employee" asp-controller="EmployeePermission" asp-action="Index" class="btn btn-secondary">İzin Listesine Dön</button>
-
-                @*<a asp-area="Employee" asp-controller="Employee" asp-action="Index" class="btn btn-primary">Geri Dön</a>*@
-            </div>
+             
+           <br />
+            <form asp-area="Employee" asp-controller="Employees" asp-action="Edit">
+                &nbsp;&nbsp;
+                <input type="hidden" asp-for="Id" />
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Düzenle</a>
+                <a asp-action="Index" class="btn btn-primary">Geri Dön</a>
+            </form>
             <br />
             <br />
         </div>

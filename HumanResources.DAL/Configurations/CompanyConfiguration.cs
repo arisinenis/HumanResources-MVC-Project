@@ -14,7 +14,7 @@ namespace HumanResources.DAL.Configurations
         public void Configure(EntityTypeBuilder<Company> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Package).WithMany(y => y.Companies).HasForeignKey(x => x.PackageId);
+            //builder.HasOne(x => x.Package).WithMany(y => y.Companies).HasForeignKey(x => x.PackageId);
 
         }
     }

@@ -1,0 +1,39 @@
+﻿@model HumanResources.Core.Entities.Wallet
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h1>Cüzdan</h1>
+<hr />
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.Company.Name)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Balance)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.TopUpDate)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => modelItem.Company.Name)</a></td>
+            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => modelItem.Balance) TL</a></td>
+            @if (Model.Balance == 0)
+            {
+                <td><a class="text-primary fw-bold"></a></td>
+            }
+            else
+            {
+                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => modelItem.TopUpDate)</a></td>
+            }
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    @*<input asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance" type="submit" value="" class="btn btn-success" />*@
+    @*<button asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance" class="btn btn-success"></button>*@
+    <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance"><span class="badge bg-success" style="padding:1rem;font-size:0.75rem;">Bakiye Yüklemek İçin Tıklayınız.</span></a>
+</div>

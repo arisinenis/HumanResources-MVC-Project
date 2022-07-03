@@ -1,4 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,11 +25,11 @@ namespace HumanResources.Core.Entities
             Companies = new HashSet<Company>();
         }
 
-        [Required]
+        [Required(ErrorMessage ="Lütfen Paket ismi giriniz.")]
         [MinLength(3, ErrorMessage = "Ürün adı en az 3 karakter olmalıdır.")]
         [Display(Name = "Paket Adı")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Lütfen Paket için açıklama giriniz.")]
         [MaxLength(200, ErrorMessage = "Ürün açıklaması en fazla 200 karakter olmalıdır.")]
         [Display(Name = "Açıklama")]
         [DataType(DataType.MultilineText)]
@@ -34,9 +43,10 @@ namespace HumanResources.Core.Entities
         [DataType(DataType.Date)]
         [Display(Name = "Satın alma tarihi")]
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        [Required(ErrorMessage = "Lütfen Paket ücreti giriniz.")]
         [DataType(DataType.Currency)]
         [Display(Name = "Ücret")]
-        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal Cost { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Paket bitiş tarihi")]
@@ -50,6 +60,7 @@ namespace HumanResources.Core.Entities
             set { PurchaseDate = value; }
         }
         [Display(Name = "Kullanıcı sayısı")]
+        [Required(ErrorMessage = "Lütfen Kullanıcı sayısı giriniz.")]
         public int UsageAmount { get; set; }
         public string PhotoPath { get; set; }
 

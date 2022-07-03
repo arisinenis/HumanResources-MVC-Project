@@ -88,7 +88,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
             employee.Email = employee.FirstName + "." + employee.LastName + "@" + company.Name + "." + "com";
             employee.Password = company.Name + "123"; //Default bir şifre
             employee.CompanyId =company.Id;
-
+            company.PersonelSayisi += 1 ;
             if (ModelState.IsValid)
             {
                 _employeeManager.Add(employee);

@@ -72,13 +72,13 @@
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         @if ((string)TempData["photoPath"] == "default")
                         {
-                            @*<img src="@Url.Content("~/images/default.png")" alt="Profile" class="rounded-circle">*@
-                            <img src="~/images/default.png" class="rounded-circle"style="width:20px;height:20px"/>
+                            <img src="@Url.Content("~/images/default.png")" alt="Profile" class="rounded-circle">
+                            
 
                         }
                         else
                         {
-                            <img src="@Url.Content((string)TempData["photoPath"])" class="rounded-circle" style="width:20px;height:20px">
+                            <img src="@Url.Content((string)TempData["photoPath"])" alt="Profile" class="rounded-circle">
                         }
 
                         <span class="d-none d-md-block dropdown-toggle ps-2"><span>@TempData["name"] @TempData["surname"]</span>!</span>

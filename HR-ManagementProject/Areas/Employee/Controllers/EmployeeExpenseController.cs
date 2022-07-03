@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
 using HumanResources.Core.Enums;
+using HumanResources.Core.Entities;
 
 namespace HR_ManagementProject.Areas.Employee.Controllers
 {
@@ -18,10 +18,12 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
     public class EmployeeExpenseController : Controller
     {
         private readonly IExpenseService expenseManager;
+        private readonly IEmployeeService employeeService;
 
-        public EmployeeExpenseController(IExpenseService expenseManager)
+        public EmployeeExpenseController(IExpenseService expenseManager,IEmployeeService employeeService)
         {
             this.expenseManager = expenseManager;
+            this.employeeService = employeeService;
         }
 
         // GET: Employee/EmployeeExpense
@@ -68,8 +70,16 @@ namespace HR_ManagementProject.Areas.Employee.Controllers
             expense.EmployeeId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             expense.RequestDate = DateTime.Now.Date;
 
+            HumanResources.Core.Entities.Employee employee = employeeService.GetById(expense.EmployeeId);
+            double empSal = (double)employee.Salary * 0.3;
+
             if (ModelState.IsValid)
             {
+                if (expense.Total < 50 || (double)expense.Total > empSal) 
+                {
+                    ModelState.AddModelError("", $"Harcama tutarı minimum 50 tl maksimum maaşınızın %30'u kadar olabilir Maaşınızın %30'u = {empSal} tl'dir.");
+                    return View(expense);
+                }
                 expenseManager.Add(expense);
                 return RedirectToAction(nameof(Index));
             }

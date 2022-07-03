@@ -65,5 +65,10 @@ namespace HumanResources.BLL.Concrete
                 entity.PhotoPath = @"\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
             }
         }
+
+        public IEnumerable<Package> GetByUsageAmount(int companyId)
+        {
+            return packageRepository.GetByUsageAmount(companyId);
+        }
     }
 }

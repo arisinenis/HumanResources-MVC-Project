@@ -52,7 +52,7 @@
         <br />
         <form asp-action="Delete">&nbsp;&nbsp;
             <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <input onclick="return confirm('Silmek istediğinize emin misiniz?');" type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
             <a asp-action="Index" class="btn btn-primary">Paket Listesine DÖn</a>
         </form>
         <br /><br />

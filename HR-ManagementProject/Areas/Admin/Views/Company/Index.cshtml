@@ -5,9 +5,6 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h1>Şirketler</h1>*@
-
-
 <div class="col-12">
     <div class="card top-selling overflow-auto">
 
@@ -45,16 +42,15 @@
                                 <th scope="row"><a><img src="@Url.Content("~/images/company.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
                             }
                             <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
-                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
-                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CompanyType)</a></td>
-                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CompanyType)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
                             <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
                             <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TaxNumber)</a></td>
                             <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TaxAdministration)</a></td>
                             <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.MersisNo)</a></td>
                             <td>
                                 <a asp-area="Admin" asp-controller="Company" asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
-                                <a asp-area="Admin" asp-controller="Company" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                <a asp-area="Admin" asp-controller="Company" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a> <br />
                                 <a asp-area="Admin" asp-controller="Company" asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
                             </td>
                         </tr>

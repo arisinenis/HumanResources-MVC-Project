@@ -12,6 +12,8 @@ namespace HumanResources.Core.Entities
 {
     public class Expense : BaseEntity
     {
+        public object Package;
+
         [Display(Name = "Toplam Miktar")]
         public decimal Total { get; set; }
         //[Display(Name = "Minimum Talep Edilebilir Miktar")]

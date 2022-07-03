@@ -45,8 +45,8 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: CompanyAdmin/Create
         public IActionResult Create()
         {
-            var userData = new SelectList(companyService.GetAll().ToList(), "Id", "Name");
-            ViewData["UserData"] = userData;
+            
+            ViewData["UserData"] = new SelectList(companyService.GetAll(), "Id", "Name");
             return View(new User());
         }
 
@@ -55,15 +55,15 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( User person)
+        public async Task<IActionResult> Create(User person)
         {
+            var company = companyService.GetById(person.CompanyId);
             if (ModelState.IsValid)
             {
-
                 MailMessage mail = new MailMessage();
                 mail.To.Add(person.Email);
                 mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
-                mail.Subject = "Yakuptan mesaj";
+                mail.Subject = "Human Resources Project";
                 mail.Body = "Hoşgeldin " + person.FirstName + "," + "</br>" + "Şifreniz: " + person.Password;
                 mail.IsBodyHtml = true;
 
@@ -84,6 +84,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
                     TempData["Message"] = "Hata Var; " + ex.Message;
                 }
 
+                company.PersonelSayisi += 1;
                 userManager.Add(person);
                 return RedirectToAction(nameof(Index));
             }
@@ -118,6 +119,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
             {
                 try
                 {
+                    person.Company = companyService.GetById(id);
                     userManager.Update(person);
                 }
                 catch (DbUpdateConcurrencyException)

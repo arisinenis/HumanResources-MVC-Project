@@ -1,5 +1,6 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
+using HumanResources.Core.Enums;
 using HumanResources.DAL.Repositories.Abstract;
 using System;
 using System.Collections.Generic;

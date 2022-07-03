@@ -69,47 +69,52 @@
                     </a>
                 </li><!-- End Search Icon-->
 
+                <li> 
+                   <a href="#">  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
+  <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+</svg>  </a> 
+                </li>
+
                  <li class="nav-item dropdown">
 
           
 
-        <li class="nav-item dropdown">
+                     <li class="nav-item dropdown">
+                      <a id="CMZero" class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        @if(Convert.ToInt32(TempData["totalMessage"])==0)
+                        {
 
-          <a id="CMZero" class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            @if(Convert.ToInt32(TempData["totalMessage"])==0)
-            {
-
-                            }
-                            else
-                            {
-                              <span class="badge bg-success badge-number">@TempData["totalMessage"]</span>  
-                            }
+                        }
+                        else
+                        {
+                          <span class="badge bg-success badge-number">@TempData["totalMessage"]</span>  
+                        }
                             
-          </a><!-- End Messages Icon -->
+                      </a><!-- End Messages Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              @TempData["MessageCount"] yeni izin talebi mesajınız var!
-              <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
-            </li>
-            <li class="dropdown-header">
-              @TempData["AdvancePaymentCount"] yeni avans talebi mesajınız var!
-              <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="WaitingAdvancePayment"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
-            </li>
-            <li class="dropdown-header">
-              @TempData["ExpensesCount"] yeni harcama talebi mesajınız var!
-              <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                            <li class="dropdown-header">
+                              @TempData["MessageCount"] yeni izin talebi mesajınız var!
+                              <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+                            </li>
+                            <li class="dropdown-header">
+                              @TempData["AdvancePaymentCount"] yeni avans talebi mesajınız var!
+                              <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="WaitingAdvancePayment"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+                            </li>
+                            <li class="dropdown-header">
+                              @TempData["ExpensesCount"] yeni harcama talebi mesajınız var!
+                              <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+                            </li>
+                            <li>
+                              <hr class="dropdown-divider">
+                            </li>
 
            
 
-          </ul><!-- End Messages Dropdown Items -->
+                            </ul><!-- End Messages Dropdown Items -->
 
-        </li><!-- End Messages Nav -->
+                 </li><!-- End Messages Nav -->
 
 
               
@@ -223,11 +228,7 @@
                     <i class="bi bi-journal-text"></i><span>İzinler</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="izinler-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                   @*<li>
-                        <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="Index">
-                            <i class="bi bi-circle"></i><span>İzinleri Listele</span>
-                        </a>
-                    </li>*@
+                   
                     <li>
                         <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission">
                             <i class="bi bi-circle"></i><span>Bekleyen İzinler</span>
@@ -249,6 +250,24 @@
                     <li>
                         <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses">
                             <i class="bi bi-circle"></i><span>Bekleyen Harcamalar</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#wallet-nav" data-bs-toggle="collapse" href="#" >
+                    <i class="bi bi-journal-text"></i><span>Cüzdan</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="wallet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   <li>
+                        <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Cüzdanı Görüntüle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance">
+                            <i class="bi bi-circle"></i><span>Bakiye Ekleme</span>
                         </a>
                     </li>
                 </ul>

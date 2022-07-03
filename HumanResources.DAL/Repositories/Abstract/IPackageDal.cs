@@ -9,5 +9,6 @@ namespace HumanResources.DAL.Repositories.Abstract
 {
     public interface IPackageDal : IRepository<Package>
     {
+        public IEnumerable<Package> GetByUsageAmount(int companyId);
     }
 }

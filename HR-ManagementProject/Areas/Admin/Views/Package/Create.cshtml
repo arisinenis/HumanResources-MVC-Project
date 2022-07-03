@@ -12,20 +12,7 @@
 
 <form asp-area="Admin" asp-controller="Package" asp-action="Create" class="row g-3" enctype="multipart/form-data" method="post">
     <div class="col-12">
-        @{
-
-            //if (Model.PhotoPath != null)
-            //{
-            //    <img src="@Url.Content(@Model.PhotoPath)" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
-            //    <br />
-            //}
-            //else
-            //{
-            //    <img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
-
-            //    <br />
-            //}
-        }
+        
         <label asp-for="Photo" class="form-label">Fotoğraf</label>
         <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
                onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />

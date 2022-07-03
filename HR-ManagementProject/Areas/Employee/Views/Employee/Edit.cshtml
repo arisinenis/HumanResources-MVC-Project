@@ -10,12 +10,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-controller="Employee" asp-action="Edit" enctype="multipart/form-data" class="row g-3">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(modelItem => Model.Id)
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="control-label">@Html.DisplayNameFor(model => model.FirstName)</label>
+                <input asp-for="FirstName" type="text" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -59,5 +59,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

@@ -22,6 +22,8 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         // GET: CompanyAdmin
         public async Task<IActionResult> Index()
         {
+            var id = HttpContext.Session.GetString("id");
+            var companyAdmin = userManager.GetById(Convert.ToInt32(id));
             return View(userManager.GetAll());
         }
 
