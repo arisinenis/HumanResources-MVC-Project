@@ -21,8 +21,15 @@ namespace HumanResources.BLL.Concrete
 
         public bool Add(User entity)
         {
-            AddPhoto(entity);
-            return userRepository.Add(entity);
+            if (entity.BirthDate.AddYears(18) < DateTime.Now)
+            {
+                AddPhoto(entity);
+                return userRepository.Add(entity);
+            }
+            else
+                return false;
+            
+            
         }
 
         public bool Delete(User entity)

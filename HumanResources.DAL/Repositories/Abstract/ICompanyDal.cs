@@ -10,5 +10,6 @@ namespace HumanResources.DAL.Repositories.Abstract
 {
     public interface ICompanyDal : IRepository<Company>
     {
+        int GetpackagesByCompanyID(int id);
     }
 }

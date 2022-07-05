@@ -53,7 +53,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // GET: Company/Create
         public IActionResult Create()
         {
-            ViewData["PackagesData"] = new SelectList(packageService.GetAll(), "Id", "Name");
+            ViewBag.PackagesData = new SelectList(packageService.GetAll(), "Id", "Name");
 
 
             return View(new Company());

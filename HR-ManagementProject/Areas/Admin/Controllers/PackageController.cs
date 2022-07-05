@@ -55,12 +55,17 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,StartDate,EndDate,Cost,Occupancy,UsageAmount,Photo,MinimumCost,PackageStatus,Id")] Package package)
+        public async Task<IActionResult> Create(Package package)
         {
             if (ModelState.IsValid)
             {
 
                 package.StartDate = DateTime.Now;
+                if (package.StartDate < DateTime.Now)
+                {
+                    package.PackageStatus = false;
+                }else
+                package.PackageStatus = true;
                 _packageManager.Add(package);
                 return RedirectToAction(nameof(Index));
             }
@@ -72,11 +77,27 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         {
 
             var package = _packageManager.GetById(id);
-            if (package == null)
+            Package packagedb = _packageManager.GetAll().Where(x => x.Id == id)
+            .Select(x => new Package
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                StartDate = x.StartDate,
+                EndDate = x.EndDate,
+                PurchaseDate = x.PurchaseDate,
+                Cost = x.Cost,
+                UsageAmount = x.UsageAmount,
+                PhotoPath = x.PhotoPath,
+                Companies = x.Companies
+            }).FirstOrDefault();
+
+            if (packagedb == null)
             {
                 return NotFound();
             }
-            return View(package);
+
+            return View(packagedb);
         }
 
         // POST: Package/Edit/5
@@ -84,7 +105,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Description,StartDate,EndDate,Cost,Occupancy,UsageAmount,Photo,MinimumCost,PackageStatus,Id")] Package package)
+        public async Task<IActionResult> Edit(int id, Package package)
         {
             if (id != package.Id)
             {

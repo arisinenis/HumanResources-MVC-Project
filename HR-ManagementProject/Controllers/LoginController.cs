@@ -17,17 +17,32 @@ namespace HR_ManagementProject.Controllers
         private readonly IUserService userManager;
         private readonly IEmployeeService employeeManager;
         private readonly IPermissionService permissionManager;
+        private readonly ICompanyService companyManager;
+        private readonly IPackageService packageManager;
+        private readonly IWalletService walletManager;
         private readonly IAdvancePaymentService advancePaymentService;
         private readonly IExpenseService expenseService;
 
-        public LoginController(IAdminService adminManager, IUserService userService,IEmployeeService employeeService,IPermissionService permissionService,IAdvancePaymentService advancePaymentService,IExpenseService expenseService)
+        public LoginController(IAdminService adminManager, IUserService userService,IEmployeeService employeeService,IPermissionService permissionService,IAdvancePaymentService advancePaymentService,IExpenseService expenseService, ICompanyService companyManager,IPackageService packageManager, IWalletService walletManager)
         { 
             this.adminManager = adminManager;
             this.userManager = userService;
             this.employeeManager = employeeService;
             this.permissionManager = permissionService;
             this.advancePaymentService = advancePaymentService;
+            this.companyManager = companyManager;
+            this.packageManager = packageManager;
+            this.walletManager = walletManager;
             this.expenseService = expenseService;
+
+            foreach ( Package item in packageManager.GetAll())
+            {
+                if (item.StartDate < DateTime.Now)
+                {
+                    item.PackageStatus = true;
+                    packageManager.Update(item);
+                }
+            }
         }
 
         public IActionResult Index()
@@ -66,7 +81,6 @@ namespace HR_ManagementProject.Controllers
                     HttpContext.Session.SetString("photoPath", userAdmin.ProfilePictureName.ToString());
                 }
                 else HttpContext.Session.SetString("photoPath", "default");
-                HttpContext.Session.SetString("ProfilePictureName", "default");
                 TempData["welcome"] = "Hoşgeldin " + userAdmin.FirstName + "!";
                 return RedirectToAction("Index", "Home");
             }
@@ -75,6 +89,8 @@ namespace HR_ManagementProject.Controllers
                 var permissionCount = userManager.GetManagerWaitingPermissions(user.CompanyId).Count();
                 var advancePaymentCount = advancePaymentService.GetAllWaitingAdvancePayments(user.CompanyId).Count();
                 var expensesCount = expenseService.GetAllWaitingExpensesWithEmployees(user.CompanyId).Count();
+                var package = companyManager.GetpackagesByCompanyID(user.CompanyId);
+                var wallet = walletManager.GetWalletWithCompany(user.CompanyId);
 
                 HttpContext.Session.SetString("email", user.Email);
                 HttpContext.Session.SetString("id", user.Id.ToString());
@@ -86,6 +102,10 @@ namespace HR_ManagementProject.Controllers
                 HttpContext.Session.SetString("MessageCount", permissionCount.ToString());
                 HttpContext.Session.SetString("AdvancePaymentCount", advancePaymentCount.ToString());
                 HttpContext.Session.SetString("ExpensesCount", expensesCount.ToString());
+                HttpContext.Session.SetString("Package", package.ToString());
+                HttpContext.Session.SetString("WalletBalance", wallet.Balance.ToString());
+                
+
                 if (user.PhotoPath != null)
                 {
                     HttpContext.Session.SetString("photoPath", user.PhotoPath.ToString());
@@ -161,6 +181,9 @@ namespace HR_ManagementProject.Controllers
             HttpContext.Session.Remove("MessageCount");
             HttpContext.Session.Remove("title");
             HttpContext.Session.Remove("photoPath");
+            HttpContext.Session.Remove("Package");
+            HttpContext.Session.Remove("Wallet");
+
             return RedirectToAction("Index", "Login");
         }
     }

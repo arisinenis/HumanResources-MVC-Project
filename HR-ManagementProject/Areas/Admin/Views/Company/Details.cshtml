@@ -13,6 +13,19 @@
     <div>
 
         <hr />
+        <div class="row align-content-center">
+            <span class="nav-link nav-profile d-flex align-content-center pe-0">
+                @if (Model.PhotoPath != null)
+                {
+                     <a><img class="rounded-circle" src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+                else
+                {
+                     <a><img class="rounded-circle" src="@Url.Content("~/images/default.png")" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+            </span>
+
+        </div>
         <div class="card">
 
             <br />

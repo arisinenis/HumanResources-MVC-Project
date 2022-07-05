@@ -64,7 +64,8 @@ namespace HumanResources.Core.Entities
         
         [Display(Name = "Doğum Tarihi")]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; } = DateTime.Now;
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime BirthDate { get; set; }
 
         //[Required]
         [Display(Name = "Kan Grubu")]

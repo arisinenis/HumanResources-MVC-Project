@@ -40,7 +40,7 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View( _packageManager.GetByUsageAmount(Convert.ToInt32(HttpContext.Session.GetString("CompanyId"))));
+            return View( _packageManager.GetActivePackages());
         }
 
         public IActionResult AddPackage(int packageId)
@@ -70,24 +70,29 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         public IActionResult BuyPackage(int id)
         {
             var package = _packageManager.GetById(id);
-            TempData["package"] = package.Id;
+            
             return View(package);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BuyPackage(Package package)
+        public async Task<IActionResult> BuyPackage(int id, Package package )
         {
-            package = _packageManager.GetById((int)TempData["package"]);
-
+            package = _packageManager.GetById(id);
+            
             //if (ModelState.IsValid)
             //{
-                var company = companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            var company = companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
                 var wallet = walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
 
                 if (wallet.Balance < package.Cost)
                 {
                     ViewBag.BuyError = "Bakiye Yetersiz! Bakiye yüklemek için, bakiye yükle butonuna tıklayınız.";
+                    return View(package);
+                }
+                if (companyManager.GetpackagesByCompanyID(company.Id) > 0)
+                {
+                    ViewBag.BuyError = "Kullanmakta olduğunuz başka bir paket mevcut. Paket değişikliği yapmak için lütfen paket değiştirme sayfasına gidiniz.";
                     return View(package);
                 }
 
@@ -97,13 +102,17 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
                 package.Occupancy = DateTime.Now.Date.AddYears(1);
                 company.Packages.Add(package);
                 companyManager.Update(company);
+            HttpContext.Session.Remove("Package");
+            var packageCount = companyManager.GetpackagesByCompanyID(company.Id);
+            
+            HttpContext.Session.SetString("Package",packageCount.ToString());
 
-                // Şirketin cüzdanından, paketin fiyatı kadar düşeceğiz.
+            // Şirketin cüzdanından, paketin fiyatı kadar düşeceğiz.
 
-                wallet.Balance -= package.Cost;
+            wallet.Balance -= package.Cost;
                 walletManager.Update(wallet);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Home");
             //}
             //return View(package);
         }

@@ -10,5 +10,7 @@ namespace HumanResources.BLL.Abstract
     public interface IPackageService : IService<Package>
     {
         public IEnumerable<Package> GetByUsageAmount(int companyId);
+        bool DeleteforPackage(int packageId);
+        IEnumerable<Package> GetActivePackages();
     }
 }

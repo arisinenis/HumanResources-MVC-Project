@@ -24,6 +24,7 @@ namespace HumanResources.DAL.Context
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<AdvancePayment> AdvancePayments { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
         //public DbSet<Person> Persons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

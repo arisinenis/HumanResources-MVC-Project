@@ -131,7 +131,9 @@
                     <tbody>
                         @foreach (var item in Model.Packages)
                         {
-                            <tr>
+                            if(item.PackageStatus)
+                            {
+                                 <tr>
                                 <th scope="row">@item.Name</th>
                                 <td scope="row">@item.Description</td>
                                 <td scope="row">@item.Cost</td>
@@ -143,6 +145,8 @@
 
                                 </td>
                             </tr>
+                            }
+                           
                         }
                     </tbody>
                 </table>
@@ -223,7 +227,9 @@ else if (Context.Session.GetString("role") == "Manager")
                     <tbody>
                         @foreach (var item in Model.Packages)
                         {
-                            <tr>
+                            if(item.PackageStatus)
+                            {
+                               <tr>
                                 <th scope="row">@item.Name</th>
                                 <td scope="row">@item.Description</td>
                                 <td scope="row">@item.Cost</td>
@@ -235,6 +241,10 @@ else if (Context.Session.GetString("role") == "Manager")
 
                                 </td>
                             </tr>
+                            
+
+                            }
+                            
                         }
                     </tbody>
                 </table>

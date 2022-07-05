@@ -20,6 +20,9 @@
         <img src="@Url.Content(@Model.PhotoPath)" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
         <br />
         }
+
+
+
         else
         {
         <img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
@@ -28,7 +31,7 @@
         }
         }
         <label asp-for="Photo" class="form-label">Fotoğraf</label>
-        <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+        <input asp-for="Photo" type="file" value="@Model.PhotoPath" accept="image/*" class="form-control" id="Photo"
                onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
         <span asp-validation-for="Photo" class="text-danger"></span>
     </div>

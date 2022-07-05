@@ -21,11 +21,11 @@
         <div class="card-body pb-0">
             <h5 class="card-title">Paketler</h5>
             @* <div class="card-title">
-            <a asp-area="Admin" asp-controller="Package" asp-action="Create" class="btn btn-primary">Yeni Paket Ekle</a>
-           //// <input type="submit" value="Ekle" class="btn btn-primary" />
-        </div>*@
-     
-         <p>
+                <a asp-area="Admin" asp-controller="Package" asp-action="Create" class="btn btn-primary">Yeni Paket Ekle</a>
+                //// <input type="submit" value="Ekle" class="btn btn-primary" />
+                </div>*@
+
+            <p>
                 <a asp-area="Admin" asp-controller="Package" asp-action="Create"><input value="Yeni paket oluştur" class="btn btn-primary" /></a>
             </p>
             <table class="table table-borderless">
@@ -45,41 +45,40 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        @if (item.PackageStatus == true)
-                        {
-                            <tr>
-                                @if (item.PhotoPath != null)
-                                {
-                                    <th scope="row"><a><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
-                                }
-                                else
-                                {
-                                    <th scope="row"><a a><img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
-                                }
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
-                                <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.StartDate)</a></td>
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.EndDate)</a></td>
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Cost)</a></td>
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Occupancy)</a></td>
-                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.UsageAmount)</a></td>
-                                <td>
-                                    @if (Context.Session.GetString("email") == "admin@admin.com")
-                                    {
-                                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
-                                        <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
-                                    }
 
-                                </td>
-                            </tr>
+                        <tr>
+                            @if (item.PhotoPath != null)
+                            {
+                                <th scope="row"><a><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            else
+                            {
+                                <th scope="row"><a a><img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.StartDate)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.EndDate)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Cost)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Occupancy)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.UsageAmount)</a></td>
+                            <td>
+                                @if (Context.Session.GetString("email") == "admin@admin.com")
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                }
 
-                        }}
+                            </td>
+                        </tr>
+
+                    }
                 </tbody>
             </table>
 
         </div>
-       
+
     </div>
 </div>
 @section Scripts {

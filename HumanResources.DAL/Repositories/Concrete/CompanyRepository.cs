@@ -36,5 +36,10 @@ namespace HumanResources.DAL.Repositories.Concrete
                 return false;
             }
         }
+        public int GetpackagesByCompanyID(int id)
+        {
+            return db.Set<Company>().Where(x=>x.Id==id).SelectMany(y=>y.Packages).Where(x=>x.PackageStatus==true).Count();
+        }
+        
     }
 }

@@ -14,19 +14,23 @@
 <div>
     <div>
         <hr/>
-        <div class="card">
-            <br/>
-            <br/>
-            <div class="row">
+        <div class="row align-content-center">
+            <span class="nav-link nav-profile d-flex align-content-center pe-0">
                 @if (Model.PhotoPath != null)
                 {
-                    <th scope="row"><a><img src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                    <a><img class="rounded-circle" src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="200px" height="200px" alt=""></a>
                 }
                 else
                 {
-                    <th scope="row"><a><img src="@Url.Content("~/images/default.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                    <a><img class="rounded-circle" src="@Url.Content("~/images/default.png")" asp-append-version="true" width="200px" height="200px" alt=""></a>
                 }
+            </span>
+                
             </div>
+        <div class="card">
+            <br/>
+            <br/>
+            
             <div class="row">
                 <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.FirstName):</b></div> 
                 <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.FirstName)</div>

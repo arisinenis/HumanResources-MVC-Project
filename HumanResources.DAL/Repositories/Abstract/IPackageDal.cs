@@ -10,5 +10,7 @@ namespace HumanResources.DAL.Repositories.Abstract
     public interface IPackageDal : IRepository<Package>
     {
         public IEnumerable<Package> GetByUsageAmount(int companyId);
+        bool DeleteforPackage(int packageId);
+        IEnumerable<Package> GetActivePackages();
     }
 }

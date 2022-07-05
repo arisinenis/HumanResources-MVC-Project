@@ -70,5 +70,15 @@ namespace HumanResources.BLL.Concrete
         {
             return packageRepository.GetByUsageAmount(companyId);
         }
+
+        public bool DeleteforPackage(int packageId)
+        {
+            return packageRepository.DeleteforPackage(packageId);
+        }
+
+        public IEnumerable<Package> GetActivePackages()
+        {
+            return packageRepository.GetActivePackages();
+        }
     }
 }

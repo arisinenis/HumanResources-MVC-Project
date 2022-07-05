@@ -20,14 +20,17 @@ namespace HumanResources.Core.Entities
 {
     public class Package : BaseEntity
     {
+
+
         public Package()
         {
             Companies = new HashSet<Company>();
         }
 
-        [Required(ErrorMessage ="Lütfen Paket ismi giriniz.")]
+        [Required(ErrorMessage = "Lütfen Paket ismi giriniz.")]
         [MinLength(3, ErrorMessage = "Ürün adı en az 3 karakter olmalıdır.")]
         [Display(Name = "Paket Adı")]
+        [RegularExpression(@"^[a-zA-ZğüşöçıİĞÜŞÖÇ]+$", ErrorMessage = "Lütfen sayı ve özel karakter kullanmayınız.")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Lütfen Paket için açıklama giriniz.")]
         [MaxLength(200, ErrorMessage = "Ürün açıklaması en fazla 200 karakter olmalıdır.")]
@@ -36,9 +39,11 @@ namespace HumanResources.Core.Entities
         public string Description { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Kampanya başlangıç tarihi")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; } /*= DateTime.Now;*/
         [DataType(DataType.Date)]
         [Display(Name = "Kampanya bitiş tarihi")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; } /*= DateTime.Now;*/
         [DataType(DataType.Date)]
         [Display(Name = "Satın alma tarihi")]
@@ -69,9 +74,31 @@ namespace HumanResources.Core.Entities
         public IFormFile Photo { get; set; }
         //[DataType(DataType.Currency)]
         //public decimal MinimumCost { get; set; }
-        public bool PackageStatus { get; set; } = true;
+        private bool _PackageStatus;
+        public bool PackageStatus
+        {
+            get; set;
+            
+        }
 
         // Nav. Property
         public ICollection<Company> Companies { get; set; }
+        //private bool _IsActive;
+        //public bool IsActive
+        //{
+        //    get
+        //    {
+        //        if (StartDate < DateTime.Now)
+        //        {
+        //            return false;
+        //        }
+        //        else { return _IsActive; }
+        //    }
+        //    set
+        //    {
+        //        _IsActive = value;
+        //    }
+
+        //}
     }
 }

@@ -17,6 +17,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
     {
         private readonly IUserService userManager;
         private readonly ICompanyService companyService;
+        
 
         public UserController(IUserService userManager, ICompanyService companyService)
         {
@@ -60,34 +61,49 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
             var company = companyService.GetById(person.CompanyId);
             if (ModelState.IsValid)
             {
-                MailMessage mail = new MailMessage();
-                mail.To.Add(person.Email);
-                mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
-                mail.Subject = "Human Resources Project";
-                mail.Body = "Hoşgeldin " + person.FirstName + "," + "</br>" + "Şifreniz: " + person.Password;
-                mail.IsBodyHtml = true;
-
-                SmtpClient client = new SmtpClient();
-                client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
-                client.Port = 587;
-                client.Host = "smtp.gmail.com";
-                client.EnableSsl = true;
-
-                try
+                
+                if (userManager.Add(person))
                 {
-                    client.Send(mail);
-                    TempData["Message"] = "Gönderildi.";
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(person.Email);
+                    mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
+                    mail.Subject = "Human Resources Project";
+                    mail.Body = "Hoşgeldin " + person.FirstName + "," + "</br>" + "Şifreniz: " + person.Password;
+                    mail.IsBodyHtml = true;
+
+                    SmtpClient client = new SmtpClient();
+                    client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
+                    client.Port = 587;
+                    client.Host = "smtp.gmail.com";
+                    client.EnableSsl = true;
+
+                    try
+                    {
+                        client.Send(mail);
+                        TempData["Message"] = "Gönderildi.";
+                    }
+                    catch (Exception ex)
+                    {
+
+                        TempData["Message"] = "Hata Var; " + ex.Message;
+                    }
+
+                    company.PersonelSayisi += 1;
+                    companyService.Update(company);
+                    userManager.Add(person);
+
+                    return RedirectToAction("Index", "Home");
                 }
-                catch (Exception ex)
+                else
                 {
-
-                    TempData["Message"] = "Hata Var; " + ex.Message;
+                    ViewData["YasHatasi"] = "Yönetici olabilmek için 18 yaşından büyük olmalısınız.";
+                    ViewData["UserData"] = new SelectList(companyService.GetAll(), "Id", "Name");
+                    return View(person);
                 }
-
-                company.PersonelSayisi += 1;
-                userManager.Add(person);
-                return RedirectToAction(nameof(Index));
+                
+                
             }
+            ViewData["UserData"] = new SelectList(companyService.GetAll(), "Id", "Name");
             return View(person);
         }
 
@@ -155,7 +171,11 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var person = userManager.GetById(id);
+            var company = companyService.GetById(person.CompanyId);
+            company.PersonelSayisi -= 1;
+            companyService.Update(company);
             userManager.Delete(person);
             return RedirectToAction(nameof(Index));
         }

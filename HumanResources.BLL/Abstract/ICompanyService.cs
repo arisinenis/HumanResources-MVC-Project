@@ -9,5 +9,6 @@ namespace HumanResources.BLL.Abstract
 {
     public interface ICompanyService : IService<Company>
     {
+        int GetpackagesByCompanyID(int id);
     }
 }

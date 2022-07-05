@@ -40,7 +40,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a class="logo d-flex align-items-center" asp-area="Employee" asp-controller="Employee" asp-action="Index">
+            <a class="logo d-flex align-items-center" asp-controller="Home" asp-action="Index">
                 <img src="assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">HumanResources</span>
             </a>
@@ -105,7 +105,7 @@
 
                         <li>
                             <a class="dropdown-item d-flex align-items-center" asp-controller="Login" asp-action="LogOut">
-                                <i class="bi bi-gear"></i>
+                                <i  class="bi bi-box-arrow-right"></i>
                                 <span>Çıkış Yap</span>
                             </a>
                         </li>
@@ -124,7 +124,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " asp-controller="Login" asp-action="Index">
+                <a class="nav-link " asp-controller="Home" asp-action="Index" >
                     <i class="bi bi-grid"></i>
                     <span>Çalışan Paneli</span>
                 </a>
