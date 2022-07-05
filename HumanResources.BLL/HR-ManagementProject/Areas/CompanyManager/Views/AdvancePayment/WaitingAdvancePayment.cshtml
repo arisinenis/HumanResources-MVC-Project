@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HumanResources.Core.Entities.AdvancePayment>
+
+@{
+    ViewData["Title"] = "WaitingAdvancePayment";
+}
+
+<h1>WaitingAdvancePayment</h1>
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Avans talepleri</h5>
+
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.TotalPaymentRequest)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CreateTime)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Employee.FirstName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Employee.LastName)</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TotalPaymentRequest)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Status)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CreateTime)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Employee.FirstName)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Employee.LastName)</a></td>
+                            <td>
+
+
+                                <form asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="ApproveAdvancePayment" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.Status" />
+                                        <input type="submit" value="Onayla" class="btn btn-success" />
+                                    </div>
+                                </form>
+
+                                <form asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="RejectAdvancePayment" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.Status" />
+                                        <input type="submit" value="Reddet" class="btn btn-danger" />
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,70 @@
+﻿
+
+@model HR_ManagementProject.Areas.CompanyManager.Model.EmployeePermissionVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h1>İzin Talepleri</h1>
+
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+        <div class="card-body pb-0">
+            <h4 class="card-title">İzinler</h4>
+            @*<a asp-area="Admin" asp-controller="Package" asp-action="Create" class="btn btn-primary">Yeni Paket Ekle</a>*@
+
+            <table class="table table-borderless">
+
+                <thead>
+                    @foreach (var item in Model.Permission)
+                    {
+                        <tr>
+                            <th scope="col">@Html.DisplayNameFor(model => item.PermissionType)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => item.TotalDayOfPermissionType)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => item.StartDate)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => item.EndDate)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => item.PermissionStatus)</th>
+
+                        </tr>
+                    }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Permission)
+                    {
+                        <tr>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PermissionType)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TotalDayOfPermissionType)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.StartDate)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.EndDate)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PermissionStatus)</a></td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                @*@if (Context.Session.GetString("email") == "admin@admin.com")
+        {
+
+        }*@
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Ekle" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

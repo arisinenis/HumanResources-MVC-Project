@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h1>Personeller</h1>
+<table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Personel Profil Fotoğrafı</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CitizenNo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Salary)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.BirthDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Job)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.JobTitle)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @if (item.Status == true)
+                        {
+                            <tr>
+                                @if (item.PhotoPath != null)
+                                {
+                                    <th scope="row"><a><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                else
+                                {
+                                    <th scope="row"><a a><img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.FirstName)</a></td>
+                                 <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.LastName)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CitizenNo)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Salary)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BirthDate)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Job)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.JobTitle)</a></td>
+                                <td>
+                                    @if (Context.Session.GetString("role") == "Manager")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                    }
+
+                                </td>
+                            </tr>
+
+                        }}
+                </tbody>
+            </table>
+
+

@@ -1,0 +1,51 @@
+﻿@model HumanResources.Core.Entities.AdvancePayment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TotalPaymentRequest)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TotalPaymentRequest)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Description)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Status)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Status)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.CreateTime)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.CreateTime)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.FileName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.FileName)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EmployeeId)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EmployeeId)</div>
+        </div>
+        <br />
+       <br />
+        <form asp-action="Edit">&nbsp;&nbsp;
+            <a asp-action="Index" class="btn btn-primary">Paket Listesine Dön</a>
+        </form>
+        <br /><br />
+    </div>
+
+

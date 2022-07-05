@@ -1,0 +1,66 @@
+﻿@model HumanResources.Core.Entities.Package
+
+@{
+    ViewData["Title"] = "Delete";
+    }
+
+
+
+<h2>Paketi Silmek İstediğinizden Emin Misiniz?</h2>
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Name)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Name)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Description)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.StartDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EndDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Cost)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Cost)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Occupancy)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Occupancy)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.UsageAmount)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.UsageAmount)</div>
+        </div>
+        <br />
+        <form asp-action="Delete">&nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input onclick="return confirm('Silmek istediğinize emin misiniz?');" type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-action="Index" class="btn btn-primary">Paket Listesine DÖn</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

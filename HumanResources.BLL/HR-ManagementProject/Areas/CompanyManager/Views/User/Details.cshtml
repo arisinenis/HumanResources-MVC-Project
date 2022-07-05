@@ -1,0 +1,88 @@
+﻿@model HumanResources.Core.Entities.User
+
+@{
+    ViewData["Title"] = "Details";
+
+    Layout = "_CompanyManagerLayout";
+
+}
+
+<h1>Şirket Yöneticisi Detayı</h1>
+
+<div>
+    <div>
+        <hr />
+        <div class="card">
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.FirstName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.FirstName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.SecondName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.SecondName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.LastName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.LastName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.Email)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Email)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.Address)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Address)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.PhoneNumber)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.PhoneNumber)</div>
+            </div>
+            @*  <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.Password)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Password)</div>
+                </div>*@
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.CitizenNo)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.CitizenNo)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.BirthDate)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.BirthDate)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.BloodType)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.BloodType)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.JobTitle)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.JobTitle)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.Profession)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Profession)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.PhotoPath)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.PhotoPath)</div>
+            </div>
+            <br />
+            <form asp-area="CompanyManager" asp-controller="User" asp-action="Edit">
+                &nbsp;&nbsp;
+                @*<input type="hidden" asp-for="Id"/>
+                    <input type="submit" value="Edit" class="btn btn-danger"/>&nbsp;&nbsp;*@
+                <a asp-area="CompanyManager" asp-controller="User" asp-action="Index" class="btn btn-primary">Şirket Yöneticisi Listesine Dön</a>
+            </form>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+
+

@@ -1,0 +1,30 @@
+﻿@model HumanResources.Core.Entities.Wallet
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+<div>
+        <h2>Cüzdan Bilgileri</h2>
+    <div class="card">
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Company.Name):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Company.Name)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Balance):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Balance) TL</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.TopUpDate):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TopUpDate)</div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance"><span class="badge bg-success" style="padding:1rem;font-size:0.75rem;">Bakiye Yüklemek İçin Tıklayınız.</span></a>
+</div>

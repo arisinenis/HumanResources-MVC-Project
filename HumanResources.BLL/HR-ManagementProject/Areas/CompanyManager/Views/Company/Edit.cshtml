@@ -1,0 +1,65 @@
+﻿@using HumanResources.Core.Enums
+@model HumanResources.Core.Entities.Company
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3>Şirketi Düzenle</h3>
+
+<hr />
+<form asp-area="CompanyManager" asp-controller="Company" asp-action="Edit" class="row g-3">
+    <div class="col-12">
+        <label asp-for="Photo" class="form-label">Fotoğraf</label>
+        <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"/>
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Name" class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <input asp-for="Name" type="text" class="form-control" id="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="CompanyType" class="form-label">@Html.DisplayNameFor(model => model.CompanyType)</label>
+        <select asp-items="@Html.GetEnumSelectList<CompanyType>()" asp-for="CompanyType" class="form-control" id="CompanyType"></select>
+        <span asp-validation-for="CompanyType" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Address" class="form-label">@Html.DisplayNameFor(model => model.Address)</label>
+        <input asp-for="Address" type="text" class="form-control" id="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+        <input asp-for="PhoneNumber" type="tel" name="phone" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="TaxNumber" class="form-label">@Html.DisplayNameFor(model => model.TaxNumber)</label>
+        <input asp-for="TaxNumber" type="text" class="form-control" id="TaxNumber">
+        <span asp-validation-for="TaxNumber" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="TaxAdministration" class="form-label">@Html.DisplayNameFor(model => model.TaxAdministration)</label>
+        <input asp-for="TaxAdministration" type="text" class="form-control" id="TaxAdministration">
+        <span asp-validation-for="TaxAdministration" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="MersisNo" class="form-label">@Html.DisplayNameFor(model => model.MersisNo)</label>
+        <input asp-for="MersisNo" type="text" pattern="\d{11}" class="form-control" id="MersisNo">
+        <span asp-validation-for="MersisNo" class="text-danger"></span>
+    </div>
+    <div class="text-center">
+        <input type="hidden" asp-for="Id"/>
+        <button type="submit" value="Save" class="btn btn-primary">Düzenle</button>
+        <button asp-area="CompanyManager" asp-controller="Company" asp-action="Index" class="btn btn-secondary">Şirket Listesine Dön</button>
+    </div>
+</form>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

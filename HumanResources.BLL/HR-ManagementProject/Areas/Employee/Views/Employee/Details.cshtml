@@ -1,0 +1,92 @@
+﻿@model HumanResources.Core.Entities.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_EmployeeLayout";
+}
+
+<h1>Profilim</h1>
+
+<div>
+    <div>
+        <hr />
+        <div class="card">
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.FirstName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.FirstName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.SecondName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.SecondName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.LastName)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.LastName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.CitizenNo)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.CitizenNo)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PhoneNumber)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.PhoneNumber)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Email)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Email)</div>
+            </div>
+            @*<div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model=>model.Password)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Password)</div>
+            </div>*@
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Address)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Address)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.BirthDate)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.BirthDate)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.StartDate)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.StartDate)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EndDate)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.EndDate)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Status)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Status)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.JobTitle)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.JobTitle)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Job)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Job)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Photo)</div>
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model => model.Photo)</div>
+            </div>
+             
+           <br />
+            <form asp-area="Employee" asp-controller="Employees" asp-action="Edit">
+                &nbsp;&nbsp;
+                <input type="hidden" asp-for="Id" />
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Düzenle</a>
+                <a asp-action="Index" class="btn btn-primary">Geri Dön</a>
+            </form>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">DÜzenle</a> |
+    <a asp-action="Index">Geri Dön</a>
+</div>*@

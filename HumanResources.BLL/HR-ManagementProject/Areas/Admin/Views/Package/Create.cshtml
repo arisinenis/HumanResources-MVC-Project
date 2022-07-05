@@ -1,0 +1,66 @@
+﻿@model HumanResources.Core.Entities.Package
+
+@{
+    ViewData["Title"] = "Create";
+    
+}
+
+
+
+<h4>Yeni Paket Oluştur</h4>
+<hr />
+
+<form asp-area="Admin" asp-controller="Package" asp-action="Create" class="row g-3" enctype="multipart/form-data" method="post">
+    <div class="col-12">
+        
+        <label asp-for="Photo" class="form-label">Fotoğraf</label>
+        <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+               onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Name" class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <input asp-for="Name" type="text" class="form-control" id="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">@Html.DisplayNameFor(model => model.Description)</label>
+        <textarea asp-for="Description" rows="10" cols="40" class="form-control" id="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="StartDate" class="form-label">@Html.DisplayNameFor(model => model.StartDate)</label>
+        <input asp-for="StartDate" type="date" class="form-control" id="StartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="EndDate" class="form-label">@Html.DisplayNameFor(model => model.EndDate)</label>
+        <input asp-for="EndDate" type="date" class="form-control" id="EndDate">
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Cost" class="form-label">@Html.DisplayNameFor(model => model.Cost)</label>
+        <input asp-for="Cost" type="text" pattern="\d*" class="form-control" id="Cost">
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+    
+    <div class="col-12">
+        <label asp-for="UsageAmount" class="form-label">@Html.DisplayNameFor(model => model.UsageAmount)</label>
+        <input asp-for="UsageAmount" type="text" pattern="\d*" class="form-control" id="UsageAmount">
+        <span asp-validation-for="UsageAmount" class="text-danger"></span>
+    @*</div>
+       <div class="col-12 form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="PackageStatus" />Paket Aktif Durumu
+        </label>
+    </div>*@
+       <div class="text-center">
+           <input type="submit" value="Ekle" class="btn btn-primary" />
+           <button asp-area="Admin" asp-controller="Packages" asp-action="Index" class="btn btn-secondary">Paketler Listesine Dön</button>
+
+       </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

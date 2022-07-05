@@ -1,0 +1,71 @@
+﻿@using HumanResources.Core.Enums
+@model HumanResources.Core.Entities.Company
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Şirket Düzenle</h4>
+<hr />
+
+        <form asp-area="Admin" asp-controller="Company" asp-action="Edit" class="row g-3" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12">
+               
+                <label asp-for="Photo" class="form-label">Fotoğraf</label>
+                <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+                       onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="CompanyType" class="form-label">@Html.DisplayNameFor(model => model.CompanyType)</label>
+                <select asp-items="@Html.GetEnumSelectList<CompanyType>()" asp-for="CompanyType" class="form-control" id="CompanyType"></select>
+                <span asp-validation-for="CompanyType" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" type="text"    class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="TaxNumber" class="control-label"></label>
+                <input asp-for="TaxNumber"  class="form-control" />
+                <span asp-validation-for="TaxNumber" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="TaxAdministration" class="control-label"></label>
+                <input asp-for="TaxAdministration" class="form-control" />
+                <span asp-validation-for="TaxAdministration" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="MersisNo" class="control-label"></label>
+                <input asp-for="MersisNo" type="text"    class="form-control" />
+                <span asp-validation-for="MersisNo" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="col-12">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+<div>
+    <a asp-action="Index">Şirket Listesine Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

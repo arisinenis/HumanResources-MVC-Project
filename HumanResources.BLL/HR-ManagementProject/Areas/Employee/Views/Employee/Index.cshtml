@@ -1,0 +1,122 @@
+﻿@model IEnumerable<HumanResources.Core.Entities.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+
+<h3>Profilim</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.SecondName)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.CitizenNo)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.SecondName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.CitizenNo)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhotoPath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Address)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detaylar</a> |
+                    @*<a asp-action="Delete" asp-route-id="@item.Id">Sil</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+    <p>
+        <h2><a asp-controller="EmployeePermission" asp-action="Create">İzin talebi oluşturmak için tıklayınız.</a></h2>
+    </p>
+</table>

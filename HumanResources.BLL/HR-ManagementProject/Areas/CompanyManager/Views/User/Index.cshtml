@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.User>
+
+@{
+    ViewData["Title"] = "Index";
+    //if (Context.Session.GetString("email") != "admin@admin.com")
+    //{
+    //    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    //}
+    Layout = "/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h1>Ana Sayfa</h1>
+
+<p>
+    <a class="btn btn-primary" asp-area="Admin" asp-controller="User" asp-action="Create">Yönetici Oluştur</a>
+    </p>
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Şirket yöneticileri</h5>
+
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Photo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.SecondName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Password)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CitizenNo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.BirthDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.BloodType)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.JobTitle)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Profession)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            @if (item.PhotoPath != null)
+                            {
+                                <th scope="row"><a ><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            else
+                            {
+                                <th scope="row"><a ><img src="@Url.Content("~/images/default.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.FirstName)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.SecondName)</a></td>
+                            <td class="fw-bold"><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.LastName)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Email)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Password)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CitizenNo)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BirthDate)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.BloodType)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.JobTitle)</a></td>
+                            <td><a  class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Profession)</a></td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                        <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                        <a asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

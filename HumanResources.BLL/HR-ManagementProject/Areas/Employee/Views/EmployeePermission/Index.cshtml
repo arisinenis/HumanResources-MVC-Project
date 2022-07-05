@@ -1,0 +1,91 @@
+﻿@model (IEnumerable<HumanResources.Core.Entities.Permission> p, HumanResources.Core.Entities.Employee e)
+
+@{
+    ViewData["Title"] = "PermissionIndex";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1>İzin Listesi</h1>
+
+<p>
+    <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Create" class="btn btn-primary">Yeni İzin Oluştur</a>
+</p>
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.PermissionType)*@
+                İzin Tipi
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.TotalDayOfPermissionType)*@
+                Toplam İzin Süresi
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.RequestDate)*@
+                İzin Talep Tarihi
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.StartDate)*@
+                Başlangıç Tarihi
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.EndDate)*@
+                Bitiş Tarihi
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.PermissionStatus)*@
+                İzin Türü
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.p)
+        {
+            <tr>
+                <td>
+                    @if (Model.e.Gender == HumanResources.Core.Enums.Gender.Female)
+                    {
+                        int permissionTypeValue = Convert.ToInt32(item.PermissionType);
+                        string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeFemale), permissionTypeValue);
+                        @enumName
+                    }
+                    else
+                    {
+
+                        int permissionTypeValue = Convert.ToInt32(item.PermissionType);
+                        string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeMale), permissionTypeValue);
+                        @enumName
+                    }
+
+                    @*@Html.DisplayFor(modelItem => item.PermissionType)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalDayOfPermissionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermissionStatus)
+                </td>
+                <td>
+                    <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                    <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                    <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Http
+@model HumanResources.Core.Entities.Package
+
+@{
+    ViewData["Title"] = "Details";
+     if (Context.Session.GetString("email") != "admin@admin.com")
+    {
+        Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    }
+}
+
+<h2>Paket Detayı</h2>
+
+ <div>
+    
+    
+    <div>
+
+    <hr />
+    <div class="row align-content-center">
+            <span class="nav-link nav-profile d-flex align-content-center pe-0">
+                @if (Model.PhotoPath != null)
+                {
+                    <a><img class="rounded-circle" src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+                else
+                {
+                    <a><img class="rounded-circle" src="@Url.Content("~/images/default.png")" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+            </span>
+                
+            </div>
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Name):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Name)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Description):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Description)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.StartDate):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.EndDate):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Cost):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Cost)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Occupancy):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Occupancy)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.UsageAmount):</b></div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.UsageAmount)</div>
+        </div>
+        <br />
+        <form asp-action="Edit">&nbsp;&nbsp;
+            
+            <a asp-action="Index" class="btn btn-primary">Paket Listesine Dön</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+
+  
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<Expense>
+
+@{
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+        <div class="card-body">
+            <h5 class="card-title">Tüm Harcamalar</h5>
+
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">İsim</th>
+                        <th scope="col">Soyisim</th>
+                        <th scope="col">Harcama Tipi</th>
+                        <th scope="col">Toplam Harcama Miktarı</th>
+                        <th scope="col">Harcama Talep Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.Employee.FirstName</th>
+                            <th scope="row">@item.Employee.LastName</th>
+                            <th scope="row">@item.ExpenseType</th>
+                            <th scope="row">@item.Total</th>
+                            <th scope="row">@item.RequestDate</th>
+                            <td>
+
+                                @*<a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>*@
+                                <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                @*<a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>*@
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,90 @@
+﻿@model HumanResources.Core.Entities.User
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h3>Şirket Yöneticisini Silmek istediğinden EMin misin?</h3>
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.FirstName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.FirstName)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.SecondName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.SecondName)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.LastName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.LastName)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Email)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Email)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Address)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Address)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PhoneNumber)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PhoneNumber)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Password)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Password)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.CitizenNo)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.CitizenNo)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.BirthDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.BirthDate)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.BloodType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.BloodType)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.JobTitle)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.JobTitle)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Profession)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Profession)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PhotoPath)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PhotoPath)</div>
+        </div>
+        <br />
+        <form asp-area="Admin" asp-controller="User" asp-action="Delete">&nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-primary">Şirket Yönetici Listesine Dön</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

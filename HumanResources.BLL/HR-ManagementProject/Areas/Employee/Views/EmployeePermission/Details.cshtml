@@ -1,0 +1,86 @@
+﻿@model (HumanResources.Core.Entities.Permission p, HumanResources.Core.Entities.Employee e)
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1>İzin Detayları</h1>
+<hr />
+
+<div>
+    @*<h4>Permission</h4>
+    <hr />*@
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">
+                &nbsp;&nbsp;             @Html.DisplayNameFor(model => model.p.PermissionType)
+            </div>
+            <div class="col-lg-9 col-md-8">
+                @*@Html.DisplayFor(model => model.PermissionType)*@
+                @if (Model.e.Gender == HumanResources.Core.Enums.Gender.Female)
+                {
+                    int permissionTypeValue = Convert.ToInt32(Model.p.PermissionType);
+                    string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeFemale), permissionTypeValue);
+                    @enumName
+                }
+                else
+                {
+
+                    int permissionTypeValue = Convert.ToInt32(Model.p.PermissionType);
+                    string enumName = Enum.GetName(typeof(HumanResources.Core.Enums.PermissionTypeMale), permissionTypeValue);
+                    @enumName
+                }
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.p.TotalDayOfPermissionType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.p.TotalDayOfPermissionType)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.p.RequestDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.p.RequestDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.p.StartDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.p.StartDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.p.EndDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.p.EndDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.p.PermissionStatus)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.p.PermissionStatus)</div>
+        </div>
+        <br />
+
+        <br />
+        @*<form asp-action="Edit">
+        &nbsp;&nbsp;
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Edit" class="btn btn-danger" /> &nbsp;&nbsp;
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        </form>*@
+        <div>
+            @*<a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+            <a asp-action="Index">Anasayfaya geri dön</a>*@
+
+            <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Delete" class="btn btn-primary">İzni Sil</a>
+            <a asp-area="Employee" asp-controller="EmployeePermission" asp-action="Index" class="btn btn-primary">Anasayfaya geri dön</a>
+        </div>
+        <br /><br />
+    </div>
+
+</div>
+
+

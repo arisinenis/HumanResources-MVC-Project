@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HumanResources.Core.Entities.Company>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Şirketler</h5>
+            <p>
+                <a asp-area="Admin" asp-controller="Company" asp-action="Create"><input value="Yeni şirket oluştur" class="btn btn-primary" /></a>
+            </p>
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Photo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CompanyType)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.TaxNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.TaxAdministration)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.MersisNo)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @if (item.PhotoPath != null)
+                            {
+                                <th scope="row"><a asp-area="Admin" asp-controller="Package" asp-action="Details"><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            else
+                            {
+                                <th scope="row"><a><img src="@Url.Content("~/images/company.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                            }
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CompanyType)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Address)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.PhoneNumber)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TaxNumber)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TaxAdministration)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.MersisNo)</a></td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="Company" asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                <a asp-area="Admin" asp-controller="Company" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a> <br />
+                                <a asp-area="Admin" asp-controller="Company" asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

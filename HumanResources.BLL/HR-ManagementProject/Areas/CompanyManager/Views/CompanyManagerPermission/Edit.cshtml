@@ -1,0 +1,59 @@
+﻿@model HumanResources.Core.Entities.Permission
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h3>Personel İzin Talepleri Düzenle</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PermissionType" class="control-label"></label>
+                <select asp-for="PermissionType" class="form-control"></select>
+                <span asp-validation-for="PermissionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalDayOfPermissionType" class="control-label"></label>
+                <input asp-for="TotalDayOfPermissionType" class="form-control" />
+                <span asp-validation-for="TotalDayOfPermissionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestDate" class="control-label"></label>
+                <input asp-for="RequestDate" class="form-control" />
+                <span asp-validation-for="RequestDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermissionStatus" class="control-label"></label>
+                <select asp-for="PermissionStatus" class="form-control"></select>
+                <span asp-validation-for="PermissionStatus" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">İzinler Listesine Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HumanResources.Core.Entities.AdvancePayment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Avans talepleri</h5>
+            
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.TotalPaymentRequest)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CreateTime)</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.TotalPaymentRequest)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Status)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CreateTime)</a></td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+

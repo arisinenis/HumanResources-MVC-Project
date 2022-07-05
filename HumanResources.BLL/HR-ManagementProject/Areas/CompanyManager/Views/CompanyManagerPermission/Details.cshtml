@@ -1,0 +1,66 @@
+﻿@model HumanResources.Core.Entities.Permission
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h1>İzin Talebi Detayı</h1>
+<div>
+
+
+    <div>
+
+        <hr />
+        <div class="card">
+
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PermissionType)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PermissionType)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TotalDayOfPermissionType)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TotalDayOfPermissionType)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.RequestDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.RequestDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.StartDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EndDate)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PermissionStatus)</div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PermissionStatus)</div>
+            </div>
+            <br />
+           
+            <form asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="Edit">
+                &nbsp;&nbsp;
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Düzenle" class="btn btn-danger" /> &nbsp;&nbsp;
+                <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="Index" class="btn btn-primary">Talep Listesine Dön</a>
+            </form>
+            <br /><br />
+        </div>
+    </div>
+
+
+</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Düzenle</a> |
+    <a asp-action="Index">Talep Listesine Dön</a>
+</div>*@

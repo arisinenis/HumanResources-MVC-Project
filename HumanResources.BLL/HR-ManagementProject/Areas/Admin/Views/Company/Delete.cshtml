@@ -1,0 +1,65 @@
+﻿@model HumanResources.Core.Entities.Company
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Şirketi Silmek İstediğinizden Emin Misiniz?</h2>
+
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Name)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Name)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.CompanyType)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.CompanyType)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Address)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Address)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PhoneNumber)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PhoneNumber)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TaxNumber)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TaxNumber)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.TaxAdministration)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.TaxAdministration)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.MersisNo)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.MersisNo)</div>
+        </div>
+        <br />
+        <form asp-area="Admin" asp-controller="Company" asp asp-action="Delete">&nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input onclick="return confirm('Silmek istediğinize emin misiniz?');" type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-area="Admin" asp-controller="Company" asp-action="Index" class="btn btn-primary">Şirket Listesine Dön</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

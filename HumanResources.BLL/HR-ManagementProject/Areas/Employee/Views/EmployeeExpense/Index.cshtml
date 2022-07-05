@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HumanResources.Core.Entities.Expense>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Harcamalarım</h5>
+            @*<p>
+                <a asp-area="Employee" asp-controller="EmployeeExpense" asp-action="Create"><input value="Yeni şirket oluştur" class="btn btn-primary" /></a>
+                </p>*@
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.ExpenseType)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Total)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.RequestDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.ResponseDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.ExpenseType)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Total) TL</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Status)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.RequestDate)</a></td>
+                            @if (item.ResponseDate < item.RequestDate)
+                            {
+                                <td><a class="text-primary fw-bold">Onay bekleniyor</a></td>
+                            }
+                            else
+                            {
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.ResponseDate)</a></td>
+                            }
+
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

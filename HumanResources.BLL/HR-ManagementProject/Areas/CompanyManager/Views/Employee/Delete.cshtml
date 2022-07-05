@@ -1,0 +1,74 @@
+﻿@model HumanResources.Core.Entities.Employee
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+
+<h3>Personeli Silmek İstediğinden Emin misiniz?</h3>
+
+<div>
+
+    <hr />
+    <div class="card">
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.PhotoPath)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PhotoPath)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.FirstName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.FirstName)</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.LastName)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.LastName)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Email)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Email)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Job)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Job)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.JobTitle)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.JobTitle)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.Salary)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Salary)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.StartDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; @Html.DisplayNameFor(model => model.EndDate)</div>
+            <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+        </div>
+
+        <form asp-action="Delete">
+            &nbsp;&nbsp;
+            <input type="hidden" asp-for="Id" />
+            <input onclick="return confirm('Silmek istediğinize emin misiniz?');" type="submit" value="Sil" class="btn btn-danger" /> &nbsp;&nbsp;
+            <a asp-action="Index" class="btn btn-primary">Listeye Dön</a>
+        </form>
+        <br /><br />
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

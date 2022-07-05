@@ -1,0 +1,90 @@
+﻿@model HumanResources.Core.Entities.Package
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Paket Düzenleme</h1>
+<hr />
+
+
+
+@*<img src="Photo" asp-append-version="true" width="100px" height="100px" id="logoImage" alt="">*@
+
+<form asp-controller="Package" asp-action="Edit" enctype="multipart/form-data" class="row g-3">
+    <div class="col-12">
+        @{
+
+        if (Model.PhotoPath != null)
+        {
+        <img src="@Url.Content(@Model.PhotoPath)" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+        <br />
+        }
+
+
+
+        else
+        {
+        <img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+
+        <br />
+        }
+        }
+        <label asp-for="Photo" class="form-label">Fotoğraf</label>
+        <input asp-for="Photo" type="file" value="@Model.PhotoPath" accept="image/*" class="form-control" id="Photo"
+               onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Name" class="form-label">@Html.DisplayNameFor(model => model.Name)</label>
+        <input asp-for="Name" type="text" class="form-control" id="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">@Html.DisplayNameFor(model => model.Description)</label>
+        <textarea asp-for="Description" rows="30" cols="50" class="form-control" id="EndDate"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="StartDate" class="form-label">@Html.DisplayNameFor(model => model.StartDate)</label>
+        <input asp-for="StartDate" type="date" class="form-control" id="StartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="EndDate" class="form-label">@Html.DisplayNameFor(model => model.EndDate)</label>
+        <input asp-for="EndDate" type="date" class="form-control" id="EndDate">
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Cost" class="form-label">@Html.DisplayNameFor(model => model.Cost)</label>
+        <span class="input-group-addon">@string.Format("{0:C}", Model.Cost!=null?Model.Cost:0).FirstOrDefault()</span>
+                <input asp-for="Cost" asp-format="{0}" class="form-control" />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Occupancy" class="form-label">@Html.DisplayNameFor(model => model.Occupancy)</label>
+        <input asp-for="Occupancy" type="date" class="form-control" id="Occupancy">
+        <span asp-validation-for="Occupancy" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="UsageAmount" class="form-label">@Html.DisplayNameFor(model => model.UsageAmount)</label>
+        <input asp-for="UsageAmount" type="text" pattern="\d*" class="form-control" id="UsageAmount">
+        <span asp-validation-for="UsageAmount" class="text-danger"></span>
+    </div>
+    <div class="text-center">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" value="Kaydet" class="btn btn-primary">Düzenle</button>
+        <button asp-action="Index" class="btn btn-secondary">Paket Listesine Dön</button>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+
+
+
+
+

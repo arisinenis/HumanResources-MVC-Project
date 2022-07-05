@@ -1,0 +1,113 @@
+﻿@model HumanResources.Core.Entities.Employee
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<h2>Çalışan Detayları</h2>
+
+<div>
+    <div>
+        <hr />
+        <div class="row align-content-center">
+            <span class="nav-link nav-profile d-flex align-content-center pe-0">
+                @if (Model.PhotoPath != null)
+                {
+                    <a><img class="rounded-circle" src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+                else
+                {
+                    <a><img class="rounded-circle" src="@Url.Content("~/images/default.png")" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+            </span>
+
+        </div>
+        <div class="card">
+
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.FirstName):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.FirstName)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.SecondName):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.SecondName)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.LastName):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.LastName)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.CitizenNo):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.CitizenNo)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.PhoneNumber):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.PhoneNumber)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Salary):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Salary)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Address):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Address)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.BirthDate):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.BirthDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.StartDate):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.StartDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.EndDate):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.EndDate)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Status):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Address)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.JobTitle):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.JobTitle)</div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model => model.Job):</b></div>
+                <div class="col-lg-9 col-md-8"> @Html.DisplayFor(model => model.Job)</div>
+            </div>
+            <br />
+            <form asp-action="Edit">
+                &nbsp;&nbsp;
+
+                <a asp-action="Index" class="btn btn-primary">Çalışanlar Listesine Dön</a>
+            </form>
+            <br /><br />
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

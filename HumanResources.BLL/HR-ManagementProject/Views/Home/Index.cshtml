@@ -1,0 +1,367 @@
+﻿@using Microsoft.AspNetCore.Http
+@model HR_ManagementProject.ViewModels.PackageManagerEmployeeVM;
+
+@{
+    if (Context.Session.GetString("email") == "admin@admin.com")
+    {
+
+        Layout = "_AdminLayout ";
+
+    }
+    else if (Context.Session.GetString("role") == "Manager")
+    {
+        Layout = "_CompanyManagerLayout";
+    }
+    else
+    {
+        Layout = "_EmployeeLayout";
+    }
+
+
+    ViewData["Title"] = "Home Page";
+}
+
+
+@if (Context.Session.GetString("email") == "admin@admin.com")
+{
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Yöneticiler</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">TC Kimlik No</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Managers)
+                        {
+                            <tr>
+                                <th scope="row">@item.FirstName</th>
+                                <td scope="row">@item.LastName</td>
+                                <td scope="row">@item.CitizenNo</td>
+                                <td scope="row">@item.PhoneNumber</td>
+                                <td scope="row">@item.Email</td>
+                                <td>
+
+                                    <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Çalışanlar</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">TC Kimlik No</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Employees)
+                        {
+                            <tr>
+                                <th scope="row">@item.FirstName</th>
+                                <td scope="row">@item.LastName</td>
+                                <td scope="row">@item.CitizenNo</td>
+                                <td scope="row">@item.PhoneNumber</td>
+                                <td scope="row">@item.Email</td>
+                                <td>
+
+                                    <a asp-area="Employee" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Paketler</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Paket Adı</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Başlangıç Tarihi</th>
+                            <th scope="col">Bitiş Tarihi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Packages)
+                        {
+                            if(item.PackageStatus)
+                            {
+                                 <tr>
+                                <th scope="row">@item.Name</th>
+                                <td scope="row">@item.Description</td>
+                                <td scope="row">@item.Cost</td>
+                                <td scope="row">@item.StartDate</td>
+                                <td scope="row">@item.EndDate</td>
+                                 <td>
+
+                                    <a asp-area="Admin" asp-controller="Package" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                            </tr>
+                            }
+                           
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+}
+else if (Context.Session.GetString("role") == "Manager")
+{
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Çalışanlar</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">TC Kimlik No</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Employees)
+                        {
+                            if (item.CompanyId == Convert.ToInt32(Context.Session.GetString("CompanyId")))
+                            {
+                                <tr>
+                                    <th scope="row">@item.FirstName</th>
+                                    <td scope="row">@item.LastName</td>
+                                    <td scope="row">@item.CitizenNo</td>
+                                    <td scope="row">@item.PhoneNumber</td>
+                                    <td scope="row">@item.Email</td>
+                                    <td>
+
+                                    <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Paketler</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Paket Adı</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Başlangıç Tarihi</th>
+                            <th scope="col">Bitiş Tarihi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Packages)
+                        {
+                            if(item.PackageStatus)
+                            {
+                               <tr>
+                                <th scope="row">@item.Name</th>
+                                <td scope="row">@item.Description</td>
+                                <td scope="row">@item.Cost</td>
+                                <td scope="row">@item.StartDate</td>
+                                <td scope="row">@item.EndDate</td>
+                                 <td>
+
+                                    <a asp-area="CompanyManager" asp-controller="Package" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                            </tr>
+                            
+
+                            }
+                            
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Bilgilerim</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">TC Kimlik No</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Managers)
+                        {
+                            if (item.CompanyId == Convert.ToInt32(Context.Session.GetString("CompanyId")))
+                            {
+                                <tr>
+                                    <th scope="row">@item.FirstName</th>
+                                    <td scope="row">@item.LastName</td>
+                                    <td scope="row">@item.CitizenNo</td>
+                                    <td scope="row">@item.PhoneNumber</td>
+                                    <td scope="row">@item.Email</td>
+                                     <td>
+
+                                    <a asp-area="CompanyManager" asp-controller="User" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+}
+else
+{
+
+
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+
+
+            <div class="card-body">
+                <h5 class="card-title">Bilgilerim</h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">TC Kimlik No</th>
+                            <th scope="col">Telefon Numarası</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Employees)
+                        {
+                            if (item.Id == Convert.ToInt32(Context.Session.GetString("id")))
+                            {
+                                <tr>
+                                    <th scope="row">@item.FirstName</th>
+                                    <td scope="row">@item.LastName</td>
+                                    <td scope="row">@item.CitizenNo</td>
+                                    <td scope="row">@item.PhoneNumber</td>
+                                    <td scope="row">@item.Email</td>
+                                     <td>
+
+                                    <a asp-area="Employee" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+
+                                </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Recent Sales -->
+}
+
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+

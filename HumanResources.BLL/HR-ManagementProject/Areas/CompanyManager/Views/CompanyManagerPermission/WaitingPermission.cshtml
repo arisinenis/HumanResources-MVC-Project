@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.Permission>
+
+@{
+    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="card recent-sales overflow-auto">
+
+
+        <div class="card-body">
+            <h5 class="card-title">Bekleyen İzin Talepleri</h5>
+
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">İsim</th>
+                        <th scope="col">Soyisim</th>
+                        <th scope="col">İzin Tipi</th>
+                        <th scope="col">Toplam Talep Edilen İzin Süresi</th>
+                        <th scope="col">İzin Talep Tarihi</th>
+                        <th scope="col">İzin Başlangıç Tarihi</th>
+                        <th scope="col">İzin Bitiş Tarihi</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @*if(item.Employee.CompanyId == Convert.ToInt32(Context.Session.GetString("CompanyId")))
+                        {*@
+                            <tr>
+                            
+                            <th scope="row">@item.Employee.FirstName</th>
+                            <th scope="row">@item.Employee.LastName</th>
+                            <th scope="row">@item.PermissionType</th>
+                            <th scope="row">@item.TotalDayOfPermissionType</th>
+                            <th scope="row">@item.RequestDate</th>
+                            <th scope="row">@item.StartDate</th>
+                            <th scope="row">@item.EndDate</th>
+                            <td>
+
+                                @*<a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Onayla</span></a>
+                            <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-danger">Reddet</span></a>*@
+                                <form asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="ApprovePermission" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.PermissionStatus" />
+                                        <input type="submit" value="Onayla" class="btn btn-success" @*onclick="permissionAlert()"*@ />
+                                    </div>
+                                </form>
+
+                                <form asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="RejectPermission" asp-route-id="@item.Id">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="@item.Id" />
+                                        <input type="submit" value="Reddet" class="btn btn-danger" @*onclick="permissionAlert()"*@ />
+                                    </div>
+                                </form>
+                            </td>
+                        </tr> 
+                        @*}*@
+                       
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    function permissionAlert() {
+        alert(@ViewBag.Message);
+    }
+</script>

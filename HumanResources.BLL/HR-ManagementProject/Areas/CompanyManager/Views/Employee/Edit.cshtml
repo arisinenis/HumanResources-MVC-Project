@@ -1,0 +1,133 @@
+﻿@model HumanResources.Core.Entities.Employee
+@using HumanResources.Core.Enums
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_CompanyManagerLayout";
+}
+
+<h1>Personel Düzenleme</h1>
+<hr />
+<form asp-area=CompanyManager asp-controller="Employee" asp-action="Edit" enctype="multipart/form-data" class="row g-3">
+    <div class="col-12">
+        @*@{
+
+            if (Model.PhotoPath != null)
+            {
+            <img src="@Url.Content(@Model.PhotoPath)" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+            <br />
+            }
+            else
+            {
+            <img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" id="logoImage" width="100px" height="100px" alt="">
+
+            <br />
+            }
+            }*@
+        <label asp-for="Photo" class="form-label">Fotoğraf</label>
+        <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+               onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="FirstName" class="form-label">@Html.DisplayNameFor(model => model.FirstName)</label>
+        <input asp-for="FirstName" type="text" class="form-control" id="FirstName">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="SecondName" class="form-label">@Html.DisplayNameFor(model => model.SecondName)</label>
+        <input asp-for="SecondName" type="text" class="form-control" id="SecondName">
+        <span asp-validation-for="SecondName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="LastName" class="form-label">@Html.DisplayNameFor(model => model.LastName)</label>
+        <input asp-for="LastName" type="text" class="form-control" id="LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="CitizenNo" class="form-label">@Html.DisplayNameFor(model => model.CitizenNo)</label>
+        <input asp-for="CitizenNo" type="text" class="form-control" id="CitizenNo">
+        <span asp-validation-for="CitizenNo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
+        <input asp-for="PhoneNumber" type="text" pattern="\d*" class="form-control" id="PhoneNumber">
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Salary" class="form-label">@Html.DisplayNameFor(model => model.Salary)</label>
+        <input asp-for="Salary" type="text" pattern="\d*" class="form-control" id="Salary">
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Gender" class="form-label">@Html.DisplayNameFor(model => model.Gender)</label>
+        <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<Gender>()" class="form-control" id="CompanyType"></select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    @* <div class="col-12">
+        <label asp-for="Password" class="form-label">@Html.DisplayNameFor(model => model.Password)</label>
+        <input asp-for="Password" type="text" pattern="\d*" class="form-control" id="Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
+        </div>*@
+    <div class="col-12">
+        <label asp-for="Address" class="form-label">@Html.DisplayNameFor(model => model.Address)</label>
+        <input asp-for="Address" type="text" class="form-control" id="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="BirthDate" class="form-label">@Html.DisplayNameFor(model => model.BirthDate)</label>
+        <input asp-for="BirthDate" type="date" class="form-control" id="BirthDate">
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="StartDate" class="form-label">@Html.DisplayNameFor(model => model.StartDate)</label>
+        <input asp-for="StartDate" type="date" class="form-control" id="StartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="EndDate" class="form-label">@Html.DisplayNameFor(model => model.EndDate)</label>
+        <input asp-for="EndDate" type="date" pattern="\d*" class="form-control" id="EndDate">
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+        </label>
+    </div>
+    <div class="col-12">
+        <label asp-for="Job" class="form-label">@Html.DisplayNameFor(model => model.Job)</label>
+        <input asp-for="Job" type="text" class="form-control" id="Job">
+        <span asp-validation-for="Job" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="JobTitle" class="form-label">@Html.DisplayNameFor(model => model.JobTitle)</label>
+        <input asp-for="JobTitle" type="text" class="form-control" id="JobTitle">
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+    @* <div class="col-12">
+        <label asp-for="CompanyId" class="form-label">@Html.DisplayNameFor(model => model.CompanyId)</label>
+        <input asp-for="CompanyId" type="text" pattern="\d*" class="form-control" id="CompanyId">
+        <span asp-validation-for="CompanyId" class="text-danger"></span>
+        </div>*@
+    <div class="col-12">
+        <label asp-for="Role" class="control-label"></label>
+        <input asp-for="Role" class="form-control" />
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
+    <div class="col-12 form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="IsFirstTime" /> @Html.DisplayNameFor(model => model.IsFirstTime)
+        </label>
+    </div>
+    <div class="text-center">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" value="Kaydet" class="btn btn-primary">Kaydet</button>
+        <button asp-area="CompanyManager" asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Personel Listesine Dön</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

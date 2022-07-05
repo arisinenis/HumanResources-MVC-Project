@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<HumanResources.Core.Entities.Package>
+
+@{
+    ViewData["Title"] = "Index";
+    if (Context.Session.GetString("email") != "admin@admin.com")
+    {
+        Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    }
+
+}
+
+<h2>Paketler</h2>
+
+
+
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+        <div class="card-body pb-0">
+            <h4 class="card-title">Paketler</h4>
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Photo)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.StartDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.EndDate)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Cost)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Occupancy)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.UsageAmount)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @if (item.PackageStatus == true && item.EndDate>DateTime.Now)
+                        {
+                            <tr>
+                                @if (item.PhotoPath != null)
+                                {
+                                    <th scope="row"><a><img src="@Url.Content(@item.PhotoPath)" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                else
+                                {
+                                    <th scope="row"><a a><img src="@Url.Content("~/images/delivery.png")" asp-append-version="true" width="100px" height="100px" alt=""></a></th>
+                                }
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Name)</a></td>
+                                <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Description)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.StartDate)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.EndDate)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Cost)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Occupancy)</a></td>
+                                <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.UsageAmount)</a></td>
+                                
+                                <td>
+                                    @if (Context.Session.GetString("email") == "admin@admin.com")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                        <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="BuyPackage" asp-route-id="@item.Id"><span class="badge bg-success">Satın Al </span></a> 
+                                    }
+                                </td>
+                            </tr>
+
+                        }}
+                </tbody>
+            </table>
+
+      
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

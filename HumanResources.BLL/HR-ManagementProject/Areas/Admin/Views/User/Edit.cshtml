@@ -1,0 +1,94 @@
+﻿@model HumanResources.Core.Entities.User
+@using HumanResources.Core.Enums
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Şirket Yöneticisi Düzenle</h4>
+<hr />
+<form asp-area="Admin" asp-controller="User" asp-action="Edit" class="row g-3" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-12">
+
+        <label asp-for="Photo" class="form-label">Fotoğraf</label>
+        <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="Photo"
+               onchange="document.getElementById('logoImage').src = window.URL.createObjectURL(this.files[0])" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="SecondName" class="control-label"></label>
+        <input asp-for="SecondName" class="form-control" />
+        <span asp-validation-for="SecondName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Address" class="control-label"></label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" pattern="\d{11}" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Password" class="control-label"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="CitizenNo" class="control-label"></label>
+        <input asp-for="CitizenNo" pattern="\d{11}" class="form-control" />
+        <span asp-validation-for="CitizenNo" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="BirthDate" class="control-label"></label>
+        <input asp-for="BirthDate" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="BloodType" class="form-label">@Html.DisplayNameFor(model => model.BloodType)</label>
+        <select asp-for="BloodType" asp-items="@Html.GetEnumSelectList<BloodType>()" class="form-control" id="BloodType"></select>
+        <span asp-validation-for="BloodType" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="JobTitle" class="control-label"></label>
+        <input asp-for="JobTitle" class="form-control" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for="Profession" class="control-label"></label>
+        <input asp-for="Profession" class="form-control" />
+        <span asp-validation-for="Profession" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="Id" />
+    <div class="col-12">
+        <input type="submit" value="Düzenle" class="btn btn-primary" />
+    </div>
+</form>
+
+
+<div>
+    <a asp-action="Index">Listeye DÖn</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

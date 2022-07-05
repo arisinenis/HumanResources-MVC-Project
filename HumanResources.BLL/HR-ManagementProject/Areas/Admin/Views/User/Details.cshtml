@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Http
+@model HumanResources.Core.Entities.User
+
+@{
+    ViewData["Title"] = "Details";
+     if (Context.Session.GetString("email") != "admin@admin.com")
+    {
+        Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    }
+}
+
+<h1>Yönetici Detayları</h1>
+
+<div>
+    <div>
+        <hr/>
+        <div class="row align-content-center">
+            <span class="nav-link nav-profile d-flex align-content-center pe-0">
+                @if (Model.PhotoPath != null)
+                {
+                    <a><img class="rounded-circle" src="@Url.Content(Model.PhotoPath)" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+                else
+                {
+                    <a><img class="rounded-circle" src="@Url.Content("~/images/default.png")" asp-append-version="true" width="200px" height="200px" alt=""></a>
+                }
+            </span>
+                
+            </div>
+        <div class="card">
+            <br/>
+            <br/>
+            
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.FirstName):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.FirstName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.SecondName):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.SecondName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.LastName):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.LastName)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.Email):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Email)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.Address):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Address)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.PhoneNumber):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.PhoneNumber)</div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.CitizenNo):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.CitizenNo)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.BirthDate):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.BirthDate)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.BloodType):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.BloodType)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.JobTitle):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.JobTitle)</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3  col-md-4 label ">&nbsp;&nbsp; <b>@Html.DisplayNameFor(model=>model.Profession):</b></div> 
+                <div class="col-lg-9  col-md-8">@Html.DisplayFor(model=>model.Profession)</div>
+            </div>
+            <br/>
+            <form asp-area="Admin" asp-controller="User" asp-action="Edit">&nbsp;&nbsp;
+                <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-primary">Yöneticiler Listesine Dön</a>
+            </form>
+            <br/>
+            <br/>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+
+
