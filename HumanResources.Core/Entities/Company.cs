@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HumanResources.Core.Entities
@@ -16,6 +17,7 @@ namespace HumanResources.Core.Entities
         {
             Users = new HashSet<User>();
             Packages = new HashSet<Package>();
+            
         }
 
         [Required(ErrorMessage = "Lütfen şirket ismi giriniz.")]
@@ -73,6 +75,8 @@ namespace HumanResources.Core.Entities
         public ICollection<Package> Packages { get; set; }
 
         //public int WalletID { get; set; }
+        [JsonIgnore]
         public Wallet Wallet { get; set; }
+        
     }
 }

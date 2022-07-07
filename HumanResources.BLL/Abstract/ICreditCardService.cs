@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace HumanResources.BLL.Abstract
 {
-    interface ICreditCardService : IService<CreditCard>
+    public interface ICreditCardService : IService<CreditCard>
     {
+        //CreditCard GetCreditCardWithCompany(int id);
+        IEnumerable<CreditCard> GetAllCreditCardById(int companyId);
     }
 }

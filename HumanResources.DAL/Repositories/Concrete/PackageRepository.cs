@@ -21,7 +21,7 @@ namespace HumanResources.DAL.Repositories.Concrete
         public IEnumerable<Package> GetByUsageAmount(int companyId)
         {
             Company company = db.Companies.FirstOrDefault(x => x.Id == companyId);
-            List<Package> packages = db.Packages.Where(z => z.UsageAmount <= company.PersonelSayisi).ToList();
+            IEnumerable<Package> packages = db.Packages.Where(z => z.UsageAmount >= company.PersonelSayisi).ToList();
             
             //foreach (Package item in db.Packages)
             //{

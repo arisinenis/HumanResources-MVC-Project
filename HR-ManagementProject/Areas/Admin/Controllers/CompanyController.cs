@@ -1,6 +1,7 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HR_ManagementProject.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Roles = "Admin")]
     [Route("Admin/[controller]/[action]")]
     public class CompanyController : Controller
     {
@@ -54,8 +55,6 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.PackagesData = new SelectList(packageService.GetAll(), "Id", "Name");
-
-
             return View(new Company());
         }
 
@@ -76,6 +75,7 @@ namespace HR_ManagementProject.Areas.Admin.Controllers
                 companyManager.Add(company);
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PackagesData"] = new SelectList(_context.Packages, "Id", "Name");
             return View(company);
         }
 

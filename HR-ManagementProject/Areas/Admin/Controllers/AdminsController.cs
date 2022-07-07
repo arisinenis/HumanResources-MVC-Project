@@ -13,10 +13,11 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HumanResources.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"),Authorize(Roles = "Admin")]
     [Route("Admin/[controller]/[action]")]
     public class AdminsController : Controller
     {

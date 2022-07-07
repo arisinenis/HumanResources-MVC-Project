@@ -10,10 +10,11 @@ using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
     [Route("CompanyManager/[controller]/[action]")]
     public class CompanyManagerExpenseController : Controller
     {

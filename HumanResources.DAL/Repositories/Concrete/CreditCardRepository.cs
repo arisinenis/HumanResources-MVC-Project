@@ -1,6 +1,7 @@
 ﻿using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
 using HumanResources.DAL.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace HumanResources.DAL.Repositories.Concrete
         {
             this.db = db;
         }
-        
+        //public CreditCard GetCreditCardWithCompany(int id) => db.CreditCards.Where(w => w. == id).FirstOrDefault();
+
+        public IEnumerable<CreditCard> GetAllCreditCardById(int companyId) => db.CreditCards.Include(x=>x.Wallet).Where(a => a.Wallet.CompanyID == companyId).ToList();
     }
 }

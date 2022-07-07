@@ -10,10 +10,11 @@ using HumanResources.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
 using HumanResources.Core.Enums;
 using HumanResources.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.Employee.Controllers
 {
-    [Area("Employee")]
+    [Area("Employee"), Authorize(Roles = "Employee")]
     [Route("Employee/[controller]/[action]")]
     public class EmployeeExpenseController : Controller
     {

@@ -13,10 +13,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
     [Route("CompanyManager/[controller]/[action]")]
     public class EmployeeController : Controller
     {
@@ -59,41 +60,50 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         public async Task<IActionResult> Create(HumanResources.Core.Entities.Employee employee)
         {
             var company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
-            MailMessage mail = new MailMessage();
-            mail.To.Add(employee.Email);
-            mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
-            mail.Subject = "Merhaba Human Resources Programıza Hoşgeldiniz" + employee.Company.Name + "Firması olarak seni aramızda görmekten çok mutluyuz. ";
-            mail.Body = "Hoşgeldin " + employee.FirstName + "," + "</br>" + "Şifreniz: " + employee.Password;
-            mail.IsBodyHtml = true;
-
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
-            client.Port = 587;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;
-
-            try
-            {
-                client.Send(mail);
-                TempData["Message"] = "Gönderildi.";
-            }
-            catch (Exception ex)
-            {
-
-                TempData["Message"] = "Hata Var; " + ex.Message;
-            }
+            
 
             employee.CompanyId = Convert.ToInt32(HttpContext.Session.GetString("CompanyId"));
 
-            employee.Email = employee.FirstName + "." + employee.LastName + "@" + company.Name + "." + "com";
+            employee.Email = employee.FirstName.ToLower() + "." + employee.LastName.ToLower() + "@" + company.Name.ToLower() + "." + "com";
             employee.Password = company.Name + "123"; //Default bir şifre
             employee.CompanyId =company.Id;
+            employee.Status =true;
             company.PersonelSayisi += 1 ;
             _companyManager.Update(company);
             if (ModelState.IsValid)
             {
-                _employeeManager.Add(employee);
-                return RedirectToAction(nameof(Index));
+                if (_employeeManager.Add(employee))
+                {
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(employee.Email);
+                    mail.From = new MailAddress("humanresourcesprojectmvc@gmail.com");
+                    mail.Subject = "Merhaba Human Resources Programıza Hoşgeldiniz" +  employee.Company.Name.ToLower() + "Firması olarak seni aramızda görmekten çok mutluyuz. ";
+                    mail.Body = "Hoşgeldin " + employee.FirstName + "," + "</br>" + "Şifreniz: " + employee.Password;
+                    mail.IsBodyHtml = true;
+
+                    SmtpClient client = new SmtpClient();
+                    client.Credentials = new NetworkCredential("humanresourcesprojectmvc@gmail.com", "jvfypcjvedzbhwhh");
+                    client.Port = 587;
+                    client.Host = "smtp.gmail.com";
+                    client.EnableSsl = true;
+
+                    try
+                    {
+                        client.Send(mail);
+                        TempData["Message"] = "Gönderildi.";
+                    }
+                    catch (Exception ex)
+                    {
+
+                        TempData["Message"] = "Hata Var; " + ex.Message;
+                    }
+                    return RedirectToAction(nameof(Index));
+                }else
+                {
+                    ViewData["YasHatasi"] = "Yönetici olabilmek için 18 yaşından büyük olmalısınız.";
+                    return View(employee);
+                }
+                
             }
             return View(employee);
         }

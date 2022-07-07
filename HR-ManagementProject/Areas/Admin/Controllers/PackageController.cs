@@ -9,10 +9,11 @@ using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Roles = "Admin")]
     [Route("Admin/[controller]/[action]")]
     public class PackageController : Controller
     {

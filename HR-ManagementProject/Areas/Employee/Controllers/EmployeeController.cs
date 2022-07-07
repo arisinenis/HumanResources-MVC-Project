@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.Employee.Controllers
 {
-    [Area("Employee")]
+    [Area("Employee"), Authorize(Roles = "Employee")]
     [Route("Employee/[controller]/[action]")]
     public class EmployeeController : Controller
     {

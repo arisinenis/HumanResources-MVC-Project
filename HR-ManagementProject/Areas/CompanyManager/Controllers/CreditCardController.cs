@@ -7,50 +7,42 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
+using HumanResources.BLL.Abstract;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
+    [Route("CompanyManager/[controller]/[action]")]
+
     public class CreditCardController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICreditCardService creditCardManager;
+        private readonly ICompanyService _companyManager;
+        private readonly IWalletService walletService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public CreditCardController(ApplicationDbContext context)
+        public CreditCardController(ICreditCardService _creditCardManager, IWebHostEnvironment _hostEnvironment, ICompanyService companyManager,IWalletService walletService)
         {
-            _context = context;
+            creditCardManager = _creditCardManager;
+            _companyManager = companyManager;
+            this.walletService = walletService;
+            this._hostEnvironment = _hostEnvironment;
         }
 
         // GET: CompanyManager/CreditCard
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CreditCards.Include(c => c.Company);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: CompanyManager/CreditCard/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var creditCard = await _context.CreditCards
-                .Include(c => c.Company)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (creditCard == null)
-            {
-                return NotFound();
-            }
-
-            return View(creditCard);
+            var card = creditCardManager.GetAllCreditCardById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            return View(card);
         }
 
         // GET: CompanyManager/CreditCard/Create
         public IActionResult Create()
         {
-            ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name");
-            return View();
+            return View(new CreditCard());
         }
 
         // POST: CompanyManager/CreditCard/Create
@@ -58,104 +50,23 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NameSurname,CardNumber,CCV,ExpirationDate,CompanyID,Id")] CreditCard creditCard)
+        public async Task<IActionResult> Create(CreditCard creditCard)
         {
+            //var company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            var wallet = walletService.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            creditCard.Wallet = wallet;
+            //creditCard.CompanyId = company.Id;
             if (ModelState.IsValid)
             {
-                _context.Add(creditCard);
-                await _context.SaveChangesAsync();
+                creditCardManager.Add(creditCard);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name", creditCard.CompanyID);
+            //ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name", creditCard.CompanyID);
             return View(creditCard);
         }
-
-        // GET: CompanyManager/CreditCard/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var creditCard = await _context.CreditCards.FindAsync(id);
-            if (creditCard == null)
-            {
-                return NotFound();
-            }
-            ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name", creditCard.CompanyID);
-            return View(creditCard);
-        }
-
-        // POST: CompanyManager/CreditCard/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NameSurname,CardNumber,CCV,ExpirationDate,CompanyID,Id")] CreditCard creditCard)
-        {
-            if (id != creditCard.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(creditCard);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CreditCardExists(creditCard.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CompanyID"] = new SelectList(_context.Companies, "Id", "Name", creditCard.CompanyID);
-            return View(creditCard);
-        }
-
-        // GET: CompanyManager/CreditCard/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var creditCard = await _context.CreditCards
-                .Include(c => c.Company)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (creditCard == null)
-            {
-                return NotFound();
-            }
-
-            return View(creditCard);
-        }
-
-        // POST: CompanyManager/CreditCard/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var creditCard = await _context.CreditCards.FindAsync(id);
-            _context.CreditCards.Remove(creditCard);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool CreditCardExists(int id)
         {
-            return _context.CreditCards.Any(e => e.Id == id);
+            return creditCardManager.Exists(id);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
     [Route("CompanyManager/[controller]/[action]")]
     public class PackageController : Controller
     {
@@ -40,7 +41,8 @@ namespace HR_ManagementProject.Areas.CompanyManager.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View( _packageManager.GetActivePackages());
+            var companyId = HttpContext.Session.GetString("CompanyId");
+            return View( _packageManager.GetByUsageAmount(Convert.ToInt32(companyId)));
         }
 
         public IActionResult AddPackage(int packageId)

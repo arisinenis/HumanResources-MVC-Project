@@ -32,6 +32,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
+    <link href="~/NewTemplate/assets/css/style.css" rel="stylesheet" />
     <link href="/NewTemplate/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/NewTemplate/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="/NewTemplate/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -191,155 +192,189 @@
 
         @if ((int)TempData["Package"] != 0)
         {
-            <ul class="sidebar-nav" id="sidebar-nav">
+        <ul class="sidebar-nav" id="sidebar-nav">
 
-                <li class="nav-item">
-                    <a class="nav-link " asp-controller="Home" asp-action="Index">
-                        <i class="bi bi-grid"></i>
-                        <span>Yönetim Paneli</span>
-                    </a>
-                </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link " asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-grid"></i>
+                    <span>Yönetim Paneli</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Paketler</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="packages-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Package" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Paketleri Listele</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#employees-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Çalışanlar</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="employees-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Create">
-                                <i class="bi bi-circle"></i><span>Çalışan Ekle</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Çalışanları Listele</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#avans-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Avans Talepleri</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="avans-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Avans teleplerini Listele</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Paketler</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="packages-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Package" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Paketleri Listele</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#employees-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Çalışanlar</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="employees-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Create">
+                            <i class="bi bi-circle"></i><span>Çalışan Ekle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Employee" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Çalışanları Listele</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#avans-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Avans Talepleri</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="avans-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="AdvancePayment" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Avans teleplerini Listele</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#izinler-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>İzinler</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="izinler-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#izinler-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>İzinler</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="izinler-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission">
-                                <i class="bi bi-circle"></i><span>Bekleyen İzinler</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerPermission" asp-action="WaitingPermission">
+                            <i class="bi bi-circle"></i><span>Bekleyen İzinler</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#harcamalar-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Harcamalar</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="harcamalar-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Harcamaları Listele</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses">
-                                <i class="bi bi-circle"></i><span>Bekleyen Harcamalar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#harcamalar-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Harcamalar</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="harcamalar-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Harcamaları Listele</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CompanyManagerExpense" asp-action="WaitingExpenses">
+                            <i class="bi bi-circle"></i><span>Bekleyen Harcamalar</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#wallet-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Cüzdan</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="wallet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Cüzdanı Görüntüle</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance">
-                                <i class="bi bi-circle"></i><span>Bakiye Ekleme</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#wallet-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Cüzdan</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="wallet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Cüzdanı Görüntüle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance">
+                            <i class="bi bi-circle"></i><span>Bakiye Ekleme</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#credit-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Kredi Kartlarım</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="credit-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CreditCard" asp-action="Index">
+                            <i class="bi bi-circle"></i><span>Kredi Kartım</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="CompanyManager" asp-controller="CreditCard" asp-action="Create">
+                            <i class="bi bi-circle"></i><span>Kredit Kartı Ekle</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
-            </ul>
+        </ul>
 
         }
         else
         {
 
-            <ul class="sidebar-nav" id="sidebar-nav">
-                <li style="color:red">
-                    İşlemler için önce paket satın alınız
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " asp-controller="Home" asp-action="Index">
-                        <i class="bi bi-grid"></i>
-                        <span>Yönetim Paneli</span>
-                    </a>
-                </li>
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li style="color:red">
+            Personel işlemlerinden önce paket satın almalısınız.
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-controller="Home" asp-action="Index">
+                <i class="bi bi-grid"></i>
+                <span>Yönetim Paneli</span>
+            </a>
+        </li>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Paketler</span><i class="bi bi-chevron-down ms-auto"></i>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#packages-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Paketler</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="packages-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-area="CompanyManager" asp-controller="Package" asp-action="Index">
+                        <i class="bi bi-circle"></i><span>Paketleri Listele</span>
                     </a>
-                    <ul id="packages-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Package" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Paketleri Listele</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#wallet-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-journal-text"></i><span>Cüzdan</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="wallet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="Index">
-                                <i class="bi bi-circle"></i><span>Cüzdanı Görüntüle</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance">
-                                <i class="bi bi-circle"></i><span>Bakiye Ekleme</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#wallet-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Cüzdan</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="wallet-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="Index">
+                        <i class="bi bi-circle"></i><span>Cüzdanı Görüntüle</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance">
+                        <i class="bi bi-circle"></i><span>Bakiye Ekleme</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#credit-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Kredi Kartlarım</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="credit-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-area="CompanyManager" asp-controller="CreditCard" asp-action="Index">
+                        <i class="bi bi-circle"></i><span>Kredi Kartım</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="CompanyManager" asp-controller="CreditCard" asp-action="Create">
+                        <i class="bi bi-circle"></i><span>Kredit Kartı Ekle</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
         }
 
     </aside><!-- End Sidebar-->

@@ -4,12 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="col-12">
+    <div class="card top-selling overflow-auto">
+
+
+        <div class="card-body pb-0">
+            <h5 class="card-title">Kredi Kartlarım</h5>
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Yeni Kart Ekle</a>
+            </p>
+            <table class="table table-borderless">
+
+                <thead>
+                    <tr>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CardName)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.NameSurname)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CardNumber)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.CVV)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Bakiye)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.ExpirationDate)</th>
+                    </tr>
+
+                </thead>
+                <hr />
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CardName)</a></td>
+                            <td class="fw-bold"><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.NameSurname)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CardName)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.CVV)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Bakiye)</a></td>
+                            <td><a class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.ExpirationDate)</a></td>
+                            @*<td>
+                                @if (Context.Session.GetString("email") == "admin@admin.com")
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><span class="badge bg-success">Düzenle</span></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id"><span class="badge bg-success">Detayları Gör</span></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><span class="badge bg-success">Sil</span></a>
+                                }
+
+                            </td>*@
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -19,41 +76,37 @@
                 @Html.DisplayNameFor(model => model.CardNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CCV)
+                @Html.DisplayNameFor(model => model.CVV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bakiye)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExpirationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameSurname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CardNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CCV)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpirationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameSurname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CVV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bakiye)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpirationDate)
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>*@

@@ -1,5 +1,6 @@
 ﻿using HumanResources.BLL.Abstract;
 using HumanResources.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
     [Route("CompanyManager/[controller]/[action]")]
     public class UserController : Controller
     {

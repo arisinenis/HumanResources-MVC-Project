@@ -13,5 +13,6 @@ namespace HumanResources.DAL.Repositories.Abstract
         IEnumerable<Permission> GetAllWaitingPermission();
         bool ApprovePermission(Permission permission);
         bool RejectPermission(Permission permission);
+
     }
 }

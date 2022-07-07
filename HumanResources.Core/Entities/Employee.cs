@@ -42,11 +42,11 @@ namespace HumanResources.Core.Entities
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Geçerli bir telefon numarası giriniz.")]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
+        //[Required(ErrorMessage = "Lütfen mail adresinizi giriniz.")]
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-        ErrorMessage = "Lütfen mail adresinizi kontrol ediniz.")]
+        //[DataType(DataType.EmailAddress)]
+        //[RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+        //ErrorMessage = "Lütfen mail adresinizi kontrol ediniz.")]
         public string Email { get; set; }
         //public string Email { get { return FirstName + "." + LastName + "@" + Company.Name + "." + "com"; } }
         [DataType(DataType.Password)]

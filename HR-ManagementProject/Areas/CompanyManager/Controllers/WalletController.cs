@@ -9,153 +9,98 @@ using HumanResources.Core.Entities;
 using HumanResources.DAL.Context;
 using HumanResources.BLL.Abstract;
 using Microsoft.AspNetCore.Http;
+using HR_ManagementProject.Areas.CompanyManager.Model;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace HR_ManagementProject.Areas.CompanyManager.Controllers
 {
-    [Area("CompanyManager")]
+    [Area("CompanyManager"), Authorize(Roles = "Manager")]
     [Route("CompanyManager/[controller]/[action]")]
     public class WalletController : Controller
     {
-        private readonly IWalletService walletManager;
-        private readonly ICompanyService companyManager;
+        private readonly IWalletService _walletManager;
+        private readonly ICompanyService _companyManager;
+        private readonly ICreditCardService _creditCardManager;
 
-        public WalletController(IWalletService walletManager, ICompanyService companyManager)
+        public WalletController(IWalletService walletManager, ICompanyService companyManager, ICreditCardService creditCardManager)
         {
-            this.walletManager = walletManager;
-            this.companyManager = companyManager;
+            _walletManager = walletManager;
+            _companyManager = companyManager;
+            _creditCardManager = creditCardManager;
         }
 
         // GET: CompanyManager/Wallet
         public async Task<IActionResult> Index()
         {
-            var wallet = walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            var wallet = _walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
             return View(wallet);
         }
-
-        // GET: CompanyManager/Wallet/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var wallet = await _context.Wallets
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (wallet == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(wallet);
-        //}
-
         // GET: CompanyManager/Wallet/Create
         public IActionResult CreateBalance()
         {
-            var wallet = walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //ViewData["CardName"] = new SelectList(_creditCardManager.GetAllCreditCardById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId"))), "Id", "Name");
+            //var wallet = _walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //WalletCreditCardVM walletCreditCardVM = new WalletCreditCardVM();
+            //walletCreditCardVM.CreditCard = _creditCardManager.GetAllCreditCardById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //walletCreditCardVM.Wallet = wallet;
+            Wallet wallet = new Wallet();
+            wallet.CreditCards = _creditCardManager.GetAllCreditCardById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            if (wallet.CreditCards.Count() == 0)
+            {
+                TempData["KartYok"] = "Lütfen Kredi Kartı Kaydı Oluşturunuz ";
+
+            }
+            wallet.Company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            TempData["wallet1"] = JsonConvert.SerializeObject(wallet, new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
             return View(wallet);
         }
 
         // POST: CompanyManager/Wallet/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateBalance(Wallet wallet)
+        public async Task<IActionResult> CreateBalance(int id,Wallet wallet)
         {
-            wallet.Company = companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
-            var walletDb = walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //wallet.Company = _companyManager.GetById(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
+            //var creditCard = _creditCardManager.GetById(creditCardID);
+            var walletDb = _walletManager.GetWalletWithCompany(Convert.ToInt32(HttpContext.Session.GetString("CompanyId")));
 
+            var creditCard = _creditCardManager.GetById(id);
+            
             if (ModelState.IsValid)
             {
-                walletDb.TopUpDate = DateTime.Now.Date;
-                walletDb.Balance += wallet.Balance;
-                walletManager.Update(walletDb);
+                
+                walletDb.TopUpDate = DateTime.Now;
+                if (creditCard.Bakiye - wallet.Balance > 0)
+                {
+                    creditCard.Bakiye -= wallet.Balance;
+                    walletDb.Balance += wallet.Balance;
 
-                return RedirectToAction(nameof(Index));
+                    _walletManager.Update(walletDb);
+                    _creditCardManager.Update(creditCard);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    TempData["hata"] = "Bakiyeniz yetersiz.";
+
+
+
+                    var data = TempData["wallet1"].ToString();
+                    var wallet1=JsonConvert.DeserializeObject<Wallet>(data);
+                     
+
+                     
+                    return View(wallet1);
+                }
+               
             }
-            return View(wallet);
+            return View(walletDb);
         }
-
-        // GET: CompanyManager/Wallet/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var wallet = await _context.Wallets.FindAsync(id);
-        //    if (wallet == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(wallet);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Balance,TopUpDate,Id")] Wallet wallet)
-        //{
-        //    if (id != wallet.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(wallet);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!WalletExists(wallet.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(wallet);
-        //}
-
-        // GET: CompanyManager/Wallet/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var wallet = await _context.Wallets
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (wallet == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(wallet);
-        //}
-
-        // POST: CompanyManager/Wallet/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var wallet = await _context.Wallets.FindAsync(id);
-        //    _context.Wallets.Remove(wallet);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool WalletExists(int id)
-        //{
-        //    return _context.Wallets.Any(e => e.Id == id);
-        //}
     }
 }

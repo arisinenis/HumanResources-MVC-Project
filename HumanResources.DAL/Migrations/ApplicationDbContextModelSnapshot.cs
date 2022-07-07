@@ -149,27 +149,32 @@ namespace HumanResources.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CCV")
+                    b.Property<decimal>("Bakiye")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CVV")
                         .HasColumnType("int");
+
+                    b.Property<string>("CardName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameSurname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WalletId")
+                    b.Property<int>("WalletId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyID");
 
                     b.HasIndex("WalletId");
 
@@ -199,7 +204,6 @@ namespace HumanResources.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
@@ -500,17 +504,11 @@ namespace HumanResources.DAL.Migrations
 
             modelBuilder.Entity("HumanResources.Core.Entities.CreditCard", b =>
                 {
-                    b.HasOne("HumanResources.Core.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyID")
+                    b.HasOne("HumanResources.Core.Entities.Wallet", "Wallet")
+                        .WithMany("CreditCards")
+                        .HasForeignKey("WalletId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("HumanResources.Core.Entities.Wallet", "Wallet")
-                        .WithMany()
-                        .HasForeignKey("WalletId");
-
-                    b.Navigation("Company");
 
                     b.Navigation("Wallet");
                 });
@@ -582,6 +580,11 @@ namespace HumanResources.DAL.Migrations
                     b.Navigation("advancePayments");
 
                     b.Navigation("Expenses");
+                });
+
+            modelBuilder.Entity("HumanResources.Core.Entities.Wallet", b =>
+                {
+                    b.Navigation("CreditCards");
                 });
 #pragma warning restore 612, 618
         }

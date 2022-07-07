@@ -8,6 +8,7 @@ using HumanResources.DAL.Repositories.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using SharpYaml.Serialization;
+using Newtonsoft.Json;
 
 namespace HR_ManagementProject
 {
@@ -31,13 +35,23 @@ namespace HR_ManagementProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+            //= Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HumanresourceDB")));
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddAutoMapper(typeof(Startup));
             services.AddSession();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+            {
+                x.LoginPath = "/Login/Index/";
+            });
 
             // DAL Dependency Injections
             services.AddScoped<IPackageDal, PackageRepository>();
+            services.AddScoped<ICreditCardDal, CreditCardRepository>();
             services.AddScoped<IUserDal, UserRepository>();
             services.AddScoped<ICompanyDal, CompanyRepository>();
             services.AddScoped<IAdminDal, AdminRepository>();
@@ -49,6 +63,7 @@ namespace HR_ManagementProject
 
             // Business Dependency Injections
             services.AddScoped<IPackageService, PackageManager>();
+            services.AddScoped<ICreditCardService, CreditCardManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<ICompanyService, CompanyManager>();
             services.AddScoped<IAdminService, AdminManager>();
@@ -63,12 +78,14 @@ namespace HR_ManagementProject
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -86,7 +103,7 @@ namespace HR_ManagementProject
 
 
             app.UseEndpoints(endpoints =>
-            {  
+            {
                 endpoints.MapControllerRoute(
                     name: "login",
                     pattern: "{controller=Login}/{action=Index}/{id?}");

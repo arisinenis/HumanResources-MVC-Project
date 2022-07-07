@@ -19,16 +19,24 @@ namespace HumanResources.BLL.Concrete
         }
         public bool Add(Employee entity)
         {
-            if (entity.Photo != null)
+            //if (entity.Photo != null)
+            //{
+            //    string ticks = DateTime.Now.Ticks.ToString();
+            //    var path1 = Directory.GetCurrentDirectory() + @"\wwwroot\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
+            //    using (var stream = new FileStream(path1, FileMode.Create))
+            //    {
+            //        entity.Photo.CopyTo(stream);
+            //    }
+            //    entity.PhotoPath = @"\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
+            //}
+            if (entity.BirthDate.AddYears(18) < DateTime.Now)
             {
-                string ticks = DateTime.Now.Ticks.ToString();
-                var path1 = Directory.GetCurrentDirectory() + @"\wwwroot\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
-                using (var stream = new FileStream(path1, FileMode.Create))
-                {
-                    entity.Photo.CopyTo(stream);
-                }
-                entity.PhotoPath = @"\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
+                AddPhoto(entity);
+                return employeeRepository.Add(entity);
             }
+            else
+                return false;
+
             return employeeRepository.Add(entity);
         }
         public bool CreateCMAreaEmployee(Employee entity)
@@ -64,6 +72,20 @@ namespace HumanResources.BLL.Concrete
         public Employee GetByEmailAndPassword(string email, string password)
         {
             return employeeRepository.GetByEmailAndPassword(email, password);
+        }
+        // Fotoğraf eklemek için
+        private static void AddPhoto(Employee entity)
+        {
+            if (entity.Photo != null)
+            {
+                string ticks = DateTime.Now.Ticks.ToString();
+                var path1 = Directory.GetCurrentDirectory() + @"\wwwroot\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
+                using (var stream = new FileStream(path1, FileMode.Create))
+                {
+                    entity.Photo.CopyTo(stream);
+                }
+                entity.PhotoPath = @"\images\" + ticks + Path.GetExtension(entity.Photo.FileName);
+            }
         }
 
         public Employee GetById(int id)

@@ -44,7 +44,7 @@
     </div>
     <div class="col-12">
         <label asp-for="PhoneNumber" class="form-label">@Html.DisplayNameFor(model => model.PhoneNumber)</label>
-        <input asp-for="PhoneNumber" type="tel" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" class="form-control" id="PhoneNumber">
+        <input asp-for="PhoneNumber" type="tel"  class="form-control" id="PhoneNumber">
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="col-12">
@@ -79,11 +79,6 @@
         <span asp-validation-for="EndDate" class="text-danger"></span>
     </div>
     <div class="col-12">
-
-        <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
-
-    </div>
-    <div class="col-12">
         <label asp-for="JobTitle" class="form-label">@Html.DisplayNameFor(model => model.JobTitle)</label>
         <input asp-for="JobTitle" type="text" class="form-control" id="JobTitle">
         <span asp-validation-for="JobTitle" class="text-danger"></span>
@@ -110,6 +105,6 @@
 
 
 
-@section Scripts {
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@

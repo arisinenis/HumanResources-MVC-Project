@@ -9,5 +9,7 @@ namespace HumanResources.DAL.Repositories.Abstract
 {
     public interface ICreditCardDal: IRepository<CreditCard>
     {
+        //CreditCard GetCreditCardWithCompany(int id);
+        public IEnumerable<CreditCard> GetAllCreditCardById(int companyId);
     }
 }

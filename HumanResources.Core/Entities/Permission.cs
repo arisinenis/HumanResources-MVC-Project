@@ -19,11 +19,11 @@ namespace HumanResources.Core.Entities
         [Display(Name = "Toplam İzin Süresi")]
         public string TotalDayOfPermissionType { get; set; }
         [Display(Name = "İzin Talep Tarihi")]
-        public DateTime RequestDate { get; set; }
+        public DateTime RequestDate { get; set; }=DateTime.Now;
         [Display(Name = "İzin Başlangıç Tarihi")]
         public DateTime StartDate { get; set; }
         [Display(Name = "İzin Bitiş Tarihi")]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } 
         [Display(Name = "İzin Durumu")]
         public PermissionStatus PermissionStatus { get; set; } = PermissionStatus.Bekliyor;
 

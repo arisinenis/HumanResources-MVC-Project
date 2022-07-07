@@ -48,11 +48,18 @@ namespace HumanResources.BLL.Concrete
             
         }
 
+        //public CreditCard GetCreditCardWithCompany(int id) => creditCardRepository.GetCreditCardWithCompany(id);
+        
+
         public bool Update(CreditCard entity)
         {
             if (entity!=null)
                 return creditCardRepository.Update(entity);
             return false;
         }
+        public IEnumerable<CreditCard> GetAllCreditCardById(int companyId) => creditCardRepository.GetAllCreditCardById(companyId);
+       
+
+        
     }
 }

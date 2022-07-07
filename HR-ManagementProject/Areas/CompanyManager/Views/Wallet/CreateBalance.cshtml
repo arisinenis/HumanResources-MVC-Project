@@ -1,41 +1,68 @@
-﻿@model HumanResources.Core.Entities.Wallet
+﻿@using Microsoft.AspNetCore.Http
+@model HumanResources.Core.Entities.Wallet
 
 @{
     ViewData["Title"] = "CreateBalance";
-    Layout = "~/Views/Shared/_CompanyManagerLayout.cshtml";
+    //Layout = "_CompanyManagerLayout";
 }
 
-<h4>Bakiye Yükle</h4>
-<hr />
 
-<form asp-area="CompanyManager" asp-controller="Wallet" asp-action="CreateBalance" class="row g-3" enctype="multipart/form-data" method="post">
+<h4>Şirket Cüzdanına Bakiye Ekle</h4>
+<hr />
+@if (TempData["hata"] != null)
+{
+    <div class="alert alert-danger">@TempData["hata"]</div>
+}
+@if (TempData["KartYok"] != null)
+{
+    <div class="alert alert-danger">@TempData["KartYok"]</div>
+    <p>
+        <a asp-controller="CreditCard" asp-action="Create" class="btn btn-primary">Kredi Kartı Ekleme Ekranına Gidiniz</a>
+    </p>
+}
+
+<form asp-action="CreateBalance" enctype="multipart/form-data" class="row g-3">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="col-12">
-        <label asp-for="Balance" class="form-label">Bakiye</label>
-        <input asp-for="Balance" type="text" class="form-control" />
+        <label asp-for="Balance" class="control-label"></label>
+        <input asp-for="Balance" class="form-control" />
         <span asp-validation-for="Balance" class="text-danger"></span>
     </div>
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <input type="submit" value="Bakiyeyi Yükle" class="btn btn-success" onclick="confirmAction()" />
+
+
+    <div class="col-12">
+        <label asp-for="CreditCards" class="control-label"></label>
+        @*<select asp-for="@item.Id" class="form-control" asp-items="ViewBag.CardName"></select>*@
+        <select class="form-group" name="Id">
+            @foreach (CreditCard option in Model.CreditCards)
+            {
+                <option value="@option.Id">@option.CardName</option>
+
+            }
+        </select>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+        <button asp-action="Index" class="btn btn-secondary">Listeye Dön</button>
     </div>
 </form>
 
 
+
+
+@*<script type="text/javascript">
+        $(function () {
+            $("#itmSelect").change(function () {
+                $("#Description").val($('#itmSelect').find(":selected").attr("Description"));
+                $("#Name").val($('#itmSelect').find(":selected").attr("Name"));
+            });
+        })
+
+    </script>*@
+
 @section Scripts {
     @{
-
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
-
-    <script>
-        function confirmAction() {
-            let confirmAction = confirm("Bakiyeyi yüklemek istediğinizden emin misiniz?");
-            if (confirmAction) {
-                alert("Bakiye Yüklendi!");
-            } else {
-                alert("İşlem İptal Edildi!");
-            }
-        }
-    </script>
+}
